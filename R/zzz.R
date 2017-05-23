@@ -4,4 +4,6 @@
     warnPartialMatchDollar = TRUE,
     warnPartialMatchDollar = TRUE
   )
+
+  register_shims()
 }
