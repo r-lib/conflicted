@@ -1,5 +1,5 @@
-Package: explicit
-Title: Make R Just a Little More Explicit
+Package: strict
+Title: Make R Just a Little Stricter
 Version: 0.0.0.9000
 Authors@R: c(
     person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("aut", "cre")),
