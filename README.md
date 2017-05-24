@@ -20,6 +20,8 @@ devtools::install_github("hadley/strict")
 Features
 --------
 
+`library(strict)` affects code in the current script/session only (i.e. it doesn't affect code in others packages).
+
 -   An alternative conflict resolution mechansim. Instead of warning about conflicts on package load and letting the last loaded package win, strict throws an error when you access ambiguous functions:
 
     ``` r
