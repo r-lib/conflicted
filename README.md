@@ -96,7 +96,10 @@ Features
 
     x <- numeric()
     1:length(x)
-    #> [1] 1 0
+    #> Error: [strict]
+    #> Tried to create descending sequence 1:0. Do you want to `seq_along()` instead?
+    #> 
+    #> Please see ?shim_colon for more details
     ```
 
 Once strict is loaded, you can continue to run code in a lax manner using `lax()`.
