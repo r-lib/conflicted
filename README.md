@@ -89,4 +89,14 @@ Features
     #> Please see ?strict_sapply for more details
     ```
 
+-   `:` will throw an error instead of creating a decreasing sequence that terminates in 0.
+
+    ``` r
+    library(strict)
+
+    x <- numeric()
+    1:length(x)
+    #> [1] 1 0
+    ```
+
 Once strict is loaded, you can continue to run code in a lax manner using `lax()`.

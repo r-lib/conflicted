@@ -83,4 +83,14 @@ devtools::install_github("hadley/strict")
     sapply(1:10, sum)
     ```
 
+*   `:` will throw an error instead of creating a decreasing sequence that 
+    terminates in 0.
+
+    ```{r, error = TRUE}
+    library(strict)
+    
+    x <- numeric()
+    1:length(x)
+    ```
+
 Once strict is loaded, you can continue to run code in a lax manner using `lax()`.

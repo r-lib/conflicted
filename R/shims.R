@@ -8,6 +8,8 @@ register_shims <- function() {
   remove_shims()
 
   strict_shims <- get("attach")(new_environment(), name = "strict_shims")
+  strict_shims$`:` <- shim_colon
+
   register_shim_T_F(strict_shims)
   register_shims_apply(strict_shims)
   register_risky_shims(strict_shims)

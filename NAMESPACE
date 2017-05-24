@@ -2,6 +2,7 @@
 
 export(is_strict)
 export(lax)
+export(shim_colon)
 export(strict_activate)
 export(strict_apply)
 export(strict_arg)
