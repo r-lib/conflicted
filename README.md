@@ -41,7 +41,7 @@ Features
     #>  * plyr::is.discrete
     ```
 
-    (Thanks to @krlmlr for this neat idea!)
+    (Thanks to @[krlmlr](https://github.com/krlmlr) for this neat idea!)
 
 -   Shims for functions with "risky" arguments, i.e. arguments that either rely on global options (like `stringsAsFactors`) or have computed defaults that 90% evaluate to one thing (like `drop`). strict forces you to supply values for these arguments.
 
