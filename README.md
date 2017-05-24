@@ -88,3 +88,5 @@ Features
     #> Please use `vapply()` instead of `sapply()`.
     #> Please see ?strict_sapply for more details
     ```
+
+Once strict is loaded, you can continue to run code in a lax manner using `lax()`.
