@@ -1,7 +1,11 @@
-register_conflicts <- function() {
+remove_conflicts <- function() {
   if ("strict_conflicts" %in% search()) {
     detach("strict_conflicts")
   }
+}
+
+register_conflicts <- function() {
+  remove_conflicts()
 
   objs <- lapply(pkgs_attached(), pkg_ls)
   names(objs) <- pkgs_attached()

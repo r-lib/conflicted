@@ -1,7 +1,11 @@
-register_shims <- function() {
+remove_shims <- function() {
   if ("strict_shims" %in% search()) {
     detach("strict_shims")
   }
+}
+
+register_shims <- function() {
+  remove_shims()
 
   strict_shims <- get("attach")(new_environment(), name = "strict_shims")
   register_shim_T_F(strict_shims)

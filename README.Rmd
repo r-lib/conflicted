@@ -82,3 +82,5 @@ devtools::install_github("hadley/strict")
     library(strict)
     sapply(1:10, sum)
     ```
+
+Once strict is loaded, you can continue to run code in a lax manner using `lax()`.

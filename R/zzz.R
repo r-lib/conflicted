@@ -5,6 +5,16 @@
     warnPartialMatchDollar = TRUE
   )
 
+  strict_activate()
+}
+
+
+strict_deactivate <- function() {
+  remove_shims()
+  remove_conflicts()
+}
+
+strict_activate <- function() {
   register_shims()
   register_conflicts()
 }
