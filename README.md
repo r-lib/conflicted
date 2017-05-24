@@ -3,7 +3,7 @@
 strict
 ======
 
-[![Travis-CI Build Status](https://travis-ci.org/hadley/strict.svg?branch=master)](https://travis-ci.org/hadley/strict) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/strict)](https://cran.r-project.org/package=strict)
+[![Travis-CI Build Status](https://travis-ci.org/hadley/strict.svg?branch=master)](https://travis-ci.org/hadley/strict) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/strict)](https://cran.r-project.org/package=strict)
 
 The goal of strict to make R behave a little more strictly, making base functions more likely to throw an error rather than returning potentially ambiguous results.
 
@@ -13,7 +13,7 @@ Installation
 ------------
 
 ``` r
-# install.packages("devtols")
+# install.packages("devtools")
 devtools::install_github("hadley/strict")
 ```
 
@@ -22,7 +22,7 @@ Features
 
 `library(strict)` affects code in the current script/session only (i.e. it doesn't affect code in others packages).
 
--   An alternative conflict resolution mechansim. Instead of warning about conflicts on package load and letting the last loaded package win, strict throws an error when you access ambiguous functions:
+-   An alternative conflict resolution mechanism. Instead of warning about conflicts on package load and letting the last loaded package win, strict throws an error when you access ambiguous functions:
 
     ``` r
     library(strict)

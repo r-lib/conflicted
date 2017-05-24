@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 # strict
 
 [![Travis-CI Build Status](https://travis-ci.org/hadley/strict.svg?branch=master)](https://travis-ci.org/hadley/strict)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/strict)](https://cran.r-project.org/package=strict)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/strict)](https://cran.r-project.org/package=strict)
 
 The goal of strict to make R behave a little more strictly, making base functions more likely to throw an error rather than returning potentially ambiguous results. 
 
@@ -24,7 +24,7 @@ The goal of strict to make R behave a little more strictly, making base function
 ## Installation
 
 ```{r, eval = FALSE}
-# install.packages("devtols")
+# install.packages("devtools")
 devtools::install_github("hadley/strict")
 ```
 
@@ -32,7 +32,7 @@ devtools::install_github("hadley/strict")
 
 `library(strict)` affects code in the current script/session only (i.e. it doesn't affect code in others packages).
 
-*   An alternative conflict resolution mechansim. Instead of warning about 
+*   An alternative conflict resolution mechanism. Instead of warning about 
     conflicts on package load and letting the last loaded package win,
     strict throws an error when you access ambiguous functions:
   
