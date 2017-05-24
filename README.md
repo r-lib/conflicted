@@ -11,3 +11,6 @@ Current features activate by attaching the package:
 * Set options to warn when partial matching occurs.
 
 * Using `T` and `F` generate errors.
+
+* Overriding `sapply()` to throw an error suggesting that you use
+  `vapply()` instead.

@@ -5,6 +5,7 @@ register_shims <- function() {
 
   strict_shims <- attach(new_environment(), name = "strict_shims")
   register_shim_T_F(strict_shims)
+  strict_shims$sapply <- strict_sapply
 
   # What's getting overriden
   shims <- ls(strict_shims)
