@@ -3,7 +3,7 @@
 strict
 ======
 
-[![Travis-CI Build Status](https://travis-ci.org/hadley/strict.svg?branch=master)](https://travis-ci.org/hadley/strict) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/strict)](https://cran.r-project.org/package=strict)
+[![Travis-CI Build Status](https://travis-ci.org/hadley/strict.svg?branch=master)](https://travis-ci.org/hadley/strict) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/strict)](https://cran.r-project.org/package=strict) [![Coverage Status](https://img.shields.io/codecov/c/github/hadley/strict/master.svg)](https://codecov.io/github/hadley/strict?branch=master)
 
 The goal of strict to make R behave a little more strictly, making base functions more likely to throw an error rather than returning potentially ambiguous results.
 
