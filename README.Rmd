@@ -41,6 +41,8 @@ devtools::install_github("hadley/strict")
     
     is.discrete
     ```
+    
+    (Thanks to @krlmlr for this neat idea!)
 
 *   Shims for functions with "risky" arguments, i.e. arguments that either rely
     on global options (like `stringsAsFactors`) or have computed defaults that
