@@ -2,7 +2,9 @@
 
 export(is_strict)
 export(lax)
+export(strict_activate)
 export(strict_apply)
 export(strict_arg)
+export(strict_deactivate)
 export(strict_sapply)
 import(rlang)
