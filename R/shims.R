@@ -3,7 +3,7 @@ register_shims <- function() {
     detach("strict_shims")
   }
 
-  strict_shims <- attach(new_environment(), name = "strict_shims")
+  strict_shims <- get("attach")(new_environment(), name = "strict_shims")
   register_shim_T_F(strict_shims)
   strict_shims$sapply <- strict_sapply
 
