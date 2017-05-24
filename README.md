@@ -6,14 +6,14 @@ The goal of strict to make R behave a little more strictly, making base function
 
 `library(strict)` forces you to confront potential problems now, instead of in the future. This has both pros and cons: often you can most easily fix a potential ambiguity when your working on the code (rather than in six months time when you've forgotten how it works), but it also forces you to resolve ambiguities that might never occur with your code/data.
 
-Current features activate by attaching the package:
+## Installation
 
-*   Set options to warn when partial matching occurs.
+```R
+# install.packages("devtols")
+devtools::install_github("hadley/strict")
+```
 
-*   Using `T` and `F` generate errors.
-
-*   Overriding `sapply()` to throw an error suggesting that you use
-    `vapply()` instead.
+## Features
 
 *   An alternative conflict resolution mechansim. Instead of warning about 
     conflicts on package load and letting the last loaded package win,
@@ -45,3 +45,11 @@ Current features activate by attaching the package:
     #> Error: Must supply a value for `stringsAsFactors` argument
     #> Please see ?strict_arg for more details 
     ```
+
+*   Automatically sets options to warn when partial matching occurs.
+
+*   `T` and `F` generate errors, forcing you to use `TRUE` and `FALSE`.
+
+*   `sapply()` throws an error suggesting that you use the type-safe
+    `vapply()` instead.
+
