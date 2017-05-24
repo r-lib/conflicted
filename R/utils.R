@@ -1,11 +1,10 @@
 strict_abort <- function(..., help = NULL) {
-  msg <- paste0(..., collapse = "")
+  # Need to use colour when available in RStudio tracebacks
+  msg <- paste0("[strict]\n", ..., collapse = "")
   if (!is.null(help)) {
     msg <- paste0(msg, "\nPlease see ?", help, " for more details")
   }
 
-  # not currently used; pending RStudio support
-  col <- paste(style_strict("[strict] "), crayon::black(msg))
   abort(msg)
 }
 

@@ -78,7 +78,8 @@ conflict_fun <- function(name, pkgs) {
 
   function(...) {
     strict_abort(
-      "[strict] Multiple definitions found for `", name, "`:\n",
+      "Multiple definitions found for `", name, "`.\n",
+      "Please pick one:\n",
       paste0(bullets, collapse = "\n")
     )
   }

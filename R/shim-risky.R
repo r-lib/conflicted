@@ -7,7 +7,7 @@
 #' @param name Name of argument
 #' @export
 strict_arg <- function(name) {
-  strict_abort("Must supply a value for `", name, "` argument", help = "strict_arg")
+  strict_abort("Please supply a value for `", name, "` argument.", help = "strict_arg")
 }
 
 register_risky_shims <- function(env) {
