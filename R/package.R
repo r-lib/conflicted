@@ -10,6 +10,10 @@ pkg_ls <- function(x) {
   ls(envir = pkg_env(x))
 }
 
+pkg_get <- function(pkg, name) {
+  get(name, envir = pkg_env(pkg))
+}
+
 pkg_funs <- function(x) {
   env <- pkg_env(x)
   objs <- mget(ls(envir = env), envir = env, inherits = FALSE)

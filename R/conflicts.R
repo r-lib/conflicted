@@ -12,7 +12,11 @@ register_conflicts <- function() {
 
   # TODO: figure out how to ignore conflicts within base packages
   index <- invert(objs)
-  conflicts <- Filter(function(x) length(x) > 1, index)
+  potential <- Filter(function(x) length(x) > 1, index)
+
+  # Only consider it a conflict if the objects are actually different
+  unique <- Map(unique_obj, names(potential), potential)
+  conflicts <- Filter(function(x) length(x) > 1, unique)
 
   env <- get("attach")(new_environment(), name = "strict_conflicts")
 
@@ -25,6 +29,13 @@ register_conflicts <- function() {
     library = shim_library,
     require = shim_require
   )
+}
+
+unique_obj <- function(name, pkgs) {
+  objs <- lapply(pkgs, pkg_get, name)
+  names(objs) <- pkgs
+
+  pkgs[!duplicated(objs)]
 }
 
 package_name <- function(package, character.only = FALSE) {
