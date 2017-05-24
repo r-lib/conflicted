@@ -8,9 +8,24 @@ The goal of strict to make R behave a little more strictly, making base function
 
 Current features activate by attaching the package:
 
-* Set options to warn when partial matching occurs.
+*   Set options to warn when partial matching occurs.
 
-* Using `T` and `F` generate errors.
+*   Using `T` and `F` generate errors.
 
-* Overriding `sapply()` to throw an error suggesting that you use
-  `vapply()` instead.
+*   Overriding `sapply()` to throw an error suggesting that you use
+    `vapply()` instead.
+
+*   An alternative conflict resolution mechansim. Instead of warning about 
+    conflicts on package load and letting the last loaded package win,
+    strict throws an error when you access ambiguous functions:
+  
+    ```R
+    library(strict)
+    library(plyr)
+    library(Hmisc)
+    
+    is.discrete
+    #> Error: [strict] Multiple definitions found for `is.discrete`:
+    #> * Hmisc::is.discrete
+    #> * plyr::is.discrete 
+    ```

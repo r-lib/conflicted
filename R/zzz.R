@@ -6,4 +6,5 @@
   )
 
   register_shims()
+  register_conflicts()
 }
