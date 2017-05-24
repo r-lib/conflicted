@@ -1,7 +1,7 @@
 .onAttach <- function(...) {
   options(
     warnPartialMatchArgs = TRUE,
-    warnPartialMatchDollar = TRUE,
+    warnPartialMatchAttr = TRUE,
     warnPartialMatchDollar = TRUE
   )
 
