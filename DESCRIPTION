@@ -10,7 +10,9 @@ Description: This packages tweaks the operation of base R code to make
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: rlang
+Imports: 
+    rlang,
+    crayon
 RoxygenNote: 6.0.1
 URL: https://github.com/hadley/strict
 BugReports: https://github.com/hadley/strict/issues
