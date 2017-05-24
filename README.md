@@ -29,3 +29,19 @@ Current features activate by attaching the package:
     #> * Hmisc::is.discrete
     #> * plyr::is.discrete 
     ```
+
+*   Shims for functions with "risky" arguments, i.e. arguments that either rely
+    on global options (like `stringsAsFactors`) or have computed defaults that
+    90% evaluate to one thing (like `drop`). strict forces you to supply values
+    for these arguments.
+    
+    ```R
+    library(strict)
+    mtcars[, 1]
+    #> Error: Must supply a value for `drop` argument
+    #> Please see ?strict_arg for more details 
+    
+    data.frame(x = "a")
+    #> Error: Must supply a value for `stringsAsFactors` argument
+    #> Please see ?strict_arg for more details 
+    ```

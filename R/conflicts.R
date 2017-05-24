@@ -73,13 +73,6 @@ shim_require <- function(package, lib.loc = NULL, quietly = FALSE, warn.conflict
 
 }
 
-pkgs_attached <- function() {
-  gsub("package:", "", grep("package:", search(), value = TRUE))
-}
-pkg_ls <- function(x) {
-  ls(paste0("package:", x))
-}
-
 conflict_fun <- function(name, pkgs) {
   bullets <- paste0(" * ", pkgs, "::", name)
 

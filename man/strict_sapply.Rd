@@ -20,7 +20,8 @@ df <- data.frame(
  a = 1,
  b = "a",
  c = Sys.time(),
- d = ordered("a")
+ d = ordered("a"),
+ stringsAsFactors = FALSE
 )
 
 # A list
