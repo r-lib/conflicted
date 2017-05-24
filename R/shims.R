@@ -5,8 +5,8 @@ register_shims <- function() {
 
   strict_shims <- get("attach")(new_environment(), name = "strict_shims")
   register_shim_T_F(strict_shims)
+  register_shims_apply(strict_shims)
   register_risky_shims(strict_shims)
-  strict_shims$sapply <- strict_sapply
 }
 
 register_shim_T_F <- function(env) {

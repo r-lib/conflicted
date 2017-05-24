@@ -51,5 +51,6 @@ devtools::install_github("hadley/strict")
 *   `T` and `F` generate errors, forcing you to use `TRUE` and `FALSE`.
 
 *   `sapply()` throws an error suggesting that you use the type-safe
-    `vapply()` instead.
+    `vapply()` instead. `apply()` throws an error if you use it with a 
+    data frame.
 
