@@ -7,10 +7,6 @@ register_shims <- function() {
   register_shim_T_F(strict_shims)
   register_risky_shims(strict_shims)
   strict_shims$sapply <- strict_sapply
-
-  # What's getting overriden
-  shims <- ls(strict_shims)
-  message("Adding stict shims for: ", paste(shims, collapse = ", "))
 }
 
 register_shim_T_F <- function(env) {
