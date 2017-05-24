@@ -9,8 +9,7 @@ register_shims <- function() {
 
 register_shim_T_F <- function(env) {
   env_bind_fns(env,
-    T = function() abort("Please use TRUE, not T"),
-    F = function() abort("Please use FALSE, not F")
+    T = function() abort("[strict] Please use TRUE, not T"),
+    F = function() abort("[strict] Please use FALSE, not F")
   )
 }
-
