@@ -55,14 +55,17 @@ strict_read.csv <- function(file, header = TRUE, sep = ",", quote = "\"",
 # Helpers to find risky functions -----------------------------------------
 
 #' @examples
+#' funs <- unlist(lapply(packages, pkg_funs), recursive = FALSE)
+#' fmls <- lapply(funs, function(x) as.list(formals(x)))
+#'
+#' fmls %>% purrr::keep(has_computed_arg, "drop")
 #' risky_funs("drop")
 #' risky_funs("stringsAsFactors")
-risky_funs <- function(arg, packages = c("base", "utils", "stats")) {
-  funs <- unlist(lapply(packages, pkg_funs), recursive = FALSE)
-  names(Filter(function(x) has_computed_arg(x, arg), funs))
+
+has_computed_arg <- function(formals, arg) {
+  has_name(arg, formals) && !is_syntactic_literal(formals[[arg]])
 }
 
-has_computed_arg <- function(fun, arg) {
-  formals <- as.list(fn_fmls(fun))
-  has_name(arg, formals) && !is_syntactic_literal(formals[[arg]])
+uses_options <- function(formals) {
+  any(vapply(formals, function(x) is_lang(x, name = "getOption"), logical(1)))
 }
