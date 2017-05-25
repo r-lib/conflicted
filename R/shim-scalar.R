@@ -1,23 +1,60 @@
-
-strict_sample <- function(x, size = length(x), replace = FALSE, prob = NULL) {
-  x[sample.int(length(x), size, replace, prob)]
+register_shim_scalar <- function(env) {
+  env_bind(env,
+    sample = strict_sample,
+    diag = strict_diag
+  )
 }
 
-strict_diag <- function(x = 1, nrow, ncol) {
-  dims <- length(dim(x))
-
-  if (dims > 2) {
-    abort("`x` must be a matrix, vector or 1d array.")
-  } else if (dims == 2) {
-    # dispatch to base
-    base::diag(x, nrow, ncol)
+#' Strict behaviour for functions with special scalar behaviour
+#'
+#' [sample()] and [diag()] behave differently depending on whether their
+#' first argument is a scalar or a function. These shims throw an error
+#' when given a scalar to force you to pick a safer alternative.
+#'
+#' @param x,size,replace,prob,nrow,ncol Passed on to [sample()] and [diag()]
+#' @export
+#' @examples
+#' lax({
+#'   sample(5:3)
+#'   sample(5:4)
+#'   sample(5:5)
+#'
+#'   diag(5:3)
+#'   diag(5:4)
+#'   diag(5:5)
+#' })
+#'
+#' \dontrun{
+#'   sample(5:5)
+#'   diag(5)
+#' }
+strict_sample <- function(x, size = length(x), replace = FALSE, prob = NULL) {
+  if (length(x) == 1) {
+    strict_abort(
+      "`sample()` has surprising behaviour when `x` is a scalar.\n",
+      "Use `sample.int()` instead.",
+      help = "strict_sample"
+    )
   } else {
-    # need to test
-    nrow <- if (!missing(nrow)) nrow else length(x)
-    ncol <- if (!missing(ncol)) ncol else nrow
+    sample(
+      x = x,
+      size = size,
+      replace = replace,
+      prob = prob
+    )
+  }
+}
 
-    out <- matrix(x, nrow = nrow, ncol = ncol)
-    diag(out) <- x
-    out
+#' @export
+#' @rdname strict_sample
+strict_diag <- function(x = 1, nrow, ncol) {
+  if (length(x) == 1) {
+    strict_abort(
+      "`diag()` has surprising behaviour when `x` is a scalar.\n",
+      "Use `diag(rep(1, x))` instead.",
+      help = "strict_diag"
+    )
+  } else {
+    base::diag(x = x, nrow = nrow, ncol = ncol)
   }
 }

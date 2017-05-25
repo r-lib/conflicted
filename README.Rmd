@@ -94,4 +94,18 @@ devtools::install_github("hadley/strict")
     1:length(x)
     ```
 
+*   `diag()` and `sample()` throw an error if given scalar `x`. This avoids
+    an otherwise unpleasant surprise.
+    
+    ```{r, error = TRUE}
+    library(strict)
+    
+    sample(5:3)
+    sample(5:4)
+    lax(sample(5:5))
+    
+    sample(5:5)
+    ```
+
+
 Once strict is loaded, you can continue to run code in a lax manner using `lax()`.

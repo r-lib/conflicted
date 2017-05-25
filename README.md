@@ -102,4 +102,23 @@ Features
     #> Please see ?shim_colon for more details
     ```
 
+-   `diag()` and `sample()` throw an error if given scalar `x`. This avoids an otherwise unpleasant surprise.
+
+    ``` r
+    library(strict)
+
+    sample(5:3)
+    #> [1] 4 3 5
+    sample(5:4)
+    #> [1] 5 4
+    lax(sample(5:5))
+    #> [1] 5 2 1 4 3
+
+    sample(5:5)
+    #> Error: [strict]
+    #> `sample()` has surprising behaviour when `x` is a scalar.
+    #> Use `sample.int()` instead.
+    #> Please see ?strict_sample for more details
+    ```
+
 Once strict is loaded, you can continue to run code in a lax manner using `lax()`.

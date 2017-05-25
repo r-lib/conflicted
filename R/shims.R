@@ -12,6 +12,7 @@ register_shims <- function() {
 
   register_shim_T_F(strict_shims)
   register_shims_apply(strict_shims)
+  register_shim_scalar(strict_shims)
   register_risky_shims(strict_shims)
 }
 
