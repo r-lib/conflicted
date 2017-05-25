@@ -8,7 +8,6 @@
   strict_activate()
 }
 
-
 #' Manually activate and deactive strict mode
 #'
 #' For experts only.

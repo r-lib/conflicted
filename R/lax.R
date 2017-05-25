@@ -12,8 +12,15 @@
 #'   sapply(1:10, runif)
 #' })
 lax <- function(code) {
+  old <- options(
+    warnPartialMatchArgs = FALSE,
+    warnPartialMatchAttr = FALSE,
+    warnPartialMatchDollar = FALSE
+  )
+  on.exit(options(old), add = TRUE)
+
   strict_deactivate()
-  on.exit(strict_activate())
+  on.exit(strict_activate(), add = TRUE)
 
   code
 }
