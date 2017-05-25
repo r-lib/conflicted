@@ -59,7 +59,7 @@ shim_library <- function(package, help, pos = 2, lib.loc = NULL, character.only 
   package <- package_name(enquo(package), character.only = character.only)
   on.exit(register_conflicts())
 
-  library(
+  lax(library(
     package,
     help = help,
     pos = pos,
@@ -69,7 +69,7 @@ shim_library <- function(package, help, pos = 2, lib.loc = NULL, character.only 
     warn.conflicts = FALSE,
     quietly = quietly,
     verbose = verbose
-  )
+  ))
 }
 
 shim_require <- function(package, lib.loc = NULL, quietly = FALSE, warn.conflicts = TRUE,
@@ -78,13 +78,13 @@ shim_require <- function(package, lib.loc = NULL, quietly = FALSE, warn.conflict
   package <- package_name(enquo(package), character.only = character.only)
   on.exit(register_conflicts())
 
-  require(
+  lax(require(
     package,
     lib.loc = lib.loc,
     quietly = quietly,
     warn.conflicts = FALSE,
     character.only = TRUE
-  )
+  ))
 
 }
 
