@@ -2,12 +2,17 @@
 % Please edit documentation in R/shim-risky.R
 \name{strict_arg}
 \alias{strict_arg}
+\alias{strict_drop}
 \title{Strict arguments}
 \usage{
 strict_arg(name)
+
+strict_drop(j)
 }
 \arguments{
 \item{name}{Name of argument}
+
+\item{j}{Columns to select}
 }
 \description{
 A number of functions in base R have defaults that depend on a global

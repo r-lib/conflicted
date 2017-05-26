@@ -49,8 +49,8 @@ Features
     library(strict)
     mtcars[, 1]
     #> Error: [strict]
-    #> Please supply a value for `drop` argument.
-    #> Please see ?strict_arg for more details
+    #> Please explicitly specify `drop` when selecting a single column
+    #> Please see ?strict_drop for more details
 
     data.frame(x = "a")
     #> Error: [strict]
@@ -63,7 +63,7 @@ Features
     ``` r
     library(strict)
 
-    df <- data.frame(xyz = 1, stringsAsFactors = FALSE)
+    df <- data.frame(xyz = 1)
     df$x
     #> Warning in `$.data.frame`(df, x): Partial match of 'x' to 'xyz' in data
     #> frame
@@ -108,11 +108,11 @@ Features
     library(strict)
 
     sample(5:3)
-    #> [1] 4 3 5
+    #> [1] 5 4 3
     sample(5:4)
     #> [1] 5 4
     lax(sample(5:5))
-    #> [1] 5 2 1 4 3
+    #> [1] 3 2 1 4 5
 
     sample(5:5)
     #> Error: [strict]

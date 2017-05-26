@@ -10,6 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "README-"
 )
+set.seed(1014)
 ```
 
 # strict
@@ -64,7 +65,7 @@ devtools::install_github("hadley/strict")
     ```{r}
     library(strict)
     
-    df <- data.frame(xyz = 1, stringsAsFactors = FALSE)
+    df <- data.frame(xyz = 1)
     df$x
     ```
 

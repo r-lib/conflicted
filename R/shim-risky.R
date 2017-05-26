@@ -10,31 +10,56 @@ strict_arg <- function(name) {
   strict_abort("Please supply a value for `", name, "` argument.", help = "strict_arg")
 }
 
-register_risky_shims <- function(env) {
-  env_bind(env,
-    `[.data.frame` = force_strict(`[.data.frame`, "drop"),
-    as.data.frame.character = force_strict(as.data.frame.character, "stringsAsFactors"),
-    as.data.frame.list = force_strict(as.data.frame.list, "stringsAsFactors"),
-    data.frame = force_strict(data.frame, "stringsAsFactors"),
-    read.table = force_strict(utils::read.table, "stringsAsFactors"),
-    read.csv = strict_read.csv
+#' @export
+#' @rdname strict_arg
+#' @param j Columns to select
+strict_drop <- function(j) {
+  if (missing(j)) {
+    return(FALSE)
+  }
+
+  if ((is.numeric(j) || is.character(j)) && length(j) > 1) {
+    return(FALSE)
+  }
+
+  if (is.logical(j) && sum(j) > 1) {
+    return(FALSE)
+  }
+
+  strict_abort(
+    "Please explicitly specify `drop` when selecting a single column",
+    help = "strict_drop"
   )
 }
 
-force_strict <- function(fun, args) {
-  formals <- as.list(fn_fmls(fun))
+register_shims_risky <- function(env) {
+  env_bind(env,
+    as.data.frame.character = replace_strings_as_factors(as.data.frame.character),
+    as.data.frame.list =      replace_strings_as_factors(as.data.frame.list),
+    data.frame =              replace_strings_as_factors(data.frame),
+    read.table =              replace_strings_as_factors(utils::read.table),
+    `[.data.frame` =          replace_args(`[.data.frame`, drop = quote(strict_drop(j))),
+    read.csv =                strict_read_csv,
+  )
+}
 
-  for (arg in args) {
-    if (has_name(arg, formals) && !is_syntactic_literal(formals[[arg]])) {
-      formals[[arg]] <- expr(strict_arg(!!arg))
-    }
+replace_strings_as_factors <- function(fun) {
+  replace_args(fun, stringsAsFactors = quote(strict_arg("stringsAsFactors")))
+}
+
+replace_args <- function(fun, ...) {
+  formals <- as.list(fn_fmls(fun))
+  args <- list(...)
+
+  for (arg in names(args)) {
+    formals[[arg]] <- args[[arg]]
   }
 
   formals(fun) <- formals
   fun
 }
 
-strict_read.csv <- function(file, header = TRUE, sep = ",", quote = "\"",
+strict_read_csv <- function(file, header = TRUE, sep = ",", quote = "\"",
                             dec = ".", fill = TRUE, comment.char = "",
                             stringsAsFactors = strict_arg("stringsAsFactors"),
                             ...) {
@@ -50,8 +75,6 @@ strict_read.csv <- function(file, header = TRUE, sep = ",", quote = "\"",
     stringsAsFactors = stringsAsFactors
   )
 }
-
-
 # Helpers to find risky functions -----------------------------------------
 
 #' @examples
