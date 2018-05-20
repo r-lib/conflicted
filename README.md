@@ -7,6 +7,8 @@
 status](https://travis-ci.org/r-lib/conflicted.svg?branch=master)](https://travis-ci.org/r-lib/conflicted)
 [![Coverage
 status](https://codecov.io/gh/r-lib/conflicted/branch/master/graph/badge.svg)](https://codecov.io/github/r-lib/conflicted?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/conflicted)](https://cran.r-project.org/package=conflicted)
 
 The goal of conflicted is to provide an alternative conflict resolution
 strategy. R’s default conflict resolution system gives precedence to the
@@ -46,3 +48,9 @@ active binding will throw an error message describing how to
 disambiguate the name. The conflicted environment also contains bindings
 for `library()` and `require()` that suppress conflict reporting and
 update the conflicted environment with any new conflicts.
+
+## Code of conduct
+
+Please note that this project is released with a [Contributor Code of
+Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
+to abide by its terms.
