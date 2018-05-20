@@ -46,14 +46,17 @@ shim_require <- function(package,
 
 package_name <- function(package, character.only = FALSE) {
   if (!character.only) {
-    package <- as.character(get_expr(package))
+    package <- as.character(quo_expr(package))
   } else {
     package <- eval_tidy(package)
   }
-  if (length(package) != 1L)
-    stop("'package' must be of length 1")
-  if (is.na(package) || (package == ""))
-    stop("invalid package name")
+
+  if (!is.character(package) || length(package) != 1L) {
+    abort("`package` must be character vector of length 1.")
+  }
+  if (is.na(package) || (package == "")) {
+    abort("`package` must not be NA or ''.")
+  }
 
   package
 }
