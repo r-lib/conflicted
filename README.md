@@ -17,7 +17,11 @@ particularly when introduced by an update to an existing package.
 conflicted takes a different approach, making every conflict an error
 and forcing you to choose which function to use.
 
-Thanks to [@krlmlr](https://github.com/krlmlr) for this neat idea\!
+Thanks to [@krlmlr](https://github.com/krlmlr) for this neat idea\! This
+code was previously part of the experimental
+[strict](https://github.com/hadley/strict) package, but I decided
+improved conflict resolution is useful by itself and worth its own
+package.
 
 ## Installation
 
