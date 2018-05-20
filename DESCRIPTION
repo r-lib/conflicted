@@ -11,16 +11,16 @@ Description: R's default conflict management system gives the most recently
     conflicted takes a different approach, making every conflict an error
     and forcing you to choose which function to use.
 License: GPL-3
-Encoding: UTF-8
-LazyData: true
-Imports:
-    rlang
-RoxygenNote: 6.0.1
-Suggests: 
-    testthat,
-    covr,
-    crayon
 URL: https://github.com/r-lib/conflicted
 BugReports: https://github.com/r-lib/conflicted/issues
 Depends: 
     R (>= 3.1)
+Imports: 
+    rlang
+Suggests: 
+    covr,
+    crayon,
+    testthat
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
