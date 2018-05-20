@@ -30,10 +30,9 @@ To active conflicted, all you need to do is load it:
 
 ```{r, error = TRUE}
 library(conflicted)
-library(plyr)
-library(Hmisc)
+library(dplyr)
 
-is.discrete
+filter
 ```
 
 (Thanks to @[krlmlr](https://github.com/krlmlr) for this neat idea!)
