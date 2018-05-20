@@ -13,100 +13,27 @@ knitr::opts_chunk$set(
 set.seed(1014)
 ```
 
-# strict
+# conflicted
 
-[![Travis-CI Build Status](https://travis-ci.org/hadley/strict.svg?branch=master)](https://travis-ci.org/hadley/strict)
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/strict)](https://cran.r-project.org/package=strict)
-[![Coverage Status](https://img.shields.io/codecov/c/github/hadley/strict/master.svg)](https://codecov.io/github/hadley/strict?branch=master)
-
-The goal of strict to make R behave a little more strictly, making base functions more likely to throw an error rather than returning potentially ambiguous results. 
-
-`library(strict)` forces you to confront potential problems now, instead of in the future. This has both pros and cons: often you can most easily fix a potential ambiguity when your working on the code (rather than in six months time when you've forgotten how it works), but it also forces you to resolve ambiguities that might never occur with your code/data.
+The goal of conflicted is to provide an alternative conflict resolution strategy. R's default conflict resolution system gives precedence to the most recently loaded package. This can make it hard to detect conflicts, particularly when introduced by an update to an existing package. conflicted takes a different approach, making every conflict an error and forcing you to choose which function to use.
 
 ## Installation
 
 ```{r, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("hadley/strict")
+devtools::install_github("r-lib/conflicted")
 ```
 
-## Features
+## Usage
 
-`library(strict)` affects code in the current script/session only (i.e. it doesn't affect code in others packages).
+To active conflicted, all you need to do is load it:
 
-*   An alternative conflict resolution mechanism. Instead of warning about 
-    conflicts on package load and letting the last loaded package win,
-    strict throws an error when you access ambiguous functions:
-  
-    ```{r, error = TRUE}
-    library(strict)
-    library(plyr)
-    library(Hmisc)
-    
-    is.discrete
-    ```
-    
-    (Thanks to @[krlmlr](https://github.com/krlmlr) for this neat idea!)
+```{r, error = TRUE}
+library(conflicted)
+library(plyr)
+library(Hmisc)
 
-*   Shims for functions with "risky" arguments, i.e. arguments that either rely
-    on global options (like `stringsAsFactors`) or have computed defaults that
-    90% evaluate to one thing (like `drop`). strict forces you to supply values
-    for these arguments.
-    
-    ```{r, error = TRUE}
-    library(strict)
-    mtcars[, 1]
+is.discrete
+```
 
-    data.frame(x = "a")
-    ```
-
-*   Automatically sets options to warn when partial matching occurs.
-
-    ```{r}
-    library(strict)
-    
-    df <- data.frame(xyz = 1)
-    df$x
-    ```
-
-*   `T` and `F` generate errors, forcing you to use `TRUE` and `FALSE`.
-
-    ```{r, error = TRUE}
-    library(strict)
-    T
-    ```
-
-*   `sapply()` throws an error suggesting that you use the type-safe
-    `vapply()` instead. `apply()` throws an error if you use it with a 
-    data frame.
-
-    ```{r, error = TRUE}
-    library(strict)
-    sapply(1:10, sum)
-    ```
-
-*   `:` will throw an error instead of creating a decreasing sequence that 
-    terminates in 0.
-
-    ```{r, error = TRUE}
-    library(strict)
-    
-    x <- numeric()
-    1:length(x)
-    ```
-
-*   `diag()` and `sample()` throw an error if given scalar `x`. This avoids
-    an otherwise unpleasant surprise.
-    
-    ```{r, error = TRUE}
-    library(strict)
-    
-    sample(5:3)
-    sample(5:4)
-    lax(sample(5:5))
-    
-    sample(5:5)
-    ```
-
-
-Once strict is loaded, you can continue to run code in a lax manner using `lax()`.
+(Thanks to @[krlmlr](https://github.com/krlmlr) for this neat idea!)
