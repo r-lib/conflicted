@@ -1,4 +1,4 @@
 library(testthat)
-library(strict)
+library(conflicted)
 
-test_check("strict")
+test_check("conflicted")
