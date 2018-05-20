@@ -41,3 +41,8 @@ filter
 ```
 
 Loading conflicted creates a new "conflicted" environment that is attached just after the global environment. This environment contains an active binding for any object that is exported by multiple packages; the active binding will throw an error message describing how to disambiguate the name. The conflicted environment also contains bindings for `library()` and `require()` that suppress conflict reporting and update the conflicted environment with any new conflicts.
+
+## Code of conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
