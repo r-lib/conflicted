@@ -10,6 +10,8 @@ particularly when introduced by an update to an existing package.
 conflicted takes a different approach, making every conflict an error
 and forcing you to choose which function to use.
 
+Thanks to [@krlmlr](https://github.com/krlmlr) for this neat idea\!
+
 ## Installation
 
 ``` r
@@ -19,18 +21,23 @@ devtools::install_github("r-lib/conflicted")
 
 ## Usage
 
-To active conflicted, all you need to do is load it:
+conflicted does not export any functions. To use it, all you need to do
+is load it:
 
 ``` r
 library(conflicted)
 library(dplyr)
 
 filter
-#> Error: [strict]
-#> Multiple definitions found for `filter`.
-#> Please pick one:
+#> Error: Multiple definitions found for filter. Please pick one:
 #>  * dplyr::filter
 #>  * stats::filter
 ```
 
-(Thanks to @[krlmlr](https://github.com/krlmlr) for this neat idea\!)
+Loading conflicted creates a new “conflicted” environment that is
+attached just after the global environment. This environment contains an
+active binding for any object that is exported by multiple packages; the
+active binding will throw an error message describing how to
+disambiguate the name. The conflicted environment also contains bindings
+for `library()` and `require()` that suppress conflict reporting and
+update the conflicted environment with any new conflicts.

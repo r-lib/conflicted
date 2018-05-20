@@ -19,7 +19,7 @@ conflicts_register <- function() {
 
   # For each conflicted, new active binding in shim environment
   conflicts <- conflicts_find()
-  conflict_overrides <- Map(conflict_fun, names(conflicts), conflicts)
+  conflict_overrides <- Map(conflict_binding, names(conflicts), conflicts)
   env_bind_fns(env, !!!conflict_overrides)
 
   # Shim library() and require() so we can rebuild
@@ -30,13 +30,14 @@ conflicts_register <- function() {
 }
 
 conflicts_reset <- function() {
-  if ("strict_conflicts" %in% search()) {
-    detach("strict_conflicts")
+  if ("conflicted" %in% search()) {
+    detach("conflicted")
   }
 }
 
+
 conflicts_init <- function() {
-  get("attach")(env(), name = "strict_conflicts")
+  get("attach")(env(), name = "conflicted")
 }
 
 unique_obj <- function(name, pkgs) {
@@ -46,7 +47,7 @@ unique_obj <- function(name, pkgs) {
   pkgs[!duplicated(objs)]
 }
 
-conflict_fun <- function(name, pkgs) {
+conflict_binding <- function(name, pkgs) {
   bullets <- paste0(" * ", style_name(pkgs, "::", name))
   msg <- paste0(
     "Multiple definitions found for ", style_name(name), ". ",
@@ -54,7 +55,7 @@ conflict_fun <- function(name, pkgs) {
     paste0(bullets, collapse = "\n")
   )
 
-  function(...) {
+  function(value) {
     abort(msg)
   }
 }
