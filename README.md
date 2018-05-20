@@ -3,6 +3,11 @@
 
 # conflicted
 
+[![Travis build
+status](https://travis-ci.org/r-lib/conflicted.svg?branch=master)](https://travis-ci.org/r-lib/conflicted)
+[![Coverage
+status](https://codecov.io/gh/r-lib/conflicted/branch/master/graph/badge.svg)](https://codecov.io/github/r-lib/conflicted?branch=master)
+
 The goal of conflicted is to provide an alternative conflict resolution
 strategy. R’s default conflict resolution system gives precedence to the
 most recently loaded package. This can make it hard to detect conflicts,

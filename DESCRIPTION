@@ -22,3 +22,5 @@ Suggests:
     crayon
 URL: https://github.com/r-lib/conflicted
 BugReports: https://github.com/r-lib/conflicted/issues
+Depends: 
+    R (>= 3.1)
