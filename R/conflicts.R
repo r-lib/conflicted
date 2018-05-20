@@ -89,15 +89,15 @@ shim_require <- function(package, lib.loc = NULL, quietly = FALSE, warn.conflict
 }
 
 conflict_fun <- function(name, pkgs) {
-  bullets <- paste0(" * ", pkgs, "::", name)
+  bullets <- paste0(" * ", style_name(pkgs, "::", name))
+  msg <- paste0(
+    "Multiple definitions found for ", style_name(name), ". ",
+    "Please pick one:\n",
+    paste0(bullets, collapse = "\n")
+  )
 
   function(...) {
-    strict_abort(
-      "Multiple definitions found for `", name, "`.\n",
-      "Please pick one:\n",
-      paste0(bullets, collapse = "\n")
-    )
+    abort(msg)
   }
 }
-
 
