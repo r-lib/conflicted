@@ -38,7 +38,14 @@ conflicted does not export any functions. To use it, all you need to do is load 
 library(conflicted)
 library(dplyr)
 
-filter
+filter(mtcars, cyl == 8)
+```
+
+You can also use assignment to resolve the conflict once for the entire session:
+
+```{r}
+filter <- dplyr::filter
+filter(mtcars, am & cyl == 8)
 ```
 
 Loading conflicted creates a new "conflicted" environment that is attached just after the global environment. This environment contains an active binding for any object that is exported by multiple packages; the active binding will throw an error message describing how to disambiguate the name. The conflicted environment also contains bindings for `library()` and `require()` that suppress conflict reporting and update the conflicted environment with any new conflicts.

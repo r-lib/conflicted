@@ -39,10 +39,21 @@ is load it:
 library(conflicted)
 library(dplyr)
 
-filter
+filter(mtcars, cyl == 8)
 #> Error: Multiple definitions found for filter. Please pick one:
 #>  * dplyr::filter
 #>  * stats::filter
+```
+
+You can also use assignment to resolve the conflict once for the entire
+session:
+
+``` r
+filter <- dplyr::filter
+filter(mtcars, am & cyl == 8)
+#>    mpg cyl disp  hp drat   wt qsec vs am gear carb
+#> 1 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4
+#> 2 15.0   8  301 335 3.54 3.57 14.6  0  1    5    8
 ```
 
 Loading conflicted creates a new “conflicted” environment that is
