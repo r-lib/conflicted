@@ -1,3 +1,3 @@
 .onAttach <- function(...) {
-  register_conflicts()
+  conflicts_register()
 }

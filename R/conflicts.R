@@ -1,14 +1,6 @@
-remove_conflicts <- function() {
-  if ("strict_conflicts" %in% search()) {
-    detach("strict_conflicts")
-  }
-}
-
-register_conflicts <- function() {
-  remove_conflicts()
-
-  objs <- lapply(pkgs_attached(), pkg_ls)
-  names(objs) <- pkgs_attached()
+conflicts_find <- function(pkgs = pkgs_attached()) {
+  objs <- lapply(pkgs, pkg_ls)
+  names(objs) <- pkgs
 
   # TODO: figure out how to ignore conflicts within base packages
   index <- invert(objs)
@@ -18,11 +10,16 @@ register_conflicts <- function() {
   unique <- Map(unique_obj, names(potential), potential)
   conflicts <- Filter(function(x) length(x) > 1, unique)
 
-  env <- get("attach")(new_environment(), name = "strict_conflicts")
+  conflicts
+}
+
+conflicts_register <- function() {
+  env <- conflicts_reset()
 
   # For each conflicted, new active binding in shim environment
+  conflicts <- conflicts_find()
   conflict_overrides <- Map(conflict_fun, names(conflicts), conflicts)
-  env_bind_fns(env, !!! conflict_overrides)
+  env_bind_fns(env, !!!conflict_overrides)
 
   # Shim library() and require() so we can rebuild
   env_bind(env,
@@ -51,3 +48,9 @@ conflict_fun <- function(name, pkgs) {
   }
 }
 
+conflicts_reset <- function() {
+  if ("strict_conflicts" %in% search()) {
+    detach("strict_conflicts")
+  }
+  get("attach")(env(), name = "strict_conflicts")
+}

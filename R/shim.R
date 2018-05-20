@@ -10,7 +10,7 @@ shim_library <- function(package,
                          ) {
 
   package <- package_name(enquo(package), character.only = character.only)
-  on.exit(register_conflicts())
+  on.exit(conflicts_register())
 
   base::library(
     package,
@@ -32,7 +32,7 @@ shim_require <- function(package,
                          character.only = FALSE) {
 
   package <- package_name(enquo(package), character.only = character.only)
-  on.exit(register_conflicts())
+  on.exit(conflicts_register())
 
   base::require(
     package,
