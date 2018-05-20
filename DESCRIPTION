@@ -20,3 +20,5 @@ Suggests:
     testthat,
     covr,
     crayon
+URL: https://github.com/r-lib/conflicted
+BugReports: https://github.com/r-lib/conflicted/issues
