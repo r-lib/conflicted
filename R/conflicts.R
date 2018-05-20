@@ -14,7 +14,8 @@ conflicts_find <- function(pkgs = pkgs_attached()) {
 }
 
 conflicts_register <- function() {
-  env <- conflicts_reset()
+  conflicts_reset()
+  env <- conflicts_init()
 
   # For each conflicted, new active binding in shim environment
   conflicts <- conflicts_find()
@@ -26,6 +27,16 @@ conflicts_register <- function() {
     library = shim_library,
     require = shim_require
   )
+}
+
+conflicts_reset <- function() {
+  if ("strict_conflicts" %in% search()) {
+    detach("strict_conflicts")
+  }
+}
+
+conflicts_init <- function() {
+  get("attach")(env(), name = "strict_conflicts")
 }
 
 unique_obj <- function(name, pkgs) {
@@ -48,9 +59,3 @@ conflict_fun <- function(name, pkgs) {
   }
 }
 
-conflicts_reset <- function() {
-  if ("strict_conflicts" %in% search()) {
-    detach("strict_conflicts")
-  }
-  get("attach")(env(), name = "strict_conflicts")
-}
