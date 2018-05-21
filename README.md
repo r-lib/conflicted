@@ -40,7 +40,7 @@ library(conflicted)
 library(dplyr)
 
 filter(mtcars, cyl == 8)
-#> Error: Multiple definitions found for filter. Please pick one:
+#> Error: filter found in 2 packages. You must indicate which one you want with ::
 #>  * dplyr::filter
 #>  * stats::filter
 ```

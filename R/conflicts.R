@@ -50,8 +50,8 @@ unique_obj <- function(name, pkgs) {
 conflict_binding <- function(name, pkgs) {
   bullets <- paste0(" * ", style_name(pkgs, "::", name))
   msg <- paste0(
-    "Multiple definitions found for ", style_name(name), ". ",
-    "Please pick one:\n",
+    style_name(name), " found in ", length(pkgs), " packages. ",
+    "You must indicate which one you want with ::\n",
     paste0(bullets, collapse = "\n")
   )
 
