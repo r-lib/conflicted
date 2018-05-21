@@ -12,6 +12,14 @@ particularly when introduced by an update to an existing package.
 conflicted takes a different approach, making every conflict an error
 and forcing you to choose which function to use.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/r-lib/conflicted}
+  \item Report bugs at \url{https://github.com/r-lib/conflicted/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Hadley Wickham \email{hadley@rstudio.com}
 
