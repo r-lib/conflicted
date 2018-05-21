@@ -12,6 +12,19 @@ particularly when introduced by an update to an existing package.
 conflicted takes a different approach, making every conflict an error
 and forcing you to choose which function to use.
 }
+\section{Resolving conflicts}{
+
+
+To permanently resolve a conflict within a session, use assignment:
+
+\preformatted{
+library(conflicted)
+library(dplyr)
+
+filter <- dplyr::filter
+}
+}
+
 \seealso{
 Useful links:
 \itemize{
