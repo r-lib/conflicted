@@ -1,0 +1,4 @@
+Multiple definitions found for x. Please pick one:
+ * a::x
+ * b::x
+ * c::x
