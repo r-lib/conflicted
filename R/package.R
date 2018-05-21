@@ -13,9 +13,3 @@ pkg_ls <- function(x) {
 pkg_get <- function(pkg, name) {
   get(name, envir = pkg_env(pkg))
 }
-
-pkg_funs <- function(x) {
-  env <- pkg_env(x)
-  objs <- mget(ls(envir = env), envir = env, inherits = FALSE)
-  Filter(function(x) is_function(x) && !is_primitive(x), objs)
-}
