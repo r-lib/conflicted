@@ -12,7 +12,7 @@ shim_library <- function(package,
   package <- package_name(enquo(package), character.only = character.only)
   on.exit(conflicts_register())
 
-  base::library(
+  library(
     package,
     help = help,
     pos = pos,
@@ -34,7 +34,7 @@ shim_require <- function(package,
   package <- package_name(enquo(package), character.only = character.only)
   on.exit(conflicts_register())
 
-  base::require(
+  require(
     package,
     lib.loc = lib.loc,
     quietly = quietly,

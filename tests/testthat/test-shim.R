@@ -1,10 +1,19 @@
 context("test-shim.R")
 
-test_that("library and require shim arguments match unshimmed", {
+test_that("shimmed arguments match unshimmed", {
   expect_equal(formals(shim_require), formals(require))
   expect_equal(formals(shim_library), formals(library))
 })
 
+test_that("shims load package with conflicts silently", {
+  red <- function() {}
+
+  expect_message(shim_library(crayon), NA)
+  detach("package:crayon")
+
+  expect_message(shim_require(crayon, quietly = TRUE), NA)
+  detach("package:crayon")
+})
 
 # package_name ------------------------------------------------------------
 
