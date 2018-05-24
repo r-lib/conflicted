@@ -9,6 +9,7 @@ shim_library <- function(package,
                          verbose = getOption("verbose")
                          ) {
 
+  conflicts_reset()
   package <- package_name(enquo(package), character.only = character.only)
   on.exit(conflicts_register())
 
@@ -32,6 +33,7 @@ shim_require <- function(package,
                          character.only = FALSE) {
 
   package <- package_name(enquo(package), character.only = character.only)
+  conflicts_reset()
   on.exit(conflicts_register())
 
   require(
