@@ -7,9 +7,12 @@ conflicts_find <- function(pkgs = pkgs_attached()) {
   objs <- lapply(pkgs, pkg_ls)
   names(objs) <- pkgs
 
-  # TODO: figure out how to ignore conflicts within base packages
   index <- invert(objs)
   potential <- Filter(function(x) length(x) > 1, index)
+
+  # Ignore conflicts purely within base packages
+  all_base <- vapply(potential, pkgs_base, logical(1))
+  potential <- potential[!all_base]
 
   # Only consider it a conflict if the objects are actually different
   unique <- Map(unique_obj, names(potential), potential)
