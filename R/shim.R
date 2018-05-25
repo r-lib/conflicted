@@ -9,9 +9,6 @@ shim_library <- function(package,
                          verbose = getOption("verbose")
                          ) {
 
-  # Quiet RStudio diagnostics
-  missing(help)
-
   conflicts_reset()
   on.exit(conflicts_register())
 
