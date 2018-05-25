@@ -1,8 +1,8 @@
 context("test-shim.R")
 
 test_that("shimmed arguments match unshimmed", {
-  expect_equal(formals(shim_require), formals(require))
-  expect_equal(formals(shim_library), formals(library))
+  expect_equal(formals(shim_require), formals(base::require))
+  expect_equal(formals(shim_library), formals(base::library))
 })
 
 test_that("shims load package with conflicts silently", {
