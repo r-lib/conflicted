@@ -19,7 +19,6 @@ shim_library <- function(package,
     package <- package_name(enquo(package), character.only = character.only)
     library(
       package,
-      help = help,
       pos = pos,
       lib.loc = lib.loc,
       character.only = TRUE,
