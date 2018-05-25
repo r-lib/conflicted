@@ -13,20 +13,34 @@ shim_library <- function(package,
   missing(help)
 
   conflicts_reset()
-  package <- package_name(enquo(package), character.only = character.only)
   on.exit(conflicts_register())
 
-  library(
-    package,
-    help = help,
-    pos = pos,
-    lib.loc = lib.loc,
-    character.only = TRUE,
-    logical.return = logical.return,
-    warn.conflicts = FALSE,
-    quietly = quietly,
-    verbose = verbose
-  )
+  if (!missing(package)) {
+    package <- package_name(enquo(package), character.only = character.only)
+    library(
+      package,
+      help = help,
+      pos = pos,
+      lib.loc = lib.loc,
+      character.only = TRUE,
+      logical.return = logical.return,
+      warn.conflicts = FALSE,
+      quietly = quietly,
+      verbose = verbose
+    )
+  } else if (!missing(help)) {
+    help <- package_name(enquo(help), character.only = character.only)
+    library(
+      help = help,
+      character.only = TRUE
+    )
+  } else {
+    library(
+      lib.loc = lib.loc,
+      logical.return = logical.return
+    )
+  }
+
 }
 
 shim_require <- function(package,

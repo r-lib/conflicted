@@ -15,6 +15,25 @@ test_that("shims load package with conflicts silently", {
   detach("package:crayon")
 })
 
+test_that("shimmed help returns same as unshimmed", {
+  expect_equal(
+    shim_library(help = "rlang"),
+    base::library(help = "rlang")
+  )
+
+  expect_equal(
+    shim_library(help = rlang),
+    base::library(help = rlang)
+  )
+})
+
+test_that("shimmed library() returns same as unshimmed", {
+  expect_equal(
+    shim_library(),
+    base::library()
+  )
+})
+
 # package_name ------------------------------------------------------------
 
 test_that("package_name mimics library", {
