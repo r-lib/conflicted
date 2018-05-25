@@ -1,4 +1,9 @@
 conflicts_find <- function(pkgs = pkgs_attached()) {
+  # Ignore any packages loaded by devtools since these contain
+  # export all imported functions by default
+  is_dev <- vapply(pkgs, pkg_devtools, logical(1))
+  pkgs <- pkgs[!is_dev]
+
   objs <- lapply(pkgs, pkg_ls)
   names(objs) <- pkgs
 
