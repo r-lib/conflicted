@@ -9,10 +9,10 @@ shim_library <- function(package,
                          verbose = getOption("verbose")
                          ) {
 
-  conflicts_reset()
-  on.exit(conflicts_register())
-
   if (!missing(package)) {
+    conflicts_reset()
+    on.exit(conflicts_register())
+
     package <- package_name(enquo(package), character.only = character.only)
     library(
       package,
