@@ -1,3 +1,13 @@
+This is a resubmission
+
+* I have added single quotes around conflicted in the DESCRIPTION
+
+* conflicted is designed for interactive usage only and it does not
+  export any functions. Therefore it is not possible to include an 
+  executable example in the documentation.
+
+---
+
 ## Test environments
 * OS X install: R 3.4
 * win-builder: R-devel
