@@ -10,10 +10,12 @@ shim_library <- function(package,
                          ) {
 
   if (!missing(package)) {
+    package <- package_name(enquo(package), character.only = character.only)
+
     conflicts_reset()
     on.exit(conflicts_register())
+    on_detach(package, function() conflicts_detach(package))
 
-    package <- package_name(enquo(package), character.only = character.only)
     library(
       package,
       pos = pos,
@@ -24,6 +26,7 @@ shim_library <- function(package,
       quietly = quietly,
       verbose = verbose
     )
+
   } else if (!missing(help)) {
     help <- package_name(enquo(help), character.only = character.only)
     library(
@@ -46,8 +49,10 @@ shim_require <- function(package,
                          character.only = FALSE) {
 
   package <- package_name(enquo(package), character.only = character.only)
+
   conflicts_reset()
   on.exit(conflicts_register())
+  on_detach(package, function() conflicts_detach(package))
 
   require(
     package,

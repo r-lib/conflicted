@@ -15,6 +15,18 @@ test_that("shims load package with conflicts silently", {
   detach("package:crayon")
 })
 
+test_that("detaching package removes shims", {
+  skip_if_not("chr" %in% pkg_ls("crayon") && "chr" %in% pkg_ls("rlang"))
+
+  shim_library(crayon)
+  shim_library(rlang)
+  expect_true(exists("chr", "conflicted", inherits = FALSE))
+
+  detach("package:crayon")
+  detach("package:rlang")
+  expect_false(exists("chr", "conflicted", inherits = FALSE))
+})
+
 test_that("shimmed help returns same as unshimmed", {
   expect_equal(
     shim_library(help = "rlang"),

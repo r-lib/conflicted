@@ -21,6 +21,11 @@ conflicts_find <- function(pkgs = pkgs_attached()) {
   conflicts
 }
 
+conflicts_detach <- function(pkg) {
+  # The detach hook is called before the package is removed from the search path
+  conflicts_register(setdiff(pkgs_attached(), pkg))
+}
+
 conflicts_register <- function(pkgs = pkgs_attached()) {
   env <- conflicts_init()
 

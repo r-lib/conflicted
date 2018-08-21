@@ -22,3 +22,16 @@ pkg_devtools <- function(name) {
 
   !is.null(ns$.__DEVTOOLS__)
 }
+
+on_detach <- function(pkg, fun) {
+  force(fun)
+
+  done <- FALSE
+  call_once <- function(...) {
+    if (done) return()
+    done <<- TRUE
+    fun()
+  }
+
+  setHook(packageEvent(pkg, "detach"), call_once)
+}
