@@ -1,4 +1,14 @@
-x found in 3 packages. You must indicate which one you want with ::
+`x` found in 3 packages. You must indicate which one you want with `::`
  * a::x
  * b::x
  * c::x
+
+`if` found in 3 packages. You must indicate which one you want with `::`
+ * a::`if`
+ * b::`if`
+ * c::`if`
+
+`%in%` found in 3 packages. You must indicate which one you want with `::`
+ * `%in%` <- a::`%in%`
+ * `%in%` <- b::`%in%`
+ * `%in%` <- c::`%in%`

@@ -65,10 +65,16 @@ conflict_binding <- function(name, pkgs) {
   force(pkgs)
 
   function(value) {
-    bullets <- paste0(" * ", style_name(pkgs, "::", name))
+    bt_name <- backtick(name)
+    if (is_infix_fun(name)) {
+      bullets <- paste0(" * ", style_name(bt_name), " <- ", style_name(pkgs, "::", bt_name))
+    } else {
+      bullets <- paste0(" * ", style_name(pkgs, "::", bt_name))
+    }
+
     msg <- paste0(
-      style_name(name), " found in ", length(pkgs), " packages. ",
-      "You must indicate which one you want with ::\n",
+      style_name("`", name, "`"), " found in ", length(pkgs), " packages. ",
+      "You must indicate which one you want with `::`\n",
       paste0(bullets, collapse = "\n")
     )
 
@@ -76,3 +82,14 @@ conflict_binding <- function(name, pkgs) {
   }
 }
 
+backtick <- function(x) {
+  ifelse(x == make.names(x), x, paste0("`", x, "`"))
+}
+
+is_infix_fun <- function(name) {
+  base <- c(
+    ":", "::", ":::", "$", "@", "^", "*", "/", "+", "-", ">", ">=",
+    "<", "<=", "==", "!=", "!", "&", "&&", "|", "||", "~", "<-", "<<-"
+  )
+  name %in% base || grepl("^%.*%$", name)
+}
