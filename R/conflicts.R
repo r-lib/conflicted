@@ -39,7 +39,7 @@ conflicts_register <- function() {
 
 conflicts_reset <- function() {
   if ("conflicted" %in% search()) {
-    detach("conflicted")
+    detach("conflicted", character.only = TRUE)
   }
 }
 
