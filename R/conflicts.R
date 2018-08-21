@@ -28,9 +28,22 @@ conflicts_detach <- function(pkg) {
 
 conflicts_register <- function(pkgs = pkgs_attached()) {
   env <- conflicts_init()
-
-  # For each conflicted, new active binding in shim environment
   conflicts <- conflicts_find(pkgs)
+
+  # process preferences
+  for (fun in ls(prefs)) {
+    if (!has_name(conflicts, fun))
+      next
+    if (!prefs_resolved(fun, conflicts[[fun]]))
+      next
+
+    # bind winner & remove from conflicts
+    pkg <- prefs[[fun]][[1]]
+    env_bind(env, !!fun := getExportedValue(pkg, fun))
+    conflicts[[fun]] <- NULL
+  }
+
+  # For each conflict, create new active binding
   conflict_overrides <- Map(conflict_binding, names(conflicts), conflicts)
   env_bind_fns(env, !!!conflict_overrides)
 
@@ -64,21 +77,32 @@ conflict_binding <- function(name, pkgs) {
   force(name)
   force(pkgs)
 
-  function(value) {
-    bt_name <- backtick(name)
-    if (is_infix_fun(name)) {
-      bullets <- paste0(" * ", style_name(bt_name), " <- ", style_name(pkgs, "::", bt_name))
-    } else {
-      bullets <- paste0(" * ", style_name(pkgs, "::", bt_name))
+  if (is_infix_fun(name)) {
+    function(value) {
+      bullets <- paste0("* conflict_prefer(\"", name, "\", \"", pkgs, "\")")
+      msg <- paste0(
+        "[conflicted] ", style_name("`", name, "`"), " found in ", length(pkgs), " packages.\n",
+        "Declare a preference with `conflicted_prefer()`:\n",
+        paste0(bullets, collapse = "\n")
+      )
+      abort(msg)
+
     }
+  } else {
+    function(value) {
+      bt_name <- backtick(name)
+      bullets_temp <- paste0("* ", style_name(pkgs, "::", bt_name))
+      bullets_pers <- paste0("* ", "conflict_prefer(\"", name, "\", \"", pkgs, "\")")
 
-    msg <- paste0(
-      style_name("`", name, "`"), " found in ", length(pkgs), " packages. ",
-      "You must indicate which one you want with `::`\n",
-      paste0(bullets, collapse = "\n")
-    )
-
-    abort(msg)
+      msg <- paste0(
+        "[conflicted] ", style_name("`", name, "`"), " found in ", length(pkgs), " packages.\n",
+        "Either pick the one you want with `::` \n",
+        paste0(bullets_temp, collapse = "\n"), "\n",
+        "Or declare a preference with `conflicted_prefer()`\n",
+        paste0(bullets_pers, collapse = "\n")
+      )
+      abort(msg)
+    }
   }
 }
 

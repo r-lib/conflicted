@@ -2,6 +2,9 @@ pkgs_attached <- function() {
   gsub("package:", "", grep("package:", search(), value = TRUE))
 }
 
+pkg_attached <- function(x) {
+  paste0("package:", x) %in% search()
+}
 
 pkg_ls <- function(x) {
   ns <- ns_env(x)
