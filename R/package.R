@@ -2,16 +2,28 @@ pkgs_attached <- function() {
   gsub("package:", "", grep("package:", search(), value = TRUE))
 }
 
-pkg_env <- function(x) {
-  as.environment(paste0("package:", x))
-}
 
 pkg_ls <- function(x) {
-  ls(envir = pkg_env(x))
+  ns <- ns_env(x)
+  exports <- getNamespaceExports(ns)
+
+  intersect(exports, ls(envir = ns, sorted = FALSE))
+}
+
+# Not currently used because pkg_get() can't find it, and it seems unlikely
+# to be a common source of conflicts
+pkg_data <- function(x) {
+  ns <- ns_env(x)
+  lazy_data <- .getNamespaceInfo(ns, "lazydata")
+
+  if (is.null(lazy_data))
+    return(character())
+
+  ls(envir = lazy_data, sorted = FALSE)
 }
 
 pkg_get <- function(pkg, name) {
-  get(name, envir = pkg_env(pkg))
+  get(name, envir = ns_env(pkg), inherits = FALSE)
 }
 
 base_packages <- c(

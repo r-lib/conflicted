@@ -21,12 +21,11 @@ conflicts_find <- function(pkgs = pkgs_attached()) {
   conflicts
 }
 
-conflicts_register <- function() {
-  conflicts_reset()
+conflicts_register <- function(pkgs = pkgs_attached()) {
   env <- conflicts_init()
 
   # For each conflicted, new active binding in shim environment
-  conflicts <- conflicts_find()
+  conflicts <- conflicts_find(pkgs)
   conflict_overrides <- Map(conflict_binding, names(conflicts), conflicts)
   env_bind_fns(env, !!!conflict_overrides)
 
@@ -45,6 +44,7 @@ conflicts_reset <- function() {
 
 
 conflicts_init <- function() {
+  conflicts_reset()
   get("attach")(env(), name = "conflicted")
 }
 
@@ -56,14 +56,17 @@ unique_obj <- function(name, pkgs) {
 }
 
 conflict_binding <- function(name, pkgs) {
-  bullets <- paste0(" * ", style_name(pkgs, "::", name))
-  msg <- paste0(
-    style_name(name), " found in ", length(pkgs), " packages. ",
-    "You must indicate which one you want with ::\n",
-    paste0(bullets, collapse = "\n")
-  )
+  force(name)
+  force(pkgs)
 
   function(value) {
+    bullets <- paste0(" * ", style_name(pkgs, "::", name))
+    msg <- paste0(
+      style_name(name), " found in ", length(pkgs), " packages. ",
+      "You must indicate which one you want with ::\n",
+      paste0(bullets, collapse = "\n")
+    )
+
     abort(msg)
   }
 }
