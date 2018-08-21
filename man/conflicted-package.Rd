@@ -7,10 +7,11 @@
 \title{conflicted: An Alternative Conflict Resolution Strategy}
 \description{
 R's default conflict management system gives the most recently
-loaded package precedence. This can make it hard to detect conflicts,
-particularly when introduced by an update to an existing package.
-conflicted takes a different approach, making every conflict an error
-and forcing you to choose which function to use.
+    loaded package precedence. This can make it hard to detect conflicts, 
+    particularly when they arise because a package update creates ambiguity
+    that did not previously exist. 'conflicted' takes a different approach, 
+    making every conflict an error and forcing you to choose which function 
+    to use.
 }
 \section{Resolving conflicts}{
 
