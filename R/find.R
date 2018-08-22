@@ -31,6 +31,9 @@ conflicts_find <- function(pkgs = NULL) {
   # unless attr(f, "conflicted_superset") is FALSE
   conflicts <- map2(names(conflicts), conflicts, superset_principle)
 
+  # a deprecated function should never conflict with any other function
+  conflicts <- map2(names(conflicts), conflicts, drop_deprecated)
+
   # apply declared user preferences
   for (fun in ls(prefs)) {
     if (!has_name(conflicts, fun))
@@ -84,6 +87,29 @@ superset_principle <- function(fun, pkgs) {
     non_base
   }
 }
+
+drop_deprecated <- function(fun, pkgs) {
+  is_dep <- vapply(pkgs, function(pkg) is_deprecated_mem(fun, pkg), logical(1))
+  pkgs[!is_dep]
+}
+
+is_deprecated_mem <- memoise::memoise(function(fun, pkg) {
+  obj <- getExportedValue(pkg, fun)
+  is_deprecated(obj)
+})
+
+is_deprecated <- function(x) {
+  if (!is.function(x)) {
+    return(FALSE)
+  }
+
+  body <- body(x)
+  if (length(body) < 2 || !is_call(body, "{"))
+    return(FALSE)
+
+  is_call(body[[2]], ".Deprecated")
+}
+
 
 not_superset <- function(fun, pkg) {
   pkg == "dplyr" && fun %in% c("lag", "filter")

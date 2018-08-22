@@ -1,5 +1,8 @@
 # conflicted 0.1.0.9000
 
+* Deprecated functions (i.e. functions with a call to `.Deprecated()` as the
+  first element of the function body) now never generate conflicts.
+
 * conflicts now expects packages that override functions in base packages 
   to obey the "superset principle", i.e. that `foo::bar(...)` must return
   the same value of `base::bar(...)` whenever the input is not an error.
