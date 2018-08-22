@@ -1,4 +1,4 @@
-context("test-conflicts.R")
+context("test-disambiguate.R")
 
 test_that("error message is informative", {
   old <- options(crayon.enabled = FALSE)
@@ -15,7 +15,7 @@ test_that("error message is informative", {
       cat(c2$message)
       cat("\n\n")
       cat(c3$message)
-    }, test_path("conflicts-error.txt"))
+    }, test_path("test-disambiguate.txt"))
 })
 
 
