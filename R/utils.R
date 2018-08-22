@@ -35,3 +35,14 @@ on_detach <- function(pkg, fun) {
 
   setHook(packageEvent(pkg, "detach"), call_once)
 }
+
+if (getRversion() <= "3.1") {
+  fast_ls <- function(env) {
+    ls(envir = env)
+  }
+} else {
+  fast_ls <- function(env) {
+    ls(envir = env, sorted = FALSE)
+  }
+}
+

@@ -10,7 +10,7 @@ pkg_ls <- function(x) {
   ns <- ns_env(x)
   exports <- getNamespaceExports(ns)
 
-  intersect(exports, ls(envir = ns, sorted = FALSE))
+  intersect(exports, fast_ls(ns))
 }
 
 # Not currently used because pkg_get() can't find it, and it seems unlikely
@@ -22,7 +22,7 @@ pkg_data <- function(x) {
   if (is.null(lazy_data))
     return(character())
 
-  ls(envir = lazy_data, sorted = FALSE)
+  fast_ls(lazy_data)
 }
 
 pkg_get <- function(pkg, name) {
