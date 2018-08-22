@@ -37,11 +37,7 @@ pkg_data <- function(x) {
 }
 
 base_packages <- c(
-  "KernSmooth", "MASS", "Matrix", "base", "boot", "class", "cluster",
-  "codetools", "compiler", "datasets", "foreign", "grDevices",
-  "graphics", "grid", "lattice", "methods", "mgcv", "nlme", "nnet",
-  "parallel", "rlanglibtest", "rpart", "spatial", "splines", "stats",
-  "stats4", "survival", "tcltk", "tools", "translations", "utils"
+  "base", "datasets", "grDevices", "graphics", "methods", "stats", "utils"
 )
 
 pkgs_base <- function(x) {
