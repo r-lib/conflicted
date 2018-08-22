@@ -32,8 +32,7 @@ devtools::install_github("r-lib/conflicted")
 
 ## Usage
 
-conflicted does not export any functions. To use it, all you need to do
-is load it:
+To use conflicted, all you need to do is load it:
 
 ``` r
 library(conflicted)
@@ -76,6 +75,25 @@ library call:
 library(dplyr)
 conflict_prefer("filter", "dplyr")
 ```
+
+You can ask conflicted to report any conflicts in the current session:
+
+``` r
+conflicts_find()
+#> 6 conflicts
+#> * `filter`   : [dplyr]
+#> * `intersect`: [dplyr]
+#> * `lag`      : dplyr, stats
+#> * `setdiff`  : [dplyr]
+#> * `setequal` : [dplyr]
+#> * `union`    : [dplyr]
+```
+
+Functions surrounded by `[]` have been chosen using one of the built-in
+rules. Here `filter()` has been selected because of the preference
+declared above; the set operations have been selected because they
+follow the superset principle and extend the API of the base
+equivalents.
 
 ### How it works
 
