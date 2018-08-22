@@ -76,6 +76,27 @@ if (interactive()) {
 }
 ```
 
+## Alternative approaches
+
+It is worth comparing conflicted to
+[modules](http://github.com/klmr/modules) and
+[import](https://github.com/smbache/import). Both packages provide
+strict alternatives to `library()`, giving much finer control over what
+functions are added to the search path.
+
+``` r
+# modules expects you to namespace all package functions
+dplyr <- modules::import_package('dplyr')
+dplyr$filter(mtcars, cyl == 8)
+
+# import expects you to explicit load functions
+import::from(dplyr, select, arrange, dplyr_filter = filter)
+dplyr_filter(mtcars, cyl == 8)
+```
+
+These require more upfront work than conflicted, in return for greater
+precision and control.
+
 ## Code of conduct
 
 Please note that this project is released with a [Contributor Code of
