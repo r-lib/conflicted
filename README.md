@@ -49,16 +49,38 @@ filter(mtcars, cyl == 8)
 #> * conflict_prefer("filter", "stats")
 ```
 
+As suggested, you can either namespace individual calls:
+
+``` r
+dplyr::filter(mtcars, am & cyl == 8)
+#>    mpg cyl disp  hp drat   wt qsec vs am gear carb
+#> 1 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4
+#> 2 15.0   8  301 335 3.54 3.57 14.6  0  1    5    8
+```
+
+Or declare a session-wide preference:
+
 You can also use assignment to resolve the conflict once for the entire
 session:
 
 ``` r
-filter <- dplyr::filter
+conflict_prefer("filter", "dplyr")
+#> [conflicted] Will prefer dplyr::filter over any other package
 filter(mtcars, am & cyl == 8)
 #>    mpg cyl disp  hp drat   wt qsec vs am gear carb
 #> 1 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4
 #> 2 15.0   8  301 335 3.54 3.57 14.6  0  1    5    8
 ```
+
+I recommend declaring preferences directly underneath the corresponding
+library call:
+
+``` r
+library(dplyr)
+conflict_prefer("filter", "dplyr")
+```
+
+### How it works
 
 Loading conflicted creates a new “conflicted” environment that is
 attached just after the global environment. This environment contains an
@@ -76,9 +98,12 @@ with `usethis::edit_r_profile()`):
 
 ``` r
 if (interactive()) {
-  suppressMessages(suppressWarnings(require(conflicted)))
+  require(conflicted)
 }
 ```
+
+I don’t recommend declaring preferences in your `.Rprofile` as this will
+make your code less portable.
 
 ## Alternative approaches
 

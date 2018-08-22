@@ -41,12 +41,30 @@ library(dplyr)
 filter(mtcars, cyl == 8)
 ```
 
+As suggested, you can either namespace individual calls:
+
+```{r}
+dplyr::filter(mtcars, am & cyl == 8)
+```
+
+Or declare a session-wide preference:
+
 You can also use assignment to resolve the conflict once for the entire session:
 
 ```{r}
-filter <- dplyr::filter
+conflict_prefer("filter", "dplyr")
 filter(mtcars, am & cyl == 8)
 ```
+
+I recommend declaring preferences directly underneath the corresponding library call:
+
+```{r, eval = FALSE}
+library(dplyr)
+conflict_prefer("filter", "dplyr")
+```
+
+
+### How it works
 
 Loading conflicted creates a new "conflicted" environment that is attached just after the global environment. This environment contains an active binding for any object that is exported by multiple packages; the active binding will throw an error message describing how to disambiguate the name. The conflicted environment also contains bindings for `library()` and `require()` that suppress conflict reporting and update the conflicted environment with any new conflicts.
 
@@ -56,9 +74,11 @@ If you want to make this behaviour the default, you can load conflicted in your 
 
 ```{r}
 if (interactive()) {
-  suppressMessages(suppressWarnings(require(conflicted)))
+  require(conflicted)
 }
 ```
+
+I don't recommend declaring preferences in your `.Rprofile` as this will make your code less portable.
 
 ## Alternative approaches
 
