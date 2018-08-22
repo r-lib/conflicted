@@ -40,9 +40,13 @@ library(conflicted)
 library(dplyr)
 
 filter(mtcars, cyl == 8)
-#> Error: filter found in 2 packages. You must indicate which one you want with ::
-#>  * dplyr::filter
-#>  * stats::filter
+#> Error: [conflicted] `filter` found in 2 packages.
+#> Either pick the one you want with `::` 
+#> * dplyr::filter
+#> * stats::filter
+#> Or declare a preference with `conflicted_prefer()`
+#> * conflict_prefer("filter", "dplyr")
+#> * conflict_prefer("filter", "stats")
 ```
 
 You can also use assignment to resolve the conflict once for the entire
