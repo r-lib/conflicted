@@ -2,6 +2,14 @@
 # subsequent elements (if present) gives losers
 prefs <- env()
 
+prefs_ls <- function() {
+  env_names(prefs)
+}
+
+prefs_reset <- function() {
+  env_unbind(prefs, env_names(prefs))
+}
+
 #' Persistently prefer one function over another
 #'
 #' `conflict_prefer()` allows you to declare "winners" of conflicts.
