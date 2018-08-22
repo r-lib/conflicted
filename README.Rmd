@@ -49,8 +49,6 @@ dplyr::filter(mtcars, am & cyl == 8)
 
 Or declare a session-wide preference:
 
-You can also use assignment to resolve the conflict once for the entire session:
-
 ```{r}
 conflict_prefer("filter", "dplyr")
 filter(mtcars, am & cyl == 8)
