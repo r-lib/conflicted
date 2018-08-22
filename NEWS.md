@@ -1,6 +1,9 @@
 # conflicted 0.1.0.9000
 
-* `conflicted_prefer()` allows you to declare a persistent preference 
+* `conflicts_find()` reports on all conflicts found amongst a set of 
+  packages.
+
+* `conflicts_prefer()` allows you to declare a persistent preference 
   (within a session) for one function over another (#4)
 
 * Added a `NEWS.md` file to track changes to the package.

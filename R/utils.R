@@ -51,3 +51,12 @@ backtick <- function(x) {
   ifelse(x == make.names(x), x, paste0("`", x, "`"))
 }
 
+
+compact <- function(x) {
+  empty <- vapply(x, is_empty, logical(1))
+  x[!empty]
+}
+
+cat_line <- function(...) {
+  cat(..., "\n", sep = "")
+}
