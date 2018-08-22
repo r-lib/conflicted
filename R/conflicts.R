@@ -1,6 +1,5 @@
 conflicts_register <- function(pkgs = pkgs_attached()) {
   conflicts <- conflicts_find(pkgs)
-  conflicts <- conflicts_prefer(conflicts)
 
   env <- conflicts_init()
   map2(names(conflicts), conflicts, conflict_disambiguate, env = env)
@@ -15,32 +14,21 @@ conflicts_register <- function(pkgs = pkgs_attached()) {
 }
 
 conflicts_find <- function(pkgs = pkgs_attached()) {
-  # Ignore any packages loaded by devtools since these contain
-  # export all imported functions by default
-  is_dev <- vapply(pkgs, pkg_devtools, logical(1))
-  pkgs <- pkgs[!is_dev]
-
   objs <- lapply(pkgs, pkg_ls)
   names(objs) <- pkgs
 
   index <- invert(objs)
   potential <- Filter(function(x) length(x) > 1, index)
 
-  # Ignore conflicts purely within base packages
-  all_base <- vapply(potential, pkgs_base, logical(1))
-  potential <- potential[!all_base]
-
   # Only consider it a conflict if the objects are actually different
   unique <- Map(unique_obj, names(potential), potential)
   conflicts <- Filter(function(x) length(x) > 1, unique)
 
-  conflicts
-}
+  # superset principle: ignore single conflict with base packages
+  # unless attr(f, "conflicted_superset") is FALSE
+  conflicts <- map2(names(conflicts), conflicts, superset_principle)
 
-# Resolve conflicts with user preferences
-conflicts_prefer <- function(conflicts) {
-
-  # process preferences
+  # apply declared user preferences
   for (fun in ls(prefs)) {
     if (!has_name(conflicts, fun))
       next
@@ -49,6 +37,27 @@ conflicts_prefer <- function(conflicts) {
   }
 
   conflicts
+}
+
+superset_principle <- function(fun, pkgs) {
+  non_base <- setdiff(pkgs, base_packages)
+  if (length(non_base) == 0) {
+    # all base, so no conflicts
+    character()
+  } else if (length(non_base) == 1) {
+    # only one, so assume it obeys superset principle
+    if (not_superset(fun, non_base)) {
+      pkgs
+    } else {
+      non_base
+    }
+  } else {
+    non_base
+  }
+}
+
+not_superset <- function(fun, pkg) {
+  pkg == "dplyr" && fun %in% c("lag", "filter")
 }
 
 conflicts_remove <- function(pkg) {

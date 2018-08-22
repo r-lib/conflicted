@@ -1,12 +1,16 @@
 conflict_disambiguate <- function(fun, pkgs, env) {
-  if (length(pkgs) == 1) {
+  if (length(pkgs) == 0) {
+    # no conflict, so no action needed
+  } else if (length(pkgs) == 1) {
     # No ambiguity, but need to make sure this choice wins, not version
     # from search path (which might be in wrong order)
-    env_bind(env, !!fun := getExportedValue(pkg, fun))
-  } else if (is_infix_fun(fun)) {
-    env_bind_fns(env, !!fun := disambiguate_infix(fun, pkgs))
+    env_bind(env, !!fun := getExportedValue(pkgs, fun))
   } else {
-    env_bind_fns(env, !!fun := disambiguate_prefix(fun, pkgs))
+    if (is_infix_fun(fun)) {
+      env_bind_fns(env, !!fun := disambiguate_infix(fun, pkgs))
+    } else {
+      env_bind_fns(env, !!fun := disambiguate_prefix(fun, pkgs))
+    }
   }
 }
 

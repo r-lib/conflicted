@@ -1,18 +1,27 @@
 pkgs_attached <- function() {
-  gsub("package:", "", grep("package:", search(), value = TRUE))
+  pkgs <- gsub("package:", "", grep("package:", search(), value = TRUE))
+
+  # Ignore any packages loaded by devtools since these contain
+  # export all imported functions by default
+  is_dev <- vapply(pkgs, pkg_devtools, logical(1))
+  pkgs[!is_dev]
 }
 
 pkg_attached <- function(x) {
   paste0("package:", x) %in% search()
 }
 
-pkg_ls <- function(x) {
-  ns <- ns_env(x)
+pkg_ls <- function(pkg) {
+  ns <- getNamespace(pkg)
   exports <- getNamespaceExports(ns)
 
   names <- intersect(exports, env_names(ns))
   int <- grepl("^.__", names)
   names[!int]
+}
+
+pkg_get <- function(pkg, name) {
+  get(name, envir = ns_env(pkg), inherits = FALSE)
 }
 
 # Not currently used because pkg_get() can't find it, and it seems unlikely
@@ -25,10 +34,6 @@ pkg_data <- function(x) {
     return(character())
 
   env_names(lazy_data)
-}
-
-pkg_get <- function(pkg, name) {
-  get(name, envir = ns_env(pkg), inherits = FALSE)
 }
 
 base_packages <- c(
