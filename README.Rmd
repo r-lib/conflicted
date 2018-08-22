@@ -61,22 +61,9 @@ library(dplyr)
 conflict_prefer("filter", "dplyr")
 ```
 
-
 ### How it works
 
 Loading conflicted creates a new "conflicted" environment that is attached just after the global environment. This environment contains an active binding for any object that is exported by multiple packages; the active binding will throw an error message describing how to disambiguate the name. The conflicted environment also contains bindings for `library()` and `require()` that suppress conflict reporting and update the conflicted environment with any new conflicts.
-
-### .Rprofile
-
-If you want to make this behaviour the default, you can load conflicted in your `~/.Rprofile` (the easiest way to find and edit this file is with `usethis::edit_r_profile()`):
-
-```{r}
-if (interactive()) {
-  require(conflicted)
-}
-```
-
-I don't recommend declaring preferences in your `.Rprofile` as this will make your code less portable.
 
 ## Alternative approaches
 

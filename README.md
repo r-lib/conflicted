@@ -87,21 +87,6 @@ disambiguate the name. The conflicted environment also contains bindings
 for `library()` and `require()` that suppress conflict reporting and
 update the conflicted environment with any new conflicts.
 
-### .Rprofile
-
-If you want to make this behaviour the default, you can load conflicted
-in your `~/.Rprofile` (the easiest way to find and edit this file is
-with `usethis::edit_r_profile()`):
-
-``` r
-if (interactive()) {
-  require(conflicted)
-}
-```
-
-I don’t recommend declaring preferences in your `.Rprofile` as this will
-make your code less portable.
-
 ## Alternative approaches
 
 It is worth comparing conflicted to
