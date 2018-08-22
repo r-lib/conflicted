@@ -35,3 +35,7 @@ on_detach <- function(pkg, fun) {
 
   setHook(packageEvent(pkg, "detach"), call_once)
 }
+
+map2 <- function(.x, .y, .f, ...) {
+  mapply(.f, .x, .y, MoreArgs = list(...), SIMPLIFY = FALSE)
+}

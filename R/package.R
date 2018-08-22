@@ -10,7 +10,9 @@ pkg_ls <- function(x) {
   ns <- ns_env(x)
   exports <- getNamespaceExports(ns)
 
-  intersect(exports, env_names(ns))
+  names <- intersect(exports, env_names(ns))
+  int <- grepl("^.__", names)
+  names[!int]
 }
 
 # Not currently used because pkg_get() can't find it, and it seems unlikely

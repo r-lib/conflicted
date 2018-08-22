@@ -54,12 +54,12 @@ conflict_prefer <- function(name, winner, losers = NULL, quiet = FALSE) {
   invisible()
 }
 
-prefs_resolved <- function(fun, conflicts) {
+prefs_resolve <- function(fun, conflicts) {
   pkgs <- prefs[[fun]]
 
   if (length(pkgs) == 1) {
-    TRUE
+    pkgs[[1]]
   } else {
-    length(setdiff(conflicts, pkgs[-1])) == 0
+    c(pkgs[[1]], setdiff(conflicts, pkgs))
   }
 }

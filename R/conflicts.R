@@ -21,37 +21,39 @@ conflicts_find <- function(pkgs = pkgs_attached()) {
   conflicts
 }
 
+# Resolve conflicts with user preferences
+conflicts_prefer <- function(conflicts) {
+
+  # process preferences
+  for (fun in ls(prefs)) {
+    if (!has_name(conflicts, fun))
+      next
+
+    conflicts[[fun]] <- prefs_resolve(fun, conflicts[[fun]])
+  }
+
+  conflicts
+}
+
 conflicts_detach <- function(pkg) {
   # The detach hook is called before the package is removed from the search path
   conflicts_register(setdiff(pkgs_attached(), pkg))
 }
 
 conflicts_register <- function(pkgs = pkgs_attached()) {
-  env <- conflicts_init()
   conflicts <- conflicts_find(pkgs)
+  conflicts <- conflicts_prefer(conflicts)
 
-  # process preferences
-  for (fun in ls(prefs)) {
-    if (!has_name(conflicts, fun))
-      next
-    if (!prefs_resolved(fun, conflicts[[fun]]))
-      next
-
-    # bind winner & remove from conflicts
-    pkg <- prefs[[fun]][[1]]
-    env_bind(env, !!fun := getExportedValue(pkg, fun))
-    conflicts[[fun]] <- NULL
-  }
-
-  # For each conflict, create new active binding
-  conflict_overrides <- Map(conflict_binding, names(conflicts), conflicts)
-  env_bind_fns(env, !!!conflict_overrides)
+  env <- conflicts_init()
+  map2(names(conflicts), conflicts, conflict_disambiguate, env = env)
 
   # Shim library() and require() so we can rebuild
   env_bind(env,
     library = shim_library,
     require = shim_require
   )
+
+  env
 }
 
 conflicts_reset <- function() {
@@ -60,10 +62,13 @@ conflicts_reset <- function() {
   }
 }
 
-
 conflicts_init <- function() {
   conflicts_reset()
   get("attach")(env(), name = "conflicted")
+}
+
+conflicts_ls <- function() {
+  env_names(scoped_env("conflicted"))
 }
 
 unique_obj <- function(name, pkgs) {
@@ -73,36 +78,15 @@ unique_obj <- function(name, pkgs) {
   pkgs[!duplicated(objs)]
 }
 
-conflict_binding <- function(name, pkgs) {
-  force(name)
-  force(pkgs)
-
-  if (is_infix_fun(name)) {
-    function(value) {
-      bullets <- paste0("* conflict_prefer(\"", name, "\", \"", pkgs, "\")")
-      msg <- paste0(
-        "[conflicted] ", style_name("`", name, "`"), " found in ", length(pkgs), " packages.\n",
-        "Declare a preference with `conflicted_prefer()`:\n",
-        paste0(bullets, collapse = "\n")
-      )
-      abort(msg)
-
-    }
+conflict_disambiguate <- function(fun, pkgs, env) {
+  if (length(pkgs) == 1) {
+    # No ambiguity, but need to make sure this choice wins, not version
+    # from search path (which might be in wrong order)
+    env_bind(env, !!fun := getExportedValue(pkg, fun))
+  } else if (is_infix_fun(fun)) {
+    env_bind_fns(env, !!fun := disambiguate_infix(fun, pkgs))
   } else {
-    function(value) {
-      bt_name <- backtick(name)
-      bullets_temp <- paste0("* ", style_name(pkgs, "::", bt_name))
-      bullets_pers <- paste0("* ", "conflict_prefer(\"", name, "\", \"", pkgs, "\")")
-
-      msg <- paste0(
-        "[conflicted] ", style_name("`", name, "`"), " found in ", length(pkgs), " packages.\n",
-        "Either pick the one you want with `::` \n",
-        paste0(bullets_temp, collapse = "\n"), "\n",
-        "Or declare a preference with `conflicted_prefer()`\n",
-        paste0(bullets_pers, collapse = "\n")
-      )
-      abort(msg)
-    }
+    env_bind_fns(env, !!fun := disambiguate_prefix(fun, pkgs))
   }
 }
 
