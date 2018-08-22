@@ -14,7 +14,7 @@ shim_library <- function(package,
 
     conflicts_reset()
     on.exit(conflicts_register())
-    on_detach(package, function() conflicts_detach(package))
+    on_detach(package, function() conflicts_remove(package))
 
     library(
       package,
@@ -52,7 +52,7 @@ shim_require <- function(package,
 
   conflicts_reset()
   on.exit(conflicts_register())
-  on_detach(package, function() conflicts_detach(package))
+  on_detach(package, function() conflicts_remove(package))
 
   require(
     package,

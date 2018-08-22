@@ -39,3 +39,15 @@ on_detach <- function(pkg, fun) {
 map2 <- function(.x, .y, .f, ...) {
   mapply(.f, .x, .y, MoreArgs = list(...), SIMPLIFY = FALSE)
 }
+
+unique_obj <- function(name, pkgs) {
+  objs <- lapply(pkgs, pkg_get, name)
+  names(objs) <- pkgs
+
+  pkgs[!duplicated(objs)]
+}
+
+backtick <- function(x) {
+  ifelse(x == make.names(x), x, paste0("`", x, "`"))
+}
+

@@ -1,3 +1,19 @@
+conflicts_register <- function(pkgs = pkgs_attached()) {
+  conflicts <- conflicts_find(pkgs)
+  conflicts <- conflicts_prefer(conflicts)
+
+  env <- conflicts_init()
+  map2(names(conflicts), conflicts, conflict_disambiguate, env = env)
+
+  # Shim library() and require() so we can rebuild
+  env_bind(env,
+    library = shim_library,
+    require = shim_require
+  )
+
+  env
+}
+
 conflicts_find <- function(pkgs = pkgs_attached()) {
   # Ignore any packages loaded by devtools since these contain
   # export all imported functions by default
@@ -35,25 +51,16 @@ conflicts_prefer <- function(conflicts) {
   conflicts
 }
 
-conflicts_detach <- function(pkg) {
+conflicts_remove <- function(pkg) {
   # The detach hook is called before the package is removed from the search path
   conflicts_register(setdiff(pkgs_attached(), pkg))
 }
 
-conflicts_register <- function(pkgs = pkgs_attached()) {
-  conflicts <- conflicts_find(pkgs)
-  conflicts <- conflicts_prefer(conflicts)
+# Environment manageament -------------------------------------------------
 
-  env <- conflicts_init()
-  map2(names(conflicts), conflicts, conflict_disambiguate, env = env)
-
-  # Shim library() and require() so we can rebuild
-  env_bind(env,
-    library = shim_library,
-    require = shim_require
-  )
-
-  env
+conflicts_init <- function() {
+  conflicts_reset()
+  get("attach")(env(), name = "conflicted")
 }
 
 conflicts_reset <- function() {
@@ -62,42 +69,6 @@ conflicts_reset <- function() {
   }
 }
 
-conflicts_init <- function() {
-  conflicts_reset()
-  get("attach")(env(), name = "conflicted")
-}
-
 conflicts_ls <- function() {
   env_names(scoped_env("conflicted"))
-}
-
-unique_obj <- function(name, pkgs) {
-  objs <- lapply(pkgs, pkg_get, name)
-  names(objs) <- pkgs
-
-  pkgs[!duplicated(objs)]
-}
-
-conflict_disambiguate <- function(fun, pkgs, env) {
-  if (length(pkgs) == 1) {
-    # No ambiguity, but need to make sure this choice wins, not version
-    # from search path (which might be in wrong order)
-    env_bind(env, !!fun := getExportedValue(pkg, fun))
-  } else if (is_infix_fun(fun)) {
-    env_bind_fns(env, !!fun := disambiguate_infix(fun, pkgs))
-  } else {
-    env_bind_fns(env, !!fun := disambiguate_prefix(fun, pkgs))
-  }
-}
-
-backtick <- function(x) {
-  ifelse(x == make.names(x), x, paste0("`", x, "`"))
-}
-
-is_infix_fun <- function(name) {
-  base <- c(
-    ":", "::", ":::", "$", "@", "^", "*", "/", "+", "-", ">", ">=",
-    "<", "<=", "==", "!=", "!", "&", "&&", "|", "||", "~", "<-", "<<-"
-  )
-  name %in% base || grepl("^%.*%$", name)
 }

@@ -1,15 +1,3 @@
-# contains character vectors - first element gives winner,
-# subsequent elements (if present) gives losers
-prefs <- env()
-
-prefs_ls <- function() {
-  env_names(prefs)
-}
-
-prefs_reset <- function() {
-  env_unbind(prefs, env_names(prefs))
-}
-
 #' Persistently prefer one function over another
 #'
 #' `conflict_prefer()` allows you to declare "winners" of conflicts.
@@ -70,4 +58,18 @@ prefs_resolve <- function(fun, conflicts) {
   } else {
     c(pkgs[[1]], setdiff(conflicts, pkgs))
   }
+}
+
+# Environment management --------------------------------------------------
+
+# contains character vectors - first element gives winner,
+# subsequent elements (if present) gives losers
+prefs <- env()
+
+prefs_ls <- function() {
+  env_names(prefs)
+}
+
+prefs_reset <- function() {
+  env_unbind(prefs, env_names(prefs))
 }
