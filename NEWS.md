@@ -1,7 +1,14 @@
 # conflicted 0.1.0.9000
 
-* Deprecated functions (i.e. functions with a call to `.Deprecated()` as the
-  first element of the function body) now never generate conflicts.
+### New functions
+
+* `conflict_scout()` reports on all conflicts found amongst a set of 
+  packages.
+
+* `conflict_prefer()` allows you to declare a persistent preference 
+  (within a session) for one function over another (#4)
+
+### Improve conflict resolution
 
 * conflicts now expects packages that override functions in base packages 
   to obey the "superset principle", i.e. that `foo::bar(...)` must return
@@ -13,16 +20,13 @@
     `dplyr::filter()` and `dplyr::lag()`, and these are special cases to ensure
     that they generate a conflict (#2).
 
-* `conflict_scout()` reports on all conflicts found amongst a set of 
-  packages.
-
-* `conflicts_prefer()` allows you to declare a persistent preference 
-  (within a session) for one function over another (#4)
-
-* Added a `NEWS.md` file to track changes to the package.
+* Deprecated functions (i.e. functions with a call to `.Deprecated()` as the
+  first element of the function body) will never generate conflicts.
 
 * conflicted now listens for `detach()` events and removes conflicts that
   are removed by detaching a package (#5)
+
+## Minor improvements and bug fixes
 
 * Error messages for infix functions and non-syntactic function names are
   improved (#14)
