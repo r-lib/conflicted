@@ -1,5 +1,5 @@
 conflicts_register <- function(pkgs = pkgs_attached()) {
-  conflicts <- conflicts_find(pkgs)
+  conflicts <- conflict_scout(pkgs)
 
   env <- conflicts_init()
   map2(names(conflicts), conflicts, conflict_disambiguate, env = env)

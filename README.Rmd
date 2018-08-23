@@ -64,7 +64,7 @@ conflict_prefer("filter", "dplyr")
 You can ask conflicted to report any conflicts in the current session:
 
 ```{r}
-conflicts_find()
+conflict_scout()
 ```
 
 Functions surrounded by `[]` have been chosen using one of the built-in rules. Here `filter()` has been selected because of the preference declared above; the set operations have been selected because they follow the superset principle and extend the API of the base equivalents.

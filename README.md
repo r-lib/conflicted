@@ -79,8 +79,8 @@ conflict_prefer("filter", "dplyr")
 You can ask conflicted to report any conflicts in the current session:
 
 ``` r
-conflicts_find()
-#> 6 conflicts
+conflict_scout()
+#> 6 conflicts:
 #> * `filter`   : [dplyr]
 #> * `intersect`: [dplyr]
 #> * `lag`      : dplyr, stats

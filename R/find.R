@@ -1,6 +1,6 @@
 #' Find conflicts amongst a set of packages
 #'
-#' `conflicts_find()` is the workhorse behind the conflicted package. You can
+#' `conflict_scout()` is the workhorse behind the conflicted package. You can
 #' call it directly yourself if you want to see all conflicts before hitting
 #' them in practice.
 #
@@ -14,8 +14,8 @@
 #'   A user friendly print method displays the result as bulleted list.
 #' @export
 #' @examples
-#' conflicts_find()
-conflicts_find <- function(pkgs = NULL) {
+#' conflict_scout()
+conflict_scout <- function(pkgs = NULL) {
   pkgs <- pkgs %||% pkgs_attached()
   objs <- lapply(pkgs, pkg_ls)
   names(objs) <- pkgs

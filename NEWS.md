@@ -13,7 +13,7 @@
     `dplyr::filter()` and `dplyr::lag()`, and these are special cases to ensure
     that they generate a conflict (#2).
 
-* `conflicts_find()` reports on all conflicts found amongst a set of 
+* `conflict_scout()` reports on all conflicts found amongst a set of 
   packages.
 
 * `conflicts_prefer()` allows you to declare a persistent preference 
