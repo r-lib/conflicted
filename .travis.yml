@@ -9,9 +9,9 @@ matrix:
   - r: release
     after_success:
     - Rscript -e 'covr::codecov()'
+    before_deploy:
     - R CMD INSTALL .
     - Rscript -e 'pkgdown::build_site()'
-
     deploy:
       provider: pages
       skip-cleanup: true
