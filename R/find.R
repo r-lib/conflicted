@@ -42,7 +42,18 @@ conflicts_find <- function(pkgs = NULL) {
     conflicts[[fun]] <- prefs_resolve(fun, conflicts[[fun]])
   }
 
-  structure(conflicts, class = "conflict_report")
+  conflicts <- compact(conflicts)
+
+  new_conflict_report(conflicts)
+}
+
+new_conflict_report <- function(conflicts, n = length(conflicts)) {
+  structure(conflicts, n = n, class = "conflict_report")
+}
+
+#' @export
+`[.conflict_report` <- function(x, ...) {
+  new_conflict_report(NextMethod(), n = attr(x, "n"))
 }
 
 #' @export
@@ -55,8 +66,8 @@ print.conflict_report <- function(x, ...) {
     }
   }
 
-  x <- compact(x)
-  cat_line(length(x), " conflicts")
+  n <- attr(x, "n")
+  cat_line(n, " conflict", if (n != 1) "s", if (n > 0) ":")
 
   if (length(x) == 0) {
     return(invisible(x))
@@ -66,8 +77,10 @@ print.conflict_report <- function(x, ...) {
   fun <- paste0("`", names(x), "`")
   pkgs <-  vapply(x, pkg_names, character(1))
 
-  bullets <- paste0("* ", format(fun),  ": ", pkgs, "\n", collapse = "")
-  cat(bullets)
+  cat_line("* ", format(fun),  ": ", pkgs)
+  if (n > length(x)) {
+    cat_line("...")
+  }
   invisible(x)
 }
 

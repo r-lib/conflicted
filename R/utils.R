@@ -58,5 +58,5 @@ compact <- function(x) {
 }
 
 cat_line <- function(...) {
-  cat(..., "\n", sep = "")
+  cat(paste0(..., "\n", collapse = ""))
 }
