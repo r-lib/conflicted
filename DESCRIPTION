@@ -22,6 +22,7 @@ Imports:
 Suggests: 
     covr,
     crayon,
+    pkgdown,
     testthat
 Encoding: UTF-8
 LazyData: true
