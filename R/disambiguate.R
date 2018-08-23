@@ -22,7 +22,7 @@ disambiguate_infix <- function(name, pkgs) {
     bullets <- paste0("* conflict_prefer(\"", name, "\", \"", pkgs, "\")")
     msg <- paste0(
       "[conflicted] ", style_name("`", name, "`"), " found in ", length(pkgs), " packages.\n",
-      "Declare a preference with `conflicted_prefer()`:\n",
+      "Declare a preference with `conflict_prefer()`:\n",
       paste0(bullets, collapse = "\n")
     )
     abort(msg)
@@ -42,7 +42,7 @@ disambiguate_prefix <- function(name, pkgs) {
       "[conflicted] ", style_name("`", name, "`"), " found in ", length(pkgs), " packages.\n",
       "Either pick the one you want with `::` \n",
       paste0(bullets_temp, collapse = "\n"), "\n",
-      "Or declare a preference with `conflicted_prefer()`\n",
+      "Or declare a preference with `conflict_prefer()`\n",
       paste0(bullets_pers, collapse = "\n")
     )
     abort(msg)
