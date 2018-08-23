@@ -4,13 +4,26 @@ language: R
 sudo: false
 cache: packages
 
-r:
-- 3.1
-- 3.2
-- 3.3
-- oldrel
-- release
-- devel
+matrix:
+  include:
+  - r: release
+    after_success:
+    - Rscript -e 'covr::codecov()'
+    - R CMD INSTALL .
+    - Rscript -e 'pkgdown::build_site()'
 
-after_success:
-  - Rscript -e 'covr::codecov()'
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      github-token: $GITHUB_TOKEN
+      local-dir: docs
+      fqdn: conflicted.r-lib.org
+      on:
+        branch: master
+
+r:
+- devel
+- oldrel
+- 3.3
+- 3.2
+- 3.1
