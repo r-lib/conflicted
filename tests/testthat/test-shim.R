@@ -20,11 +20,11 @@ test_that("detaching package removes shims", {
 
   shim_library(crayon)
   shim_library(rlang)
-  expect_true(exists("chr", "conflicted", inherits = FALSE))
+  expect_true(exists("chr", ".conflicts", inherits = FALSE))
 
   detach("package:crayon")
   detach("package:rlang")
-  expect_false(exists("chr", "conflicted", inherits = FALSE))
+  expect_false(exists("chr", ".conflicts", inherits = FALSE))
 })
 
 test_that("shimmed help returns same as unshimmed", {

@@ -22,7 +22,7 @@ conflicts_remove <- function(pkg) {
 
 conflicts_init <- function() {
   conflicts_reset()
-  get("attach")(env(), name = "conflicted")
+  get("attach")(env(), name = ".conflicts")
 }
 
 conflicts_reset <- function() {
