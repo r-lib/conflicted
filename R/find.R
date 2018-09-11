@@ -85,26 +85,45 @@ print.conflict_report <- function(x, ...) {
 }
 
 superset_principle <- function(fun, pkgs) {
+  base <- intersect(pkgs, base_packages)
   non_base <- setdiff(pkgs, base_packages)
+
   if (length(non_base) == 0) {
     # all base, so no conflicts
     character()
   } else if (length(non_base) == 1) {
-    # only one, so assume it obeys superset principle
-    if (not_superset(fun, non_base)) {
-      pkgs
-    } else {
+    # only one so see if it assumes superset principle
+    if (is_superset(fun, non_base, base = base)) {
       non_base
+    } else {
+      pkgs
     }
   } else {
     non_base
   }
 }
 
+is_superset <- function(fun, pkg, base) {
+  # Special case dplyr::lag() which looks like it should agree
+  if (pkg == "dplyr" && fun == "lag")
+    return(FALSE)
+
+  # Assume any function that just takes ... passes them on appropriately,
+  # like BiocGenerics::table()
+  args_pkg <- names(fn_fmls(getExportedValue(pkg, fun)))
+  if (identical(args_pkg, "..."))
+    return(TRUE)
+  args_base <- names(fn_fmls(getExportedValue(base, fun)))
+
+  # To be a superset, all base arguments must be included in the pkg funtion
+  all(args_base %in% args_pkg)
+}
+
 drop_moved <- function(fun, pkgs) {
   is_dep <- vapply(pkgs, has_moved, fun = fun, FUN.VALUE = logical(1))
   pkgs[!is_dep]
 }
+
 
 has_moved <- memoise::memoise(function(pkg, fun, obj = NULL) {
   if (is.null(obj)) {
@@ -128,8 +147,3 @@ has_moved <- memoise::memoise(function(pkg, fun, obj = NULL) {
 
   grepl(paste0("::", fun), new)
 })
-
-
-not_superset <- function(fun, pkg) {
-  pkg == "dplyr" && fun %in% c("lag", "filter")
-}
