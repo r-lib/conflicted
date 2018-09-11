@@ -19,6 +19,9 @@ disambiguate_infix <- function(name, pkgs) {
   force(pkgs)
 
   function(value) {
+    if (from_save(sys.calls()))
+      return(NULL)
+
     bullets <- paste0("* conflict_prefer(\"", name, "\", \"", pkgs, "\")")
     msg <- paste0(
       "[conflicted] ", style_name("`", name, "`"), " found in ", length(pkgs), " packages.\n",
@@ -34,6 +37,9 @@ disambiguate_prefix <- function(name, pkgs) {
   force(pkgs)
 
   function(value) {
+    if (from_save(sys.calls()))
+      return(NULL)
+
     bt_name <- backtick(name)
     bullets_temp <- paste0("* ", style_name(pkgs, "::", bt_name))
     bullets_pers <- paste0("* ", "conflict_prefer(\"", name, "\", \"", pkgs, "\")")
@@ -57,4 +63,19 @@ is_infix_fun <- function(name) {
     "<", "<=", "==", "!=", "!", "&", "&&", "|", "||", "~", "<-", "<<-"
   )
   name %in% base || grepl("^%.*%$", name)
+}
+
+# This is a hack needed for RStudio, which saves and restores environments
+# when you "install and restart", because save() evaluates active bindings.
+from_save <- function(calls) {
+  is_save <- function(call) {
+    is_call(call) && length(call) > 1 && is_symbol(call[[1]], "save")
+  }
+
+  for (call in calls) {
+    if (is_save(call))
+      return(TRUE)
+  }
+
+  FALSE
 }

@@ -19,3 +19,12 @@ test_that("error message is informative", {
 })
 
 
+test_that("can save active binding without error", {
+  env <- env(
+    a = disambiguate_prefix("x", c("a", "b", "c")),
+    b = disambiguate_infix("y", c("a", "b", "c"))
+  )
+
+  expect_error(save(a, envir = env, file = tempfile()), NA)
+  expect_error(save(b, envir = env, file = tempfile()), NA)
+})
