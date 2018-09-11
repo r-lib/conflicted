@@ -31,8 +31,8 @@ conflict_scout <- function(pkgs = NULL) {
   # unless attr(f, "conflicted_superset") is FALSE
   conflicts <- map2(names(conflicts), conflicts, superset_principle)
 
-  # a deprecated function should never conflict with any other function
-  conflicts <- map2(names(conflicts), conflicts, drop_deprecated)
+  # a function that has moved packages should never conflict
+  conflicts <- map2(names(conflicts), conflicts, drop_moved)
 
   # apply declared user preferences
   for (fun in ls(prefs)) {
@@ -101,27 +101,33 @@ superset_principle <- function(fun, pkgs) {
   }
 }
 
-drop_deprecated <- function(fun, pkgs) {
-  is_dep <- vapply(pkgs, function(pkg) is_deprecated_mem(fun, pkg), logical(1))
+drop_moved <- function(fun, pkgs) {
+  is_dep <- vapply(pkgs, has_moved, fun = fun, FUN.VALUE = logical(1))
   pkgs[!is_dep]
 }
 
-is_deprecated_mem <- memoise::memoise(function(fun, pkg) {
-  obj <- getExportedValue(pkg, fun)
-  is_deprecated(obj)
-})
+has_moved <- memoise::memoise(function(pkg, fun, obj = NULL) {
+  if (is.null(obj)) {
+    obj <- getExportedValue(pkg, fun)
+  }
 
-is_deprecated <- function(x) {
-  if (!is.function(x)) {
+  if (!is.function(obj)) {
     return(FALSE)
   }
 
-  body <- body(x)
+  body <- body(obj)
   if (length(body) < 2 || !is_call(body, "{"))
     return(FALSE)
 
-  is_call(body[[2]], ".Deprecated")
-}
+  if (!is_call(body[[2]], ".Deprecated"))
+    return(FALSE)
+
+  new <- body[[2]][[2]]
+  if (!is.character(new))
+    return(FALSE)
+
+  grepl(paste0("::", fun), new)
+})
 
 
 not_superset <- function(fun, pkg) {

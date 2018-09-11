@@ -20,8 +20,9 @@
     `dplyr::filter()` and `dplyr::lag()`, and these are special cases to ensure
     that they generate a conflict (#2).
 
-* Deprecated functions (i.e. functions with a call to `.Deprecated()` as the
-  first element of the function body) will never generate conflicts.
+* Functions that have moved betwee npackages (i.e. functions with a call to 
+  `.Deprecated("pkg::foo")`) as the first element of the function body) will 
+  never generate conflicts.
 
 * conflicted now listens for `detach()` events and removes conflicts that
   are removed by detaching a package (#5)
