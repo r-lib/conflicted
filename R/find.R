@@ -108,12 +108,17 @@ is_superset <- function(fun, pkg, base) {
   if (pkg == "dplyr" && fun == "lag")
     return(FALSE)
 
+  pkg_obj <- getExportedValue(pkg, fun)
+  base_obj <- getExportedValue(base, fun)
+  if (!is.function(pkg_obj) || !is.function(base_obj))
+    return(FALSE)
+
   # Assume any function that just takes ... passes them on appropriately,
   # like BiocGenerics::table()
-  args_pkg <- names(fn_fmls(getExportedValue(pkg, fun)))
+  args_pkg <- names(fn_fmls(pkg_obj))
   if (identical(args_pkg, "..."))
     return(TRUE)
-  args_base <- names(fn_fmls(getExportedValue(base, fun)))
+  args_base <- names(fn_fmls(base_obj))
 
   # To be a superset, all base arguments must be included in the pkg funtion
   all(args_base %in% args_pkg)
