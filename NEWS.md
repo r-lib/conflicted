@@ -2,25 +2,26 @@
 
 ### New functions
 
-* `conflict_scout()` reports on all conflicts found amongst a set of 
-  packages.
+* `conflict_scout()` reports all conflicts found with a set of packages.
 
 * `conflict_prefer()` allows you to declare a persistent preference 
-  (within a session) for one function over another (#4)
+  (within a session) for one function over another (#4).
 
 ### Improve conflict resolution
 
-* conflicts now expects packages that override functions in base packages 
-  to obey the "superset principle", i.e. that `foo::bar(...)` must return
-  the same value of `base::bar(...)` whenever the input is not an error.
-  In other words, if you override a base function you can only extend the API,
-  not change or reduce it.
-  
-    Two notable functions that fail to implement the superset principle are
-    `dplyr::filter()` and `dplyr::lag()`, and these are special cases to ensure
-    that they generate a conflict (#2).
+*   conflicts now generally expects packages that override functions in base 
+    packages to obey the "superset principle", i.e. that `foo::bar(...)` must 
+    return the same value of `base::bar(...)` whenever the input is not an 
+    error. In other words, if you override a base function you can only extend 
+    the API, not change or reduce it.
+    
+    There are two exceptions. If the arguments of the two functions are not
+    compatible (i.e. the function in the package doesn't include all 
+    arguments of the base package), conflicts can tell it doesn't follow
+    the superset principle. Additionally, `dplyr::lag()` fails to follow
+    the superset principle, and is marked as a special case (#2).
 
-* Functions that have moved betwee npackages (i.e. functions with a call to 
+* Functions that have moved between packages (i.e. functions with a call to 
   `.Deprecated("pkg::foo")`) as the first element of the function body) will 
   never generate conflicts.
 
@@ -31,7 +32,3 @@
 
 * Error messages for infix functions and non-syntactic function names are
   improved (#14)
-  
-* conflicted is around 5x faster. I benchmarked by loading ~170 packages
-  (as many as I can load without running out of DLLs), and registering 
-  conflicts only took ~100 ms (#6).
