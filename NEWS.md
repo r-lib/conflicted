@@ -1,4 +1,4 @@
-# conflicted 0.1.0.9000
+# conflicted 1.0.0
 
 ### New functions
 
