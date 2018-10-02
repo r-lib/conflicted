@@ -1,4 +1,4 @@
-# conflicted 1.0.0.9000
+# conflicted 1.0.1
 
 * Internal `has_moved()` function no longer fails when it encounters a 
   call to `.Deprecated()` with no arguments (#29).
