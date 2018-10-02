@@ -146,6 +146,9 @@ has_moved <- memoise::memoise(function(pkg, fun, obj = NULL) {
   if (!is_call(body[[2]], ".Deprecated"))
     return(FALSE)
 
+  if (length(body[[2]]) < 2)
+    return(FALSE)
+
   new <- body[[2]][[2]]
   if (!is.character(new))
     return(FALSE)
