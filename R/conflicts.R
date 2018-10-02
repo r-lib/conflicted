@@ -25,12 +25,16 @@ conflicts_init <- function() {
   get("attach")(env(), name = ".conflicts")
 }
 
+conflicts_attached <- function() {
+  ".conflicts" %in% search()
+}
+
 conflicts_reset <- function() {
-  if ("conflicted" %in% search()) {
-    detach("conflicted", character.only = TRUE)
+  if (conflicts_attached()) {
+    detach(".conflicts", character.only = TRUE)
   }
 }
 
 conflicts_ls <- function() {
-  env_names(scoped_env("conflicted"))
+  env_names(scoped_env(".conflicts"))
 }
