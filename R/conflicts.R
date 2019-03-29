@@ -5,10 +5,7 @@ conflicts_register <- function(pkgs = pkgs_attached()) {
   map2(names(conflicts), conflicts, conflict_disambiguate, env = env)
 
   # Shim library() and require() so we can rebuild
-  env_bind(env,
-    library = shim_library,
-    require = shim_require
-  )
+  shims_bind(env)
 
   env
 }

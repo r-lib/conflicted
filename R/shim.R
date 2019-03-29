@@ -1,13 +1,23 @@
-shim_library <- function(package,
-                         help,
-                         pos = 2,
-                         lib.loc = NULL,
-                         character.only = FALSE,
-                         logical.return = FALSE,
-                         warn.conflicts = TRUE,
-                         quietly = FALSE,
-                         verbose = getOption("verbose")
-                         ) {
+shims_bind <- function(env = caller_env()) {
+  env_bind(env,
+    library = shim_library_3_1,
+    require = shim_require_3_1
+  )
+}
+
+# library -----------------------------------------------------------------
+
+
+shim_library_3_1 <- function(package,
+                             help,
+                             pos = 2,
+                             lib.loc = NULL,
+                             character.only = FALSE,
+                             logical.return = FALSE,
+                             warn.conflicts = TRUE,
+                             quietly = FALSE,
+                             verbose = getOption("verbose")
+                             ) {
 
   if (!missing(package)) {
     package <- package_name(enquo(package), character.only = character.only)
@@ -26,7 +36,6 @@ shim_library <- function(package,
       quietly = quietly,
       verbose = verbose
     )
-
   } else if (!missing(help)) {
     help <- package_name(enquo(help), character.only = character.only)
     library(
@@ -39,14 +48,15 @@ shim_library <- function(package,
       logical.return = logical.return
     )
   }
-
 }
 
-shim_require <- function(package,
-                         lib.loc = NULL,
-                         quietly = FALSE,
-                         warn.conflicts = TRUE,
-                         character.only = FALSE) {
+# require -----------------------------------------------------------------
+
+shim_require_3_1 <- function(package,
+                             lib.loc = NULL,
+                             quietly = FALSE,
+                             warn.conflicts = TRUE,
+                             character.only = FALSE) {
 
   package <- package_name(enquo(package), character.only = character.only)
 

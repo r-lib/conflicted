@@ -1,25 +1,28 @@
 context("test-shim.R")
 
 test_that("shimmed arguments match unshimmed", {
-  expect_equal(formals(shim_require), formals(base::require))
-  expect_equal(formals(shim_library), formals(base::library))
+  shims_bind()
+  expect_equal(formals(require), formals(base::require))
+  expect_equal(formals(library), formals(base::library))
 })
 
 test_that("shims load package with conflicts silently", {
   red <- function() {}
+  shims_bind()
 
-  expect_message(shim_library(crayon), NA)
+  expect_message(library(crayon), NA)
   detach("package:crayon")
 
-  expect_message(shim_require(crayon, quietly = TRUE), NA)
+  expect_message(require(crayon, quietly = TRUE), NA)
   detach("package:crayon")
 })
 
 test_that("detaching package removes shims", {
   skip_if_not("chr" %in% pkg_ls("crayon") && "chr" %in% pkg_ls("rlang"))
+  shims_bind()
 
-  shim_library(crayon)
-  shim_library(rlang)
+  library(crayon)
+  library(rlang)
   expect_true(exists("chr", ".conflicts", inherits = FALSE))
 
   detach("package:crayon")
@@ -28,22 +31,23 @@ test_that("detaching package removes shims", {
 })
 
 test_that("shimmed help returns same as unshimmed", {
+  shims_bind()
+
   expect_equal(
-    shim_library(help = "rlang"),
+    library(help = "rlang"),
     base::library(help = "rlang")
   )
 
   expect_equal(
-    shim_library(help = rlang),
+    library(help = rlang),
     base::library(help = rlang)
   )
 })
 
 test_that("shimmed library() returns same as unshimmed", {
-  expect_equal(
-    shim_library(),
-    base::library()
-  )
+  shims_bind()
+
+  expect_equal(library(), base::library())
 })
 
 # package_name ------------------------------------------------------------
