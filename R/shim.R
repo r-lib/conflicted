@@ -89,9 +89,9 @@ if (getRversion() > "3.6.0") {
         warn.conflicts = FALSE,
         quietly = quietly,
         verbose = verbose,
-        mask.ok = maybe_missing(mask.ok),
-        exclude = maybe_missing(exclude),
-        include.only = maybe_missing(include.only),
+        mask.ok = mask.ok,
+        exclude = exclude,
+        include.only = include.only,
         attach.required = attach.required
       )
     } else if (!missing(help)) {
@@ -158,9 +158,9 @@ if (getRversion() > "3.6.0") {
       quietly = quietly,
       warn.conflicts = FALSE,
       character.only = TRUE,
-      mask.ok = maybe_missing(mask.ok),
-      exclude = maybe_missing(exclude),
-      include.only = maybe_missing(include.only),
+      mask.ok = mask.ok,
+      exclude = exclude,
+      include.only = include.only,
       attach.required = attach.required
     )
   }
