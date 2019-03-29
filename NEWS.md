@@ -1,4 +1,4 @@
-# conflicted 1.0.1.9000
+# conflicted 1.0.2
 
 * Align with changes to R 3.6
 
