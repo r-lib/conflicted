@@ -1,3 +1,5 @@
+# conflicted (development version)
+
 # conflicted 1.0.2
 
 * Align with changes to R 3.6
