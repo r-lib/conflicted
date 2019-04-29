@@ -57,7 +57,7 @@ shim_library_3_1 <- function(package,
   }
 }
 
-if (getRversion() > "3.6.0") {
+if (getRversion() >= "3.6.0") {
   shim_library_3_6 <- function(package,
                                help,
                                pos = 2,
@@ -134,7 +134,7 @@ shim_require_3_1 <- function(package,
   )
 }
 
-if (getRversion() > "3.6.0") {
+if (getRversion() >= "3.6.0") {
   shim_require_3_6 <- function(package,
                                lib.loc = NULL,
                                quietly = FALSE,
