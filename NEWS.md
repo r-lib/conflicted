@@ -1,3 +1,5 @@
+# conflicted (development version)
+
 # conflicted 1.0.3
 
 * Fix > vs >= mistake
