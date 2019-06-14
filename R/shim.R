@@ -172,7 +172,7 @@ if (getRversion() >= "3.6.0") {
 
 package_name <- function(package, character.only = FALSE) {
   if (!character.only) {
-    package <- as.character(quo_expr(package))
+    package <- as.character(quo_squash(package))
   } else {
     package <- eval_tidy(package)
   }
