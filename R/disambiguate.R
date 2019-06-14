@@ -7,9 +7,9 @@ conflict_disambiguate <- function(fun, pkgs, env) {
     env_bind(env, !!fun := getExportedValue(pkgs, fun))
   } else {
     if (is_infix_fun(fun)) {
-      env_bind_fns(env, !!fun := disambiguate_infix(fun, pkgs))
+      env_bind_active(env, !!fun := disambiguate_infix(fun, pkgs))
     } else {
-      env_bind_fns(env, !!fun := disambiguate_prefix(fun, pkgs))
+      env_bind_active(env, !!fun := disambiguate_prefix(fun, pkgs))
     }
   }
 }
