@@ -1,4 +1,4 @@
-# conflicted (development version)
+# conflicted 1.0.4
 
 * Fixes for dev rlang
 
