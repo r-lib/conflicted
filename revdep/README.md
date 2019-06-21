@@ -10,20 +10,16 @@
 |collate  |en_US.UTF-8                  |
 |ctype    |en_US.UTF-8                  |
 |tz       |America/Chicago              |
-|date     |2019-03-29                   |
+|date     |2019-06-21                   |
 
 # Dependencies
 
-|package    |old   |new        |Δ  |
-|:----------|:-----|:----------|:--|
-|conflicted |1.0.1 |1.0.1.9000 |*  |
-|rlang      |NA    |0.3.1      |*  |
+|package    |old    |new        |Δ  |
+|:----------|:------|:----------|:--|
+|conflicted |1.0.3  |1.0.3.9000 |*  |
+|digest     |0.6.19 |0.6.19     |   |
+|memoise    |1.1.0  |1.1.0      |   |
+|rlang      |0.3.4  |0.3.4      |   |
 
 # Revdeps
-
-## All (1)
-
-|package    |version |error |warning |note |
-|:----------|:-------|:-----|:-------|:----|
-|vegawidget |0.1.0   |      |        |     |
 
