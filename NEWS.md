@@ -1,5 +1,7 @@
 # conflicted (development version)
 
+* Fixes for dev rlang
+
 # conflicted 1.0.3
 
 * Fix > vs >= mistake
