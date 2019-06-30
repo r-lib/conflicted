@@ -19,7 +19,7 @@ If omitted, \code{winner} will beat all comers.}
 \description{
 \code{conflict_prefer()} allows you to declare "winners" of conflicts.
 You can either declare a specific pairing (i.e. \code{dplyr::filter()} beats
-\code{base::filter()}), or an overall winner (i.e. \code{dplyr::filter()} beats
+\code{stats::filter()}), or an overall winner (i.e. \code{dplyr::filter()} beats
 all comers).
 }
 \section{Best practices}{
@@ -33,6 +33,6 @@ script, immediately underneath the relevant \code{library()} call.
 conflict_prefer("filter", "dplyr")
 
 # Prefer over specified package or packages
-conflict_prefer("filter", "dplyr", "base")
-conflict_prefer("filter", "dplyr", c("base", "filtration"))
+conflict_prefer("filter", "dplyr", "stats")
+conflict_prefer("filter", "dplyr", c("stats", "filtration"))
 }

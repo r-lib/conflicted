@@ -2,7 +2,7 @@
 #'
 #' `conflict_prefer()` allows you to declare "winners" of conflicts.
 #' You can either declare a specific pairing (i.e. `dplyr::filter()` beats
-#' `base::filter()`), or an overall winner (i.e. `dplyr::filter()` beats
+#' `stats::filter()`), or an overall winner (i.e. `dplyr::filter()` beats
 #' all comers).
 #'
 #' @section Best practices:
@@ -20,8 +20,8 @@
 #' conflict_prefer("filter", "dplyr")
 #'
 #' # Prefer over specified package or packages
-#' conflict_prefer("filter", "dplyr", "base")
-#' conflict_prefer("filter", "dplyr", c("base", "filtration"))
+#' conflict_prefer("filter", "dplyr", "stats")
+#' conflict_prefer("filter", "dplyr", c("stats", "filtration"))
 conflict_prefer <- function(name, winner, losers = NULL, quiet = FALSE) {
   stopifnot(is.character(name), length(name) == 1)
   stopifnot(is.character(winner), length(winner) == 1)
