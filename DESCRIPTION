@@ -24,7 +24,8 @@ Suggests:
     crayon,
     dplyr,
     pkgdown,
-    testthat
+    testthat,
+    inops
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
