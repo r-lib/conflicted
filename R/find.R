@@ -118,6 +118,11 @@ is_superset <- function(fun, pkg, base) {
   args_pkg <- names(fn_fmls(pkg_obj))
   if (identical(args_pkg, "..."))
     return(TRUE)
+  
+  if (is.primitive(base_obj)){
+    return(FALSE)  
+  }
+  
   args_base <- names(fn_fmls(base_obj))
 
   # To be a superset, all base arguments must be included in the pkg funtion
