@@ -3,12 +3,12 @@
 
 # conflicted
 
-[![Travis build
-status](https://travis-ci.org/r-lib/conflicted.svg?branch=master)](https://travis-ci.org/r-lib/conflicted)
-[![Coverage
-status](https://codecov.io/gh/r-lib/conflicted/branch/master/graph/badge.svg)](https://codecov.io/github/r-lib/conflicted?branch=master)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/conflicted)](https://cran.r-project.org/package=conflicted)
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/r-lib/conflicted/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/conflicted/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/r-lib/conflicted/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/conflicted?branch=main)
+<!-- badges: end -->
 
 The goal of conflicted is to provide an alternative conflict resolution
 strategy. R’s default conflict resolution system gives precedence to the
@@ -17,7 +17,7 @@ particularly when introduced by an update to an existing package.
 conflicted takes a different approach, making every conflict an error
 and forcing you to choose which function to use.
 
-Thanks to [@krlmlr](https://github.com/krlmlr) for this neat idea\! This
+Thanks to [@krlmlr](https://github.com/krlmlr) for this neat idea! This
 code was previously part of the experimental
 [strict](https://github.com/hadley/strict) package, but I decided
 improved conflict resolution is useful by itself and worth its own
@@ -43,7 +43,7 @@ filter(mtcars, cyl == 8)
 #> Either pick the one you want with `::` 
 #> * dplyr::filter
 #> * stats::filter
-#> Or declare a preference with `conflicted_prefer()`
+#> Or declare a preference with `conflict_prefer()`
 #> * conflict_prefer("filter", "dplyr")
 #> * conflict_prefer("filter", "stats")
 ```
@@ -52,9 +52,9 @@ As suggested, you can either namespace individual calls:
 
 ``` r
 dplyr::filter(mtcars, am & cyl == 8)
-#>    mpg cyl disp  hp drat   wt qsec vs am gear carb
-#> 1 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4
-#> 2 15.0   8  301 335 3.54 3.57 14.6  0  1    5    8
+#>                 mpg cyl disp  hp drat   wt qsec vs am gear carb
+#> Ford Pantera L 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4
+#> Maserati Bora  15.0   8  301 335 3.54 3.57 14.6  0  1    5    8
 ```
 
 Or declare a session-wide preference:
@@ -63,9 +63,9 @@ Or declare a session-wide preference:
 conflict_prefer("filter", "dplyr")
 #> [conflicted] Will prefer dplyr::filter over any other package
 filter(mtcars, am & cyl == 8)
-#>    mpg cyl disp  hp drat   wt qsec vs am gear carb
-#> 1 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4
-#> 2 15.0   8  301 335 3.54 3.57 14.6  0  1    5    8
+#>                 mpg cyl disp  hp drat   wt qsec vs am gear carb
+#> Ford Pantera L 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4
+#> Maserati Bora  15.0   8  301 335 3.54 3.57 14.6  0  1    5    8
 ```
 
 I recommend declaring preferences directly underneath the corresponding
@@ -80,13 +80,9 @@ You can ask conflicted to report any conflicts in the current session:
 
 ``` r
 conflict_scout()
-#> 6 conflicts:
-#> * `filter`   : [dplyr]
-#> * `intersect`: [dplyr]
-#> * `lag`      : dplyr, stats
-#> * `setdiff`  : [dplyr]
-#> * `setequal` : [dplyr]
-#> * `union`    : [dplyr]
+#> 2 conflicts:
+#> * `filter`: [dplyr]
+#> * `lag`   : dplyr, stats
 ```
 
 Functions surrounded by `[]` have been chosen using one of the built-in
@@ -129,5 +125,5 @@ precision and control.
 ## Code of conduct
 
 Please note that this project is released with a [Contributor Code of
-Conduct](https://conflicted.r-lib.org/CODE_OF_CONDUCT.html). By participating in this project you agree
+Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
 to abide by its terms.

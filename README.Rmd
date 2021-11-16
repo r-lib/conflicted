@@ -15,9 +15,10 @@ set.seed(1014)
 
 # conflicted
 
-[![Travis build status](https://travis-ci.org/r-lib/conflicted.svg?branch=master)](https://travis-ci.org/r-lib/conflicted)
-[![Coverage status](https://codecov.io/gh/r-lib/conflicted/branch/master/graph/badge.svg)](https://codecov.io/github/r-lib/conflicted?branch=master)
-[![CRAN status](https://www.r-pkg.org/badges/version/conflicted)](https://cran.r-project.org/package=conflicted)
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/r-lib/conflicted/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/conflicted/actions)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/conflicted/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/conflicted?branch=main)
+<!-- badges: end -->
 
 The goal of conflicted is to provide an alternative conflict resolution strategy. R's default conflict resolution system gives precedence to the most recently loaded package. This can make it hard to detect conflicts, particularly when introduced by an update to an existing package. conflicted takes a different approach, making every conflict an error and forcing you to choose which function to use.
 
