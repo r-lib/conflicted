@@ -29,16 +29,16 @@ conflict_prefer <- function(name, winner, losers = NULL, quiet = FALSE) {
 
   if (env_has(prefs, name)) {
     if (!quiet)
-      message("[conflicted] Removing existing preference")
+      inform("[conflicted] Removing existing preference")
   }
 
   if (!quiet) {
     full <- style_name(winner, "::", backtick(name))
     if (is.null(losers)) {
-      message("[conflicted] Will prefer ", full, " over any other package")
+      inform(paste0("[conflicted] Will prefer ", full, " over any other package"))
     } else {
       alt <- style_name(losers, "::", backtick(name))
-      message("[conflicted] Will prefer ", full, " over ", paste(alt, collapse = ", "))
+      inform(paste0("[conflicted] Will prefer ", full, " over ", paste(alt, collapse = ", ")))
     }
   }
 
