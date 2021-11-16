@@ -1,5 +1,11 @@
 context("test-find")
 
+test_that("primitive functions are never supersets", {
+  env <- pkgload::load_all(test_path("primitive"))
+  on.exit(pkgload::unload("primitive"))
+
+  expect_false(is_superset("sum", "primitive", "base"))
+})
 
 # moved functions ----------------------------------------------------
 
