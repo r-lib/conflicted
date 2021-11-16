@@ -12,7 +12,7 @@ Description: R's default conflict management system gives the most recently
     making every conflict an error and forcing you to choose which function 
     to use.
 License: MIT + file LICENSE
-URL: https://github.com/r-lib/conflicted
+URL: https://conflicted.r-lib.org, https://github.com/r-lib/conflicted
 BugReports: https://github.com/r-lib/conflicted/issues
 Depends: 
     R (>= 3.2)
