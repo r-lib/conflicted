@@ -8,21 +8,29 @@
 
 <title>Persistently prefer one function over another — conflict_prefer • conflicted</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,13 +38,13 @@
 
 
 
-<meta property="og:title" content="Persistently prefer one function over another — conflict_prefer" />
 
+<meta property="og:title" content="Persistently prefer one function over another — conflict_prefer" />
 <meta property="og:description" content="conflict_prefer() allows you to declare &quot;winners&quot; of conflicts.
 You can either declare a specific pairing (i.e. dplyr::filter() beats
 base::filter()), or an overall winner (i.e. dplyr::filter() beats
 all comers)." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -50,9 +58,10 @@ all comers)." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -74,7 +83,7 @@ all comers)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -85,11 +94,10 @@ all comers)." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/r-lib/conflicted">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/r-lib/conflicted/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -100,6 +108,7 @@ all comers)." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -111,16 +120,14 @@ all comers)." />
     </div>
 
     <div class="ref-description">
-    
     <p><code>conflict_prefer()</code> allows you to declare "winners" of conflicts.
 You can either declare a specific pairing (i.e. <code><a href='https://dplyr.tidyverse.org/reference/filter.html'>dplyr::filter()</a></code> beats
 <code>base::filter()</code>), or an overall winner (i.e. <code><a href='https://dplyr.tidyverse.org/reference/filter.html'>dplyr::filter()</a></code> beats
 all comers).</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>conflict_prefer</span>(<span class='no'>name</span>, <span class='no'>winner</span>, <span class='kw'>losers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>conflict_prefer</span><span class='op'>(</span><span class='va'>name</span>, <span class='va'>winner</span>, losers <span class='op'>=</span> <span class='cn'>NULL</span>, quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -142,32 +149,35 @@ If omitted, <code>winner</code> will beat all comers.</p></td>
       <td><p>If <code>TRUE</code>, all output will be suppressed</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="best-practices"><a class="anchor" href="#best-practices"></a>Best practices</h2>
 
     
-    <p>I recommend placing calls to <code>conflict_prefer()</code> at the top of your
-script, immediately underneath the relevant <code><a href='https://www.rdocumentation.org/packages/base/topics/library'>library()</a></code> call.</p>
-    
+
+<p>I recommend placing calls to <code>conflict_prefer()</code> at the top of your
+script, immediately underneath the relevant <code><a href='https://rdrr.io/r/base/library.html'>library()</a></code> call.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Prefer over all other packages</span>
-<span class='fu'>conflict_prefer</span>(<span class='st'>"filter"</span>, <span class='st'>"dplyr"</span>)</div><div class='output co'>#&gt; <span class='message'>[conflicted] Will prefer <span style='color: #0000BB;'>dplyr::filter</span><span> over any other package</span></div><div class='input'>
-<span class='co'># Prefer over specified package or packages</span>
-<span class='fu'>conflict_prefer</span>(<span class='st'>"filter"</span>, <span class='st'>"dplyr"</span>, <span class='st'>"base"</span>)</div><div class='output co'>#&gt; <span class='message'>[conflicted] Removing existing preference</span></div><div class='output co'>#&gt; <span class='message'>[conflicted] Will prefer </span><span style='color: #0000BB;'>dplyr::filter</span><span> over </span><span style='color: #0000BB;'>base::filter</span><span></span></div><div class='input'><span class='fu'>conflict_prefer</span>(<span class='st'>"filter"</span>, <span class='st'>"dplyr"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"base"</span>, <span class='st'>"filtration"</span>))</div><div class='output co'>#&gt; <span class='message'>[conflicted] Removing existing preference</span></div><div class='output co'>#&gt; <span class='message'>[conflicted] Will prefer </span><span style='color: #0000BB;'>dplyr::filter</span><span> over </span><span style='color: #0000BB;'>base::filter</span><span>, </span><span style='color: #0000BB;'>filtration::filter</span><span></span></div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># Prefer over all other packages</span></span>
+<span class='r-in'><span class='fu'>conflict_prefer</span><span class='op'>(</span><span class='st'>"filter"</span>, <span class='st'>"dplyr"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> [conflicted] Will prefer <span style='color: #0000BB;'>dplyr::filter</span> over any other package</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Prefer over specified package or packages</span></span>
+<span class='r-in'><span class='fu'>conflict_prefer</span><span class='op'>(</span><span class='st'>"filter"</span>, <span class='st'>"dplyr"</span>, <span class='st'>"base"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> [conflicted] Removing existing preference</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> [conflicted] Will prefer <span style='color: #0000BB;'>dplyr::filter</span> over <span style='color: #0000BB;'>base::filter</span></span>
+<span class='r-in'><span class='fu'>conflict_prefer</span><span class='op'>(</span><span class='st'>"filter"</span>, <span class='st'>"dplyr"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"base"</span>, <span class='st'>"filtration"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> [conflicted] Removing existing preference</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> [conflicted] Will prefer <span style='color: #0000BB;'>dplyr::filter</span> over <span style='color: #0000BB;'>base::filter</span>, <span style='color: #0000BB;'>filtration::filter</span></span>
+</pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#best-practices">Best practices</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -175,13 +185,16 @@ script, immediately underneath the relevant <code><a href='https://www.rdocument
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

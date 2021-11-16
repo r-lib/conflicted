@@ -6,24 +6,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>An Alternative Conflict Resolution Strategy • conflicted</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="An Alternative Conflict Resolution Strategy">
-<meta property="og:description" content="R's default conflict management system gives the most recently
+<meta property="og:description" content="Rs default conflict management system gives the most recently
     loaded package precedence. This can make it hard to detect conflicts, 
     particularly when they arise because a package update creates ambiguity
-    that did not previously exist. 'conflicted' takes a different approach, 
+    that did not previously exist. conflicted' takes a different approach, 
     making every conflict an error and forcing you to choose which function 
     to use.">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
-    <div class="container template-article">
+<body data-spy="scroll" data-target="#toc">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -43,7 +44,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -56,8 +57,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-lib/conflicted">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/r-lib/conflicted/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -70,82 +71,82 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    
 
-    
-    
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+      </header><div class="row">
+  <div class="contents col-md-9">
 <div id="conflicted" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#conflicted" class="anchor"></a>conflicted</h1></div>
+<!-- badges: start -->
 
 <p>The goal of conflicted is to provide an alternative conflict resolution strategy. R’s default conflict resolution system gives precedence to the most recently loaded package. This can make it hard to detect conflicts, particularly when introduced by an update to an existing package. conflicted takes a different approach, making every conflict an error and forcing you to choose which function to use.</p>
 <p>Thanks to <a href="https://github.com/krlmlr">@krlmlr</a> for this neat idea! This code was previously part of the experimental <a href="https://github.com/hadley/strict">strict</a> package, but I decided improved conflict resolution is useful by itself and worth its own package.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"r-lib/conflicted"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-lib/conflicted"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>To use conflicted, all you need to do is load it:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(conflicted)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(mtcars, cyl <span class="op">==</span><span class="st"> </span><span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; [conflicted] `filter` found in 2 packages.</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; Either pick the one you want with `::` </span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; * dplyr::filter</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; * stats::filter</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; Or declare a preference with `conflict_prefer()`</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; * conflict_prefer("filter", "dplyr")</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; * conflict_prefer("filter", "stats")</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://conflicted.r-lib.org">conflicted</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span>
+<span class="co">#&gt; Error: [conflicted] `filter` found in 2 packages.</span>
+<span class="co">#&gt; Either pick the one you want with `::` </span>
+<span class="co">#&gt; * dplyr::filter</span>
+<span class="co">#&gt; * stats::filter</span>
+<span class="co">#&gt; Or declare a preference with `conflict_prefer()`</span>
+<span class="co">#&gt; * conflict_prefer("filter", "dplyr")</span>
+<span class="co">#&gt; * conflict_prefer("filter", "stats")</span></code></pre></div>
 <p>As suggested, you can either namespace individual calls:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(mtcars, am <span class="op">&amp;</span><span class="st"> </span>cyl <span class="op">==</span><span class="st"> </span><span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt;    mpg cyl disp  hp drat   wt qsec vs am gear carb</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; 1 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; 2 15.0   8  301 335 3.54 3.57 14.6  0  1    5    8</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">am</span> <span class="op">&amp;</span> <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span>
+<span class="co">#&gt;                 mpg cyl disp  hp drat   wt qsec vs am gear carb</span>
+<span class="co">#&gt; Ford Pantera L 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4</span>
+<span class="co">#&gt; Maserati Bora  15.0   8  301 335 3.54 3.57 14.6  0  1    5    8</span></code></pre></div>
 <p>Or declare a session-wide preference:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/conflict_prefer.html">conflict_prefer</a></span>(<span class="st">"filter"</span>, <span class="st">"dplyr"</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; [conflicted] Will prefer dplyr::filter over any other package</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(mtcars, am <span class="op">&amp;</span><span class="st"> </span>cyl <span class="op">==</span><span class="st"> </span><span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;    mpg cyl disp  hp drat   wt qsec vs am gear carb</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; 1 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 2 15.0   8  301 335 3.54 3.57 14.6  0  1    5    8</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/conflict_prefer.html">conflict_prefer</a></span><span class="op">(</span><span class="st">"filter"</span>, <span class="st">"dplyr"</span><span class="op">)</span>
+<span class="co">#&gt; [conflicted] Will prefer dplyr::filter over any other package</span>
+<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">am</span> <span class="op">&amp;</span> <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span>
+<span class="co">#&gt;                 mpg cyl disp  hp drat   wt qsec vs am gear carb</span>
+<span class="co">#&gt; Ford Pantera L 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4</span>
+<span class="co">#&gt; Maserati Bora  15.0   8  301 335 3.54 3.57 14.6  0  1    5    8</span></code></pre></div>
 <p>I recommend declaring preferences directly underneath the corresponding library call:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="reference/conflict_prefer.html">conflict_prefer</a></span>(<span class="st">"filter"</span>, <span class="st">"dplyr"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="fu"><a href="reference/conflict_prefer.html">conflict_prefer</a></span><span class="op">(</span><span class="st">"filter"</span>, <span class="st">"dplyr"</span><span class="op">)</span></code></pre></div>
 <p>You can ask conflicted to report any conflicts in the current session:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/conflict_scout.html">conflict_scout</a></span>()</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; 6 conflicts:</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; * `filter`   : [dplyr]</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; * `intersect`: [dplyr]</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; * `lag`      : dplyr, stats</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; * `setdiff`  : [dplyr]</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; * `setequal` : [dplyr]</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; * `union`    : [dplyr]</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/conflict_scout.html">conflict_scout</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; 2 conflicts:</span>
+<span class="co">#&gt; * `filter`: [dplyr]</span>
+<span class="co">#&gt; * `lag`   : dplyr, stats</span></code></pre></div>
 <p>Functions surrounded by <code>[]</code> have been chosen using one of the built-in rules. Here <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> has been selected because of the preference declared above; the set operations have been selected because they follow the superset principle and extend the API of the base equivalents.</p>
 <div id="how-it-works" class="section level3">
 <h3 class="hasAnchor">
 <a href="#how-it-works" class="anchor"></a>How it works</h3>
-<p>Loading conflicted creates a new “conflicted” environment that is attached just after the global environment. This environment contains an active binding for any object that is exported by multiple packages; the active binding will throw an error message describing how to disambiguate the name. The conflicted environment also contains bindings for <code><a href="https://www.rdocumentation.org/packages/base/topics/library">library()</a></code> and <code><a href="https://www.rdocumentation.org/packages/base/topics/library">require()</a></code> that suppress conflict reporting and update the conflicted environment with any new conflicts.</p>
+<p>Loading conflicted creates a new “conflicted” environment that is attached just after the global environment. This environment contains an active binding for any object that is exported by multiple packages; the active binding will throw an error message describing how to disambiguate the name. The conflicted environment also contains bindings for <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> and <code><a href="https://rdrr.io/r/base/library.html">require()</a></code> that suppress conflict reporting and update the conflicted environment with any new conflicts.</p>
 </div>
 </div>
 <div id="alternative-approaches" class="section level2">
 <h2 class="hasAnchor">
 <a href="#alternative-approaches" class="anchor"></a>Alternative approaches</h2>
-<p>It is worth comparing conflicted to <a href="http://github.com/klmr/modules">modules</a> and <a href="https://github.com/smbache/import">import</a>. Both packages provide strict alternatives to <code><a href="https://www.rdocumentation.org/packages/base/topics/library">library()</a></code>, giving much finer control over what functions are added to the search path.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># modules expects you to namespace all package functions</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">dplyr &lt;-<span class="st"> </span>modules<span class="op">::</span><span class="kw">import_package</span>(<span class="st">'dplyr'</span>)</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">dplyr<span class="op">$</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(mtcars, cyl <span class="op">==</span><span class="st"> </span><span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co"># import expects you to explicit load functions</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">import<span class="op">::</span><span class="kw">from</span>(dplyr, select, arrange, <span class="dt">dplyr_filter =</span> filter)</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="kw">dplyr_filter</span>(mtcars, cyl <span class="op">==</span><span class="st"> </span><span class="dv">8</span>)</a></code></pre></div>
+<p>It is worth comparing conflicted to <a href="http://github.com/klmr/modules">modules</a> and <a href="https://github.com/smbache/import">import</a>. Both packages provide strict alternatives to <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>, giving much finer control over what functions are added to the search path.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># modules expects you to namespace all package functions</span>
+<span class="va">dplyr</span> <span class="op">&lt;-</span> <span class="fu">modules</span><span class="fu">::</span><span class="fu">import_package</span><span class="op">(</span><span class="st">'dplyr'</span><span class="op">)</span>
+<span class="va">dplyr</span><span class="op">$</span><span class="fu">filter</span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span>
+
+<span class="co"># import expects you to explicit load functions</span>
+<span class="fu">import</span><span class="fu">::</span><span class="fu">from</span><span class="op">(</span><span class="va">dplyr</span>, <span class="va">select</span>, <span class="va">arrange</span>, dplyr_filter <span class="op">=</span> <span class="va">filter</span><span class="op">)</span>
+<span class="fu">dplyr_filter</span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
 <p>These require more upfront work than conflicted, in return for greater precision and control.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
@@ -156,13 +157,13 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=conflicted">https://​cloud.r-project.org/​package=conflicted</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/r-lib/conflicted">https://​github.com/​r-lib/​conflicted</a>
+<li>Browse source code at <br><a href="https://github.com/r-lib/conflicted/">https://​github.com/​r-lib/​conflicted/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/r-lib/conflicted/issues">https://​github.com/​r-lib/​conflicted/​issues</a>
 </li>
@@ -171,7 +172,14 @@
 <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+</ul>
+</div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
 <div class="developers">
@@ -183,16 +191,14 @@
 </ul>
 </div>
 
-      <div class="dev-status">
+  <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/r-lib/conflicted"><img src="https://travis-ci.org/r-lib/conflicted.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://codecov.io/github/r-lib/conflicted?branch=master"><img src="https://codecov.io/gh/r-lib/conflicted/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
-<li><a href="https://cran.r-project.org/package=conflicted"><img src="https://www.r-pkg.org/badges/version/conflicted" alt="CRAN status"></a></li>
+<li><a href="https://github.com/r-lib/conflicted/actions"><img src="https://github.com/r-lib/conflicted/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/r-lib/conflicted?branch=main"><img src="https://codecov.io/gh/r-lib/conflicted/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 </div>
-
 </div>
 
 
@@ -201,12 +207,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
