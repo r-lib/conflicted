@@ -20,10 +20,8 @@ Imports:
     memoise,
     rlang (>= 0.3.4)
 Suggests: 
-    covr,
     crayon,
     dplyr,
-    pkgdown,
     pkgload,
     testthat
 Encoding: UTF-8
