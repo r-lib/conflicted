@@ -26,7 +26,9 @@ package.
 Since conflicted was created base R also improved its tools for managing
 search path conflicts. See [the blog
 post](https://developer.r-project.org/Blog/public/2019/03/19/managing-search-path-conflicts/)
-by Luke Tierney for details.
+by Luke Tierney for details. The main difference is that base R requires
+up front conflict resolution of all functions when loading a package;
+conflicted only reports problems as you use conflicted functions.
 
 ## Installation
 
