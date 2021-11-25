@@ -34,6 +34,9 @@ conflict_scout <- function(pkgs = NULL) {
   # a function that has moved packages should never conflict
   conflicts <- map2(names(conflicts), conflicts, drop_moved)
 
+  # a function doesn't conflict with a non-dataset
+  conflicts <- map2(names(conflicts), conflicts, function_lookup)
+
   # apply declared user preferences
   for (fun in ls(prefs)) {
     if (!has_name(conflicts, fun))
@@ -103,6 +106,23 @@ superset_principle <- function(fun, pkgs) {
   }
 }
 
+function_lookup <- function(fun, pkgs) {
+  # Only apply this rule if exaclty two conflicts
+  if (length(pkgs) != 2) {
+    return(pkgs)
+  }
+
+  pkg1 <- getExportedValue(pkgs[[1]], fun)
+  pkg2 <- getExportedValue(pkgs[[2]], fun)
+
+  if (is.function(pkg1) != is.function(pkg2)) {
+    character()
+  } else {
+    pkgs
+  }
+
+}
+
 is_superset <- function(fun, pkg, base) {
   # Special case dplyr::lag() which looks like it should agree
   if (pkg == "dplyr" && fun == "lag")
@@ -118,11 +138,11 @@ is_superset <- function(fun, pkg, base) {
   args_pkg <- names(fn_fmls(pkg_obj))
   if (identical(args_pkg, "..."))
     return(TRUE)
-  
+
   if (is.primitive(base_obj)){
-    return(FALSE)  
+    return(FALSE)
   }
-  
+
   args_base <- names(fn_fmls(base_obj))
 
   # To be a superset, all base arguments must be included in the pkg funtion

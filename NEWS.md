@@ -1,5 +1,7 @@
 # conflicted (development version)
 
+* Conflicts between a function and a non-function are no longer shown (#30).
+
 # conflicted 1.0.4
 
 * Fixes for dev rlang

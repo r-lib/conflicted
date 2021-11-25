@@ -1,10 +1,18 @@
 context("test-find")
 
 test_that("primitive functions are never supersets", {
-  env <- pkgload::load_all(test_path("primitive"))
+  pkgload::load_all(test_path("primitive"))
   on.exit(pkgload::unload("primitive"))
 
   expect_false(is_superset("sum", "primitive", "base"))
+})
+
+test_that("functions aren't conflicts with non-functions", {
+  pkgload::load_all(test_path("funmatch"))
+  on.exit(pkgload::unload("funmatch"))
+
+  expect_equal(function_lookup("pi", c("base", "funmatch")), character())
+  expect_equal(function_lookup("mean", c("base", "funmatch")), character())
 })
 
 # moved functions ----------------------------------------------------
