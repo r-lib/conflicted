@@ -119,7 +119,10 @@
 <a href="#conflicted-development-version" class="anchor"></a>conflicted (development version)<small> Unreleased </small>
 </h1>
 <ul>
-<li>Conflicts between a function and a non-function are no longer shown (<a href='https://github.com/r-lib/conflicted/issues/30'>#30</a>).</li>
+<li><p>Conflicts involving a <code>standardGeneric</code> are no longer reported (<a href='https://github.com/r-lib/conflicted/issues/47'>#47</a>).</p></li>
+<li><p>Conflicts involving the superset principle are better handled: if there is a conflict all functons (including any base functions are reporter), and if there isn’t a conflict, no packages are reported (instead of 1) (<a href='https://github.com/r-lib/conflicted/issues/47'>#47</a>).</p></li>
+<li><p>Conflicts involving a primitive function no longer errors (<a href='https://github.com/nerskin'>@nerskin</a>, <a href='https://github.com/r-lib/conflicted/issues/46'>#46</a>, <a href='https://github.com/r-lib/conflicted/issues/48'>#48</a>).</p></li>
+<li><p>Conflicts between a function and a non-function are no longer shown (<a href='https://github.com/r-lib/conflicted/issues/30'>#30</a>).</p></li>
 </ul>
 </div>
     <div id="conflicted-104" class="section level1">
