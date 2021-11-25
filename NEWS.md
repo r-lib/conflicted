@@ -1,5 +1,11 @@
 # conflicted (development version)
 
+* Conflicts involving a `standardGeneric` are no longer reported (#47).
+
+* Conflicts involving the superset principle are better handled: if there is
+  a conflict all functons (including any base functions are reporter), and
+  if there isn't a conflict, no packages are reported (instead of 1) (#47).
+
 * Conflicts involving a primitive function no longer errors 
   (@nerskin, #46, #48).
 

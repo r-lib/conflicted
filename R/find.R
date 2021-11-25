@@ -97,12 +97,12 @@ superset_principle <- function(fun, pkgs) {
   } else if (length(non_base) == 1) {
     # only one so see if it assumes superset principle
     if (is_superset(fun, non_base, base = base)) {
-      non_base
+      character()
     } else {
       pkgs
     }
   } else {
-    non_base
+    pkgs
   }
 }
 
@@ -129,6 +129,11 @@ is_superset <- function(fun, pkg, base) {
     return(FALSE)
 
   pkg_obj <- getExportedValue(pkg, fun)
+  # If it's a standardGeneric, assume the author know's what they're doing
+  if (methods::is(pkg_obj, "standardGeneric")) {
+    return(TRUE)
+  }
+
   base_obj <- getExportedValue(base, fun)
   if (!is.function(pkg_obj) || !is.function(base_obj))
     return(FALSE)

@@ -22,6 +22,8 @@ Imports:
 Suggests: 
     crayon,
     dplyr,
+    Matrix,
+    methods,
     pkgload,
     testthat
 Encoding: UTF-8

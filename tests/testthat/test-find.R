@@ -5,6 +5,20 @@ test_that("primitive functions are never supersets", {
   on.exit(pkgload::unload("primitive"))
 
   expect_false(is_superset("sum", "primitive", "base"))
+  expect_equal(
+    superset_principle("sum", c("primitive", "base")),
+    c("primitive", "base")
+  )
+})
+
+test_that("superset", {
+  # by definition/design, there are no real conflicts in base functions
+  expect_equal(superset_principle("cbind", c("base", "methods")), character())
+
+  # Automatically created S4 generics obey the superset principle
+  expect_equal(superset_principle("print", c("base", "Matrix")), character())
+  # Even if the arguments have been customised
+  expect_equal(superset_principle("rcond", c("base", "Matrix")), character())
 })
 
 test_that("functions aren't conflicts with non-functions", {
