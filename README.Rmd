@@ -24,6 +24,8 @@ The goal of conflicted is to provide an alternative conflict resolution strategy
 
 Thanks to [\@krlmlr](https://github.com/krlmlr) for this neat idea! This code was previously part of the experimental [strict](https://github.com/hadley/strict) package, but I decided improved conflict resolution is useful by itself and worth its own package.
 
+Since conflicted was created base R also improved its tools for managing search path conflicts. See [the blog post](https://developer.r-project.org/Blog/public/2019/03/19/managing-search-path-conflicts/) by Luke Tierney for details.
+
 ## Installation
 
 ```{r, eval = FALSE}

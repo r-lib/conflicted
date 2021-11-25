@@ -23,6 +23,11 @@ code was previously part of the experimental
 improved conflict resolution is useful by itself and worth its own
 package.
 
+Since conflicted was created base R also improved its tools for managing
+search path conflicts. See [the blog
+post](https://developer.r-project.org/Blog/public/2019/03/19/managing-search-path-conflicts/)
+by Luke Tierney for details.
+
 ## Installation
 
 ``` r
