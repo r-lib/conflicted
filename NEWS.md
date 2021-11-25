@@ -1,5 +1,8 @@
 # conflicted (development version)
 
+* Conflicts involving a primitive function no longer errors 
+  (@nerskin, #46, #48).
+
 * Conflicts between a function and a non-function are no longer shown (#30).
 
 # conflicted 1.0.4
