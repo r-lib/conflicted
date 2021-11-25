@@ -1,5 +1,7 @@
 # conflicted (development version)
 
+* Conflicted involing lazy loaded datasets are now reported (#54).
+
 * Conflicts involving a `standardGeneric` are no longer reported (#47).
 
 * Conflicts involving the superset principle are better handled: if there is

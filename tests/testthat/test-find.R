@@ -29,6 +29,13 @@ test_that("functions aren't conflicts with non-functions", {
   expect_equal(function_lookup("mean", c("base", "funmatch")), character())
 })
 
+test_that("can find conflicts with data", {
+  pkgload::load_all(test_path("data"))
+  on.exit(pkgload::unload("data"))
+
+  expect_named(conflict_scout(c("datasets", "data")), "mtcars")
+})
+
 # moved functions ----------------------------------------------------
 
 test_that(".Deprecated call contains function name", {

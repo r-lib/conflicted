@@ -41,7 +41,7 @@ map2 <- function(.x, .y, .f, ...) {
 }
 
 unique_obj <- function(name, pkgs) {
-  objs <- lapply(pkgs, pkg_get, name)
+  objs <- lapply(pkgs, getExportedValue, name)
   names(objs) <- pkgs
 
   pkgs[!duplicated(objs)]

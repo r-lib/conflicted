@@ -17,15 +17,9 @@ pkg_ls <- function(pkg) {
 
   names <- intersect(exports, env_names(ns))
   int <- grepl("^.__", names)
-  names[!int]
+  c(names[!int], pkg_data(pkg))
 }
 
-pkg_get <- function(pkg, name) {
-  get(name, envir = ns_env(pkg), inherits = FALSE)
-}
-
-# Not currently used because pkg_get() can't find it, and it seems unlikely
-# to be a common source of conflicts
 pkg_data <- function(x) {
   ns <- ns_env(x)
   lazy_data <- .getNamespaceInfo(ns, "lazydata")
