@@ -31,9 +31,9 @@ You can either declare a specific pairing (i.e. \code{dplyr::filter()} beats
 \code{base::filter()}), or an overall winner (i.e. \code{dplyr::filter()} beats
 all comers).
 
-You can use \code{conflicted_prefer_matching()} to prefer many functions at
-once by specifying a regular expression, or \code{conficted_prefer_all()}
-to prefer all function from a package.
+Use \code{conficted_prefer_all()} to prefer all functions in a package, or
+\code{conflicted_prefer_matching()} to prefer functions that match a regular
+expression.
 }
 \section{Best practices}{
 

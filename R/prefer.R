@@ -6,9 +6,9 @@
 #' `base::filter()`), or an overall winner (i.e. `dplyr::filter()` beats
 #' all comers).
 #'
-#' You can use `conflicted_prefer_matching()` to prefer many functions at
-#' once by specifying a regular expression, or `conficted_prefer_all()`
-#' to prefer all function from a package.
+#' Use `conficted_prefer_all()` to prefer all functions in a package, or
+#' `conflicted_prefer_matching()` to prefer functions that match a regular
+#' expression.
 #'
 #' @section Best practices:
 #' I recommend placing calls to `conflict_prefer()` at the top of your
