@@ -1,6 +1,6 @@
 # conflicted (development version)
 
-* New `conflicted_prefer_always()` and `conflicted_prefer_matching()` to
+* New `conflicted_prefer_all()` and `conflicted_prefer_matching()` to
   prefer functions en masse (#51).
 
 * Conflicted involing lazy loaded datasets are now reported (#54).
