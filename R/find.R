@@ -160,7 +160,8 @@ drop_moved <- function(fun, pkgs) {
 }
 
 
-has_moved <- memoise::memoise(function(pkg, fun, obj = NULL) {
+# memoised onLoad
+has_moved <- function(pkg, fun, obj = NULL) {
   if (is.null(obj)) {
     obj <- getExportedValue(pkg, fun)
   }
@@ -184,4 +185,4 @@ has_moved <- memoise::memoise(function(pkg, fun, obj = NULL) {
     return(FALSE)
 
   grepl(paste0("::", fun), new)
-})
+}
