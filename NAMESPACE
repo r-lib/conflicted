@@ -3,5 +3,7 @@
 S3method("[",conflict_report)
 S3method(print,conflict_report)
 export(conflict_prefer)
+export(conflict_prefer_all)
+export(conflict_prefer_matching)
 export(conflict_scout)
 import(rlang)
