@@ -104,8 +104,8 @@ update the conflicted environment with any new conflicts.
 ## Alternative approaches
 
 It is worth comparing conflicted to
-[modules](http://github.com/klmr/modules) and
-[import](https://github.com/smbache/import). Both packages provide
+[modules](https://github.com/klmr/modules) and
+[import](https://github.com/rticulate/import). Both packages provide
 strict alternatives to `library()`, giving much finer control over what
 functions are added to the search path.
 

@@ -76,7 +76,7 @@ Loading conflicted creates a new "conflicted" environment that is attached just 
 
 ## Alternative approaches
 
-It is worth comparing conflicted to [modules](http://github.com/klmr/modules) and [import](https://github.com/smbache/import). Both packages provide strict alternatives to `library()`, giving much finer control over what functions are added to the search path. 
+It is worth comparing conflicted to [modules](https://github.com/klmr/modules) and [import](https://github.com/rticulate/import). Both packages provide strict alternatives to `library()`, giving much finer control over what functions are added to the search path. 
 
 ```{r, eval = FALSE}
 # modules expects you to namespace all package functions
