@@ -1,7 +1,5 @@
-context("test-find")
-
 test_that("primitive functions are never supersets", {
-  pkgload::load_all(test_path("primitive"))
+  pkgload::load_all(test_path("primitive"), quiet = TRUE)
   on.exit(pkgload::unload("primitive"))
 
   expect_false(is_superset("sum", "primitive", "base"))
@@ -22,7 +20,7 @@ test_that("superset", {
 })
 
 test_that("functions aren't conflicts with non-functions", {
-  pkgload::load_all(test_path("funmatch"))
+  pkgload::load_all(test_path("funmatch"), quiet = TRUE)
   on.exit(pkgload::unload("funmatch"))
 
   expect_equal(function_lookup("pi", c("base", "funmatch")), character())
@@ -30,7 +28,7 @@ test_that("functions aren't conflicts with non-functions", {
 })
 
 test_that("can find conflicts with data", {
-  pkgload::load_all(test_path("data"))
+  pkgload::load_all(test_path("data"), quiet = TRUE)
   on.exit(pkgload::unload("data"))
 
   expect_named(conflict_scout(c("datasets", "data")), "mtcars")

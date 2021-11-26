@@ -1,5 +1,3 @@
-context("test-shim.R")
-
 test_that("shimmed arguments match unshimmed", {
   shims_bind()
   expect_equal(formals(require), formals(base::require))
