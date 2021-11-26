@@ -1,5 +1,8 @@
 # conflicted (development version)
 
+* New `conflicted_prefer_all()` and `conflicted_prefer_matching()` to
+  prefer functions en masse (#51).
+
 * Conflicts involving lazy loaded datasets are now reported (#54).
 
 * Conflicts involving a `standardGeneric` are no longer reported (#47).

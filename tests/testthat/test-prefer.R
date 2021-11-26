@@ -26,3 +26,22 @@ test_that("length n vector beats listed others", {
   expect_equal(prefs_resolve("x1", c("pkga", "pkgb")), "pkga")
   expect_equal(prefs_resolve("x1", c("pkga", "pkgb", "pkgc")), c("pkga", "pkgc"))
 })
+
+
+# en masse ----------------------------------------------------------------
+
+test_that("can register preference for multiple functions", {
+  pkgload::load_all(test_path("funmatch"))
+  on.exit({
+    pkgload::unload("funmatch")
+    prefs_reset()
+  })
+
+  conflict_prefer_all("funmatch", quiet = TRUE)
+  expect_setequal(prefs_ls(), c("mean", "pi"))
+  prefs_reset()
+
+  conflict_prefer_matching("m", "funmatch", quiet = TRUE)
+  expect_setequal(prefs_ls(), "mean")
+  prefs_reset()
+})

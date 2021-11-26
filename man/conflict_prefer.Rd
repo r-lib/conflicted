@@ -2,9 +2,15 @@
 % Please edit documentation in R/prefer.R
 \name{conflict_prefer}
 \alias{conflict_prefer}
+\alias{conflict_prefer_matching}
+\alias{conflict_prefer_all}
 \title{Persistently prefer one function over another}
 \usage{
 conflict_prefer(name, winner, losers = NULL, quiet = FALSE)
+
+conflict_prefer_matching(pattern, winner, losers = NULL, quiet = FALSE)
+
+conflict_prefer_all(winner, losers = NULL, quiet = FALSE)
 }
 \arguments{
 \item{name}{Name of function.}
@@ -15,12 +21,19 @@ conflict_prefer(name, winner, losers = NULL, quiet = FALSE)
 If omitted, \code{winner} will beat all comers.}
 
 \item{quiet}{If \code{TRUE}, all output will be suppressed}
+
+\item{pattern}{Regular expression used to select objects from the \code{winner}
+package.}
 }
 \description{
 \code{conflict_prefer()} allows you to declare "winners" of conflicts.
 You can either declare a specific pairing (i.e. \code{dplyr::filter()} beats
 \code{base::filter()}), or an overall winner (i.e. \code{dplyr::filter()} beats
 all comers).
+
+Use \code{conficted_prefer_all()} to prefer all functions in a package, or
+\code{conflicted_prefer_matching()} to prefer functions that match a regular
+expression.
 }
 \section{Best practices}{
 
@@ -35,4 +48,15 @@ conflict_prefer("filter", "dplyr")
 # Prefer over specified package or packages
 conflict_prefer("filter", "dplyr", "base")
 conflict_prefer("filter", "dplyr", c("base", "filtration"))
+
+# Prefer many functions that match a pattern
+\dontrun{
+# Prefer col_* from vroom
+conflict_prefer_matching("^col_", "vroom")
+}
+# Or all functions from a package:
+\dontrun{
+# Prefer all tidylog functions over dtplyr functions
+conflict_prefer_all("tidylog", "dtplyr")
+}
 }
