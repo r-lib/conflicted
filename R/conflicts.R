@@ -15,7 +15,7 @@ conflicts_remove <- function(pkg) {
   conflicts_register(setdiff(pkgs_attached(), pkg))
 }
 
-# Environment manageament -------------------------------------------------
+# Environment management -------------------------------------------------
 
 conflicts_init <- function() {
   conflicts_reset()
