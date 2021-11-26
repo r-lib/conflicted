@@ -1,4 +1,4 @@
-# conflicted (development version)
+# conflicted 1.1.0
 
 * New `conflicted_prefer_all()` and `conflicted_prefer_matching()` to
   prefer functions en masse (#51).
