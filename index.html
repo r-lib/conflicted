@@ -81,7 +81,6 @@
 
 <p>The goal of conflicted is to provide an alternative conflict resolution strategy. R’s default conflict resolution system gives precedence to the most recently loaded package. This can make it hard to detect conflicts, particularly when introduced by an update to an existing package. conflicted takes a different approach, making every conflict an error and forcing you to choose which function to use.</p>
 <p>Thanks to <a href="https://github.com/krlmlr">@krlmlr</a> for this neat idea! This code was previously part of the experimental <a href="https://github.com/hadley/strict">strict</a> package, but I decided improved conflict resolution is useful by itself and worth its own package.</p>
-<p>Since conflicted was created base R also improved its tools for managing search path conflicts. See <a href="https://developer.r-project.org/Blog/public/2019/03/19/managing-search-path-conflicts/">the blog post</a> by Luke Tierney for details. The main difference is that base R requires up front conflict resolution of all functions when loading a package; conflicted only reports problems as you use conflicted functions.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -149,6 +148,7 @@
 <span class="fu">import</span><span class="fu">::</span><span class="fu">from</span><span class="op">(</span><span class="va">dplyr</span>, <span class="va">select</span>, <span class="va">arrange</span>, dplyr_filter <span class="op">=</span> <span class="va">filter</span><span class="op">)</span>
 <span class="fu">dplyr_filter</span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
 <p>These require more upfront work than conflicted, in return for greater precision and control.</p>
+<p>Since conflicted was created base R also improved its tools for managing search path conflicts. See <a href="https://developer.r-project.org/Blog/public/2019/03/19/managing-search-path-conflicts/">the blog post</a> by Luke Tierney for details. The main difference is that base R requires up front conflict resolution of all functions when loading a package; conflicted only reports problems as you use conflicted functions.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
