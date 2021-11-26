@@ -3,16 +3,15 @@
 * New `conflicted_prefer_all()` and `conflicted_prefer_matching()` to
   prefer functions en masse (#51).
 
-* Conflicted involing lazy loaded datasets are now reported (#54).
+* Conflicts involving lazy loaded datasets are now reported (#54).
 
 * Conflicts involving a `standardGeneric` are no longer reported (#47).
 
 * Conflicts involving the superset principle are better handled: if there is
-  a conflict all functons (including any base functions are reporter), and
+  a conflict all functions (including any base functions are reporter), and
   if there isn't a conflict, no packages are reported (instead of 1) (#47).
 
-* Conflicts involving a primitive function no longer errors 
-  (@nerskin, #46, #48).
+* Conflicts involving a primitive function no longer error (@nerskin, #46, #48).
 
 * Conflicts between a function and a non-function are no longer shown (#30).
 
