@@ -23,13 +23,6 @@ code was previously part of the experimental
 improved conflict resolution is useful by itself and worth its own
 package.
 
-Since conflicted was created base R also improved its tools for managing
-search path conflicts. See [the blog
-post](https://developer.r-project.org/Blog/public/2019/03/19/managing-search-path-conflicts/)
-by Luke Tierney for details. The main difference is that base R requires
-up front conflict resolution of all functions when loading a package;
-conflicted only reports problems as you use conflicted functions.
-
 ## Installation
 
 ``` r
@@ -128,6 +121,13 @@ dplyr_filter(mtcars, cyl == 8)
 
 These require more upfront work than conflicted, in return for greater
 precision and control.
+
+Since conflicted was created base R also improved its tools for managing
+search path conflicts. See [the blog
+post](https://developer.r-project.org/Blog/public/2019/03/19/managing-search-path-conflicts/)
+by Luke Tierney for details. The main difference is that base R requires
+up front conflict resolution of all functions when loading a package;
+conflicted only reports problems as you use conflicted functions.
 
 ## Code of conduct
 
