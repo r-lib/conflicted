@@ -43,7 +43,10 @@
 <meta property="og:description" content="conflict_prefer() allows you to declare &quot;winners&quot; of conflicts.
 You can either declare a specific pairing (i.e. dplyr::filter() beats
 base::filter()), or an overall winner (i.e. dplyr::filter() beats
-all comers)." />
+all comers).
+Use conficted_prefer_all() to prefer all functions in a package, or
+conflicted_prefer_matching() to prefer functions that match a regular
+expression." />
 
 
 
@@ -124,9 +127,16 @@ all comers)." />
 You can either declare a specific pairing (i.e. <code><a href='https://dplyr.tidyverse.org/reference/filter.html'>dplyr::filter()</a></code> beats
 <code>base::filter()</code>), or an overall winner (i.e. <code><a href='https://dplyr.tidyverse.org/reference/filter.html'>dplyr::filter()</a></code> beats
 all comers).</p>
+<p>Use <code>conficted_prefer_all()</code> to prefer all functions in a package, or
+<code>conflicted_prefer_matching()</code> to prefer functions that match a regular
+expression.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>conflict_prefer</span><span class='op'>(</span><span class='va'>name</span>, <span class='va'>winner</span>, losers <span class='op'>=</span> <span class='cn'>NULL</span>, quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>conflict_prefer</span><span class='op'>(</span><span class='va'>name</span>, <span class='va'>winner</span>, losers <span class='op'>=</span> <span class='cn'>NULL</span>, quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>conflict_prefer_matching</span><span class='op'>(</span><span class='va'>pattern</span>, <span class='va'>winner</span>, losers <span class='op'>=</span> <span class='cn'>NULL</span>, quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>conflict_prefer_all</span><span class='op'>(</span><span class='va'>winner</span>, losers <span class='op'>=</span> <span class='cn'>NULL</span>, quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,6 +157,11 @@ If omitted, <code>winner</code> will beat all comers.</p></td>
     <tr>
       <th>quiet</th>
       <td><p>If <code>TRUE</code>, all output will be suppressed</p></td>
+    </tr>
+    <tr>
+      <th>pattern</th>
+      <td><p>Regular expression used to select objects from the <code>winner</code>
+package.</p></td>
     </tr>
     </table>
 
@@ -169,6 +184,17 @@ script, immediately underneath the relevant <code><a href='https://rdrr.io/r/bas
 <span class='r-in'><span class='fu'>conflict_prefer</span><span class='op'>(</span><span class='st'>"filter"</span>, <span class='st'>"dplyr"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"base"</span>, <span class='st'>"filtration"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> [conflicted] Removing existing preference</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> [conflicted] Will prefer <span style='color: #0000BB;'>dplyr::filter</span> over <span style='color: #0000BB;'>base::filter</span>, <span style='color: #0000BB;'>filtration::filter</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Prefer many functions that match a pattern</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># Prefer col_* from vroom</span></span>
+<span class='r-in'><span class='fu'>conflict_prefer_matching</span><span class='op'>(</span><span class='st'>"^col_"</span>, <span class='st'>"vroom"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'><span class='co'># Or all functions from a package:</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># Prefer all tidylog functions over dtplyr functions</span></span>
+<span class='r-in'><span class='fu'>conflict_prefer_all</span><span class='op'>(</span><span class='st'>"tidylog"</span>, <span class='st'>"dtplyr"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
