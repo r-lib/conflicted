@@ -43,6 +43,9 @@ test_that("shimmed help returns same as unshimmed", {
 })
 
 test_that("shimmed library() returns same as unshimmed", {
+  # skip on CRAN because library() returns list of all installed packages
+  # which might be changing in the background as other packages are installed
+  skip_on_cran()
   shims_bind()
 
   expect_equal(library(), base::library())
