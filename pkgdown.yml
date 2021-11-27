@@ -2,8 +2,8 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2021-11-26T17:14Z
+last_built: 2021-11-27T15:44Z
 urls:
-  reference: http://conflicted.r-lib.org/reference
-  article: http://conflicted.r-lib.org/articles
+  reference: https://conflicted.r-lib.org/reference
+  article: https://conflicted.r-lib.org/articles
 
