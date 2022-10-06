@@ -1,11 +1,5 @@
 style_name <- function(...) {
-  x <- paste0(...)
-
-  if (!is_installed("crayon")) {
-    x
-  } else {
-    crayon::blue(x)
-  }
+  cli::col_blue(...)
 }
 
 invert <- function(x) {

@@ -17,11 +17,11 @@ BugReports: https://github.com/r-lib/conflicted/issues
 Depends: 
     R (>= 3.2)
 Imports: 
+    cli,
     memoise,
     rlang (>= 1.0.0)
 Suggests: 
     callr,
-    crayon,
     dplyr,
     Matrix,
     methods,
