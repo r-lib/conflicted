@@ -24,7 +24,7 @@ filter <- dplyr::filter
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://conflicted.r-lib.org}
+  \item \url{https://conflicted.r-lib.org/}
   \item \url{https://github.com/r-lib/conflicted}
   \item Report bugs at \url{https://github.com/r-lib/conflicted/issues}
 }
@@ -35,7 +35,7 @@ Useful links:
 
 Other contributors:
 \itemize{
-  \item RStudio [copyright holder]
+  \item RStudio [copyright holder, funder]
 }
 
 }
