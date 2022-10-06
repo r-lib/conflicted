@@ -60,7 +60,7 @@ conflict_prefer <- function(name, winner, losers = NULL, quiet = FALSE) {
 
   env_bind(prefs, !!name := c(winner, losers))
 
-  if (pkg_attached(winner))
+  if (pkg_attached(winner) && pkg_attached("conflicted"))
     conflicts_register()
 
   invisible()
