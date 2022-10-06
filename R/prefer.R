@@ -50,13 +50,13 @@ conflict_prefer <- function(name, winner, losers = NULL, quiet = FALSE) {
   }
 
   if (!quiet) {
-    full <- style_name(winner, "::", backtick(name))
+    full <- paste0(winner, "::", backtick(name))
     if (is.null(losers)) {
       cli::cli_inform(
         "[conflicted] Will prefer {.fun {full}} over any other package."
       )
     } else {
-      alt <- style_name(losers, "::", backtick(name))
+      alt <- paste0(losers, "::", backtick(name))
       cli::cli_inform(
         "[conflicted] Will prefer {.fun {full}} over {.fun {alt}}."
       )
