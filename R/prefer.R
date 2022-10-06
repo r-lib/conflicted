@@ -44,17 +44,22 @@ conflict_prefer <- function(name, winner, losers = NULL, quiet = FALSE) {
   stopifnot(is.null(losers) || is.character(losers))
 
   if (env_has(prefs, name)) {
-    if (!quiet)
-      inform("[conflicted] Removing existing preference")
+    if (!quiet) {
+      cli::cli_inform("[conflicted] Removing existing preference.")
+    }
   }
 
   if (!quiet) {
     full <- style_name(winner, "::", backtick(name))
     if (is.null(losers)) {
-      inform(paste0("[conflicted] Will prefer ", full, " over any other package"))
+      cli::cli_inform(
+        "[conflicted] Will prefer {.fun {full}} over any other package."
+      )
     } else {
       alt <- style_name(losers, "::", backtick(name))
-      inform(paste0("[conflicted] Will prefer ", full, " over ", paste(alt, collapse = ", ")))
+      cli::cli_inform(
+        "[conflicted] Will prefer {.fun {full}} over {.fun {alt}}."
+      )
     }
   }
 

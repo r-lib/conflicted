@@ -35,11 +35,22 @@ test_that("can register preference for multiple functions", {
     prefs_reset()
   })
 
-  conflict_prefer_all("funmatch", quiet = TRUE)
+  expect_snapshot({
+    conflict_prefer_all("funmatch")
+  })
   expect_setequal(prefs_ls(), c("mean", "pi"))
   prefs_reset()
 
-  conflict_prefer_matching("m", "funmatch", quiet = TRUE)
+  expect_snapshot({
+    conflict_prefer("mean", "funmatch", "noodle")
+    conflict_prefer("mean", "funmatch", "boodle")
+  })
+  expect_setequal(prefs_ls(), "mean")
+  prefs_reset()
+
+  expect_snapshot({
+    conflict_prefer_matching("m", "funmatch")
+  })
   expect_setequal(prefs_ls(), "mean")
   prefs_reset()
 })
