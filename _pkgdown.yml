@@ -1,1 +1,9 @@
 url: https://conflicted.r-lib.org
+
+template:
+  package: tidytemplate
+  bootstrap: 5
+
+  includes:
+    in_header: |
+      <script defer data-domain="conflicted.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
