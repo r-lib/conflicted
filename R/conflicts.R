@@ -31,7 +31,3 @@ conflicts_reset <- function() {
     detach(".conflicts", character.only = TRUE)
   }
 }
-
-conflicts_ls <- function() {
-  env_names(scoped_env(".conflicts"))
-}
