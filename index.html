@@ -24,6 +24,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -36,18 +38,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">conflicted</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -57,7 +53,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-lib/conflicted/">
+  <a href="https://github.com/r-lib/conflicted/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -74,85 +70,84 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="conflicted" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#conflicted" class="anchor"></a>conflicted</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="conflicted">conflicted<a class="anchor" aria-label="anchor" href="#conflicted"></a>
+</h1></div>
 <!-- badges: start -->
-
 <p>The goal of conflicted is to provide an alternative conflict resolution strategy. R’s default conflict resolution system gives precedence to the most recently loaded package. This can make it hard to detect conflicts, particularly when introduced by an update to an existing package. conflicted takes a different approach, making every conflict an error and forcing you to choose which function to use.</p>
-<p>Thanks to <a href="https://github.com/krlmlr">@krlmlr</a> for this neat idea! This code was previously part of the experimental <a href="https://github.com/hadley/strict">strict</a> package, but I decided improved conflict resolution is useful by itself and worth its own package.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<p>Thanks to <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a> for this neat idea! This code was previously part of the experimental <a href="https://github.com/hadley/strict" class="external-link">strict</a> package, but I decided improved conflict resolution is useful by itself and worth its own package.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-lib/conflicted"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-lib/conflicted"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>To use conflicted, all you need to do is load it:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://conflicted.r-lib.org">conflicted</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-
-<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span>
-<span class="co">#&gt; Error: [conflicted] `filter` found in 2 packages.</span>
-<span class="co">#&gt; Either pick the one you want with `::` </span>
-<span class="co">#&gt; * dplyr::filter</span>
-<span class="co">#&gt; * stats::filter</span>
-<span class="co">#&gt; Or declare a preference with `conflict_prefer()`</span>
-<span class="co">#&gt; * conflict_prefer("filter", "dplyr")</span>
-<span class="co">#&gt; * conflict_prefer("filter", "stats")</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://conflicted.r-lib.org">conflicted</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error: [conflicted] `filter` found in 2 packages.</span></span>
+<span><span class="co">#&gt; Either pick the one you want with `::` </span></span>
+<span><span class="co">#&gt; * dplyr::filter</span></span>
+<span><span class="co">#&gt; * stats::filter</span></span>
+<span><span class="co">#&gt; Or declare a preference with `conflict_prefer()`</span></span>
+<span><span class="co">#&gt; * conflict_prefer("filter", "dplyr")</span></span>
+<span><span class="co">#&gt; * conflict_prefer("filter", "stats")</span></span></code></pre></div>
 <p>As suggested, you can either namespace individual calls:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">am</span> <span class="op">&amp;</span> <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span>
-<span class="co">#&gt;                 mpg cyl disp  hp drat   wt qsec vs am gear carb</span>
-<span class="co">#&gt; Ford Pantera L 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4</span>
-<span class="co">#&gt; Maserati Bora  15.0   8  301 335 3.54 3.57 14.6  0  1    5    8</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">am</span> <span class="op">&amp;</span> <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                 mpg cyl disp  hp drat   wt qsec vs am gear carb</span></span>
+<span><span class="co">#&gt; Ford Pantera L 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4</span></span>
+<span><span class="co">#&gt; Maserati Bora  15.0   8  301 335 3.54 3.57 14.6  0  1    5    8</span></span></code></pre></div>
 <p>Or declare a session-wide preference:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/conflict_prefer.html">conflict_prefer</a></span><span class="op">(</span><span class="st">"filter"</span>, <span class="st">"dplyr"</span><span class="op">)</span>
-<span class="co">#&gt; [conflicted] Will prefer dplyr::filter over any other package</span>
-<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">am</span> <span class="op">&amp;</span> <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span>
-<span class="co">#&gt;                 mpg cyl disp  hp drat   wt qsec vs am gear carb</span>
-<span class="co">#&gt; Ford Pantera L 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4</span>
-<span class="co">#&gt; Maserati Bora  15.0   8  301 335 3.54 3.57 14.6  0  1    5    8</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/conflict_prefer.html">conflict_prefer</a></span><span class="op">(</span><span class="st">"filter"</span>, <span class="st">"dplyr"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [conflicted] Will prefer dplyr::filter over any other package</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">am</span> <span class="op">&amp;</span> <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                 mpg cyl disp  hp drat   wt qsec vs am gear carb</span></span>
+<span><span class="co">#&gt; Ford Pantera L 15.8   8  351 264 4.22 3.17 14.5  0  1    5    4</span></span>
+<span><span class="co">#&gt; Maserati Bora  15.0   8  301 335 3.54 3.57 14.6  0  1    5    8</span></span></code></pre></div>
 <p>I recommend declaring preferences directly underneath the corresponding library call:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="fu"><a href="reference/conflict_prefer.html">conflict_prefer</a></span><span class="op">(</span><span class="st">"filter"</span>, <span class="st">"dplyr"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/conflict_prefer.html">conflict_prefer</a></span><span class="op">(</span><span class="st">"filter"</span>, <span class="st">"dplyr"</span><span class="op">)</span></span></code></pre></div>
 <p>You can ask conflicted to report any conflicts in the current session:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/conflict_scout.html">conflict_scout</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; 2 conflicts:</span>
-<span class="co">#&gt; * `filter`: [dplyr]</span>
-<span class="co">#&gt; * `lag`   : dplyr, stats</span></code></pre></div>
-<p>Functions surrounded by <code>[]</code> have been chosen using one of the built-in rules. Here <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> has been selected because of the preference declared above; the set operations have been selected because they follow the superset principle and extend the API of the base equivalents.</p>
-<div id="how-it-works" class="section level3">
-<h3 class="hasAnchor">
-<a href="#how-it-works" class="anchor"></a>How it works</h3>
-<p>Loading conflicted creates a new “conflicted” environment that is attached just after the global environment. This environment contains an active binding for any object that is exported by multiple packages; the active binding will throw an error message describing how to disambiguate the name. The conflicted environment also contains bindings for <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> and <code><a href="https://rdrr.io/r/base/library.html">require()</a></code> that suppress conflict reporting and update the conflicted environment with any new conflicts.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/conflict_scout.html">conflict_scout</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 2 conflicts:</span></span>
+<span><span class="co">#&gt; * `filter`: [dplyr]</span></span>
+<span><span class="co">#&gt; * `lag`   : dplyr, stats</span></span></code></pre></div>
+<p>Functions surrounded by <code>[]</code> have been chosen using one of the built-in rules. Here <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code> has been selected because of the preference declared above; the set operations have been selected because they follow the superset principle and extend the API of the base equivalents.</p>
+<div class="section level3">
+<h3 id="how-it-works">How it works<a class="anchor" aria-label="anchor" href="#how-it-works"></a>
+</h3>
+<p>Loading conflicted creates a new “conflicted” environment that is attached just after the global environment. This environment contains an active binding for any object that is exported by multiple packages; the active binding will throw an error message describing how to disambiguate the name. The conflicted environment also contains bindings for <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code> and <code><a href="https://rdrr.io/r/base/library.html" class="external-link">require()</a></code> that suppress conflict reporting and update the conflicted environment with any new conflicts.</p>
 </div>
 </div>
-<div id="alternative-approaches" class="section level2">
-<h2 class="hasAnchor">
-<a href="#alternative-approaches" class="anchor"></a>Alternative approaches</h2>
-<p>It is worth comparing conflicted to <a href="https://github.com/klmr/modules">modules</a> and <a href="https://github.com/rticulate/import">import</a>. Both packages provide strict alternatives to <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>, giving much finer control over what functions are added to the search path.</p>
+<div class="section level2">
+<h2 id="alternative-approaches">Alternative approaches<a class="anchor" aria-label="anchor" href="#alternative-approaches"></a>
+</h2>
+<p>It is worth comparing conflicted to <a href="https://github.com/klmr/modules" class="external-link">modules</a> and <a href="https://github.com/rticulate/import" class="external-link">import</a>. Both packages provide strict alternatives to <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code>, giving much finer control over what functions are added to the search path.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># modules expects you to namespace all package functions</span>
-<span class="va">dplyr</span> <span class="op">&lt;-</span> <span class="fu">modules</span><span class="fu">::</span><span class="fu">import_package</span><span class="op">(</span><span class="st">'dplyr'</span><span class="op">)</span>
-<span class="va">dplyr</span><span class="op">$</span><span class="fu">filter</span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span>
-
-<span class="co"># import expects you to explicit load functions</span>
-<span class="fu">import</span><span class="fu">::</span><span class="fu">from</span><span class="op">(</span><span class="va">dplyr</span>, <span class="va">select</span>, <span class="va">arrange</span>, dplyr_filter <span class="op">=</span> <span class="va">filter</span><span class="op">)</span>
-<span class="fu">dplyr_filter</span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># modules expects you to namespace all package functions</span></span>
+<span><span class="va">dplyr</span> <span class="op">&lt;-</span> <span class="fu">modules</span><span class="fu">::</span><span class="fu">import_package</span><span class="op">(</span><span class="st">'dplyr'</span><span class="op">)</span></span>
+<span><span class="va">dplyr</span><span class="op">$</span><span class="fu">filter</span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># import expects you to explicit load functions</span></span>
+<span><span class="fu">import</span><span class="fu">::</span><span class="fu">from</span><span class="op">(</span><span class="va">dplyr</span>, <span class="va">select</span>, <span class="va">arrange</span>, dplyr_filter <span class="op">=</span> <span class="va">filter</span><span class="op">)</span></span>
+<span><span class="fu">dplyr_filter</span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">cyl</span> <span class="op">==</span> <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
 <p>These require more upfront work than conflicted, in return for greater precision and control.</p>
-<p>Since conflicted was created base R also improved its tools for managing search path conflicts. See <a href="https://developer.r-project.org/Blog/public/2019/03/19/managing-search-path-conflicts/">the blog post</a> by Luke Tierney for details. The main difference is that base R requires up front conflict resolution of all functions when loading a package; conflicted only reports problems as you use conflicted functions.</p>
+<p>Since conflicted was created base R also improved its tools for managing search path conflicts. See <a href="https://developer.r-project.org/Blog/public/2019/03/19/managing-search-path-conflicts/" class="external-link">the blog post</a> by Luke Tierney for details. The main difference is that base R requires up front conflict resolution of all functions when loading a package; conflicted only reports problems as you use conflicted functions.</p>
 </div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
 <p>Please note that the conflicted project is released with a <a href="https://conflicted.r-lib.org/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
@@ -160,55 +155,64 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=conflicted">https://​cloud.r-project.org/​package=conflicted</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/r-lib/conflicted/">https://​github.com/​r-lib/​conflicted/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/r-lib/conflicted/issues">https://​github.com/​r-lib/​conflicted/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=conflicted" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/r-lib/conflicted/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/r-lib/conflicted/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>
-<a href="http://hadley.nz">Hadley Wickham</a> <br><small class="roles"> Author, maintainer </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html#citation">Citing conflicted</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/r-lib/conflicted/actions"><img src="https://github.com/r-lib/conflicted/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/r-lib/conflicted?branch=main"><img src="https://codecov.io/gh/r-lib/conflicted/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li>Hadley Wickham <br><small class="roles"> Author, maintainer </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/r-lib/conflicted/actions" class="external-link"><img src="https://github.com/r-lib/conflicted/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/r-lib/conflicted?branch=main" class="external-link"><img src="https://codecov.io/gh/r-lib/conflicted/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://hadley.nz">Hadley Wickham</a>.</p>
+  <p></p>
+<p>Developed by Hadley Wickham.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -216,6 +220,8 @@
 
   
 
+
+  
 
   </body>
 </html>
