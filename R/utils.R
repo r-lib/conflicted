@@ -34,6 +34,10 @@ map2 <- function(.x, .y, .f, ...) {
   mapply(.f, .x, .y, MoreArgs = list(...), SIMPLIFY = FALSE)
 }
 
+map_chr <- function(.x, .f, ...) {
+  vapply(.x, .f, ..., FUN.VALUE = character(1))
+}
+
 unique_obj <- function(name, pkgs) {
   objs <- lapply(pkgs, getExportedValue, name)
   names(objs) <- pkgs
