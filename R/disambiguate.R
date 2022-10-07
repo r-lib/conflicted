@@ -22,13 +22,13 @@ disambiguate_infix <- function(name, pkgs) {
     if (from_save(sys.calls()))
       return(NULL)
 
-    bullets <- paste0("* conflict_prefer(\"", name, "\", \"", pkgs, "\")")
-    msg <- paste0(
-      "[conflicted] ", style_name("`", name, "`"), " found in ", length(pkgs), " packages.\n",
-      "Declare a preference with `conflict_prefer()`:\n",
-      paste0(bullets, collapse = "\n")
-    )
-    abort(msg)
+    prefer <- prefer_bullets(pkgs, name)
+
+    cli::cli_abort(c(
+      "{label_conflicted()} {.strong {name}} found in {length(pkgs)} packages.",
+      "Declare a preference with `conflict_prefer()`:",
+      prefer
+    ))
   }
 }
 
@@ -41,21 +41,33 @@ disambiguate_prefix <- function(name, pkgs) {
       return(NULL)
 
     bt_name <- backtick(name)
-    bullets_temp <- paste0("* ", style_name(pkgs, "::", bt_name))
-    bullets_pers <- paste0("* ", "conflict_prefer(\"", name, "\", \"", pkgs, "\")")
 
-    msg <- paste0(
-      "[conflicted] ", style_name("`", name, "`"), " found in ", length(pkgs), " packages.\n",
-      "Either pick the one you want with `::` \n",
-      paste0(bullets_temp, collapse = "\n"), "\n",
-      "Or declare a preference with `conflict_prefer()`\n",
-      paste0(bullets_pers, collapse = "\n")
-    )
-    abort(msg)
+    # bullets_temp <- paste0("* ", style_name(pkgs, "::", bt_name))
+    namespace <- map_chr(pkgs, function(pkg) {
+      style_object(pkg, name)
+    })
+    names(namespace) <- rep("*", length(namespace))
+    prefer <- prefer_bullets(pkgs, name)
+
+    cli::cli_abort(c(
+      "{label_conflicted()} {.strong {name}} found in {length(pkgs)} packages.",
+      "Either pick the one you want with `::`:",
+      namespace,
+      "Or declare a preference with `conflict_prefer()`:",
+      prefer
+    ))
   }
 }
 
 # Helpers -----------------------------------------------------------------
+
+prefer_bullets <- function(pkgs, name) {
+  prefer <- map_chr(pkgs, function(pkg) {
+  cli::format_inline("{.run [conflict_prefer(\"{name}\", \"{pkg}\")](conflicted::conflict_prefer(\"{name}\", \"{pkg}\"))}")
+})
+  names(prefer) <- rep("*", length(prefer))
+  prefer
+}
 
 is_infix_fun <- function(name) {
   base <- c(

@@ -1,5 +1,7 @@
 # conflicted (development version)
 
+* Conflict dismabiguation message now provides clickable preferences.
+
 # conflicted 1.1.0
 
 * New `conflicted_prefer_all()` and `conflicted_prefer_matching()` to

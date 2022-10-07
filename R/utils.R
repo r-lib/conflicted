@@ -45,6 +45,27 @@ unique_obj <- function(name, pkgs) {
   pkgs[!duplicated(objs)]
 }
 
+style_object <- function(pkg, name, winner = FALSE) {
+  if (is_infix_fun(name)) {
+    suffix <- ""
+  } else if (is_installed(pkg)) {
+    obj <- getExportedValue(pkg, name)
+    suffix <- if (is.function(obj)) "()" else ""
+  } else {
+    suffix <- "()"
+  }
+
+  paste0(
+    if (winner) cli::style_bold(cli::col_blue(pkg)) else cli::col_blue(pkg),
+    "::",
+    backtick(name), suffix
+  )
+}
+
+label_conflicted <- function() {
+  cli::col_grey("[conflicted]")
+}
+
 backtick <- function(x) {
   ifelse(x == make.names(x), x, paste0("`", x, "`"))
 }
