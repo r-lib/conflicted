@@ -6,9 +6,9 @@
       Error:
       ! [conflicted] x found in 3 packages.
       Either pick the one you want with `::`:
-      * a::x()
-      * b::x()
-      * c::x()
+      * a::x
+      * b::x
+      * c::x
       Or declare a preference with `conflict_prefer()`:
       * `conflict_prefer("x", "a")`
       * `conflict_prefer("x", "b")`
@@ -19,9 +19,9 @@
       Error:
       ! [conflicted] if found in 3 packages.
       Either pick the one you want with `::`:
-      * a::`if`()
-      * b::`if`()
-      * c::`if`()
+      * a::`if`
+      * b::`if`
+      * c::`if`
       Or declare a preference with `conflict_prefer()`:
       * `conflict_prefer("if", "a")`
       * `conflict_prefer("if", "b")`

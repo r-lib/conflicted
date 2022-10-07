@@ -42,7 +42,6 @@ disambiguate_prefix <- function(name, pkgs) {
 
     bt_name <- backtick(name)
 
-    # bullets_temp <- paste0("* ", style_name(pkgs, "::", bt_name))
     namespace <- map_chr(pkgs, function(pkg) {
       style_object(pkg, name)
     })

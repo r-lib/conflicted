@@ -3,12 +3,12 @@
     Code
       conflict_prefer("mean", "canoodle", c("noodle", "doodle"))
     Message
-      [conflicted] Will prefer canoodle::mean() over noodle::mean() and doodle::mean().
+      [conflicted] Will prefer canoodle::mean over noodle::mean and doodle::mean.
     Code
       conflict_prefer("mean", "canoodle", "boodle")
     Message
       [conflicted] Removing existing preference.
-      [conflicted] Will prefer canoodle::mean() over boodle::mean().
+      [conflicted] Will prefer canoodle::mean over boodle::mean.
     Code
       conflict_prefer("+", "canoodle")
     Message
@@ -20,7 +20,7 @@
       conflict_prefer_all("funmatch")
     Message
       [conflicted] Will prefer funmatch::mean over any other package.
-      [conflicted] Will prefer funmatch::pi() over any other package.
+      [conflicted] Will prefer funmatch::pi over any other package.
 
 ---
 
