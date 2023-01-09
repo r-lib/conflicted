@@ -1,6 +1,6 @@
 # conflicted (development version)
 
-* Conflict dismabiguation message now provides clickable preferences.
+* Conflict dismabiguation message now provides clickable preferences (#74).
 
 # conflicted 1.1.0
 
