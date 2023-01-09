@@ -26,7 +26,7 @@ disambiguate_infix <- function(name, pkgs) {
 
     cli::cli_abort(c(
       "{label_conflicted()} {.strong {name}} found in {length(pkgs)} packages.",
-      "Declare a preference with `conflict_prefer()`:",
+      "Declare a preference with {.code conflict_prefer()}:",
       prefer
     ))
   }
@@ -50,9 +50,9 @@ disambiguate_prefix <- function(name, pkgs) {
 
     cli::cli_abort(c(
       "{label_conflicted()} {.strong {name}} found in {length(pkgs)} packages.",
-      "Either pick the one you want with `::`:",
+      "Either pick the one you want with {.code ::}:",
       namespace,
-      "Or declare a preference with `conflict_prefer()`:",
+      "Or declare a preference with {.code conflict_prefer}:",
       prefer
     ))
   }

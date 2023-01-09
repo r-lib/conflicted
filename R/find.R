@@ -69,8 +69,8 @@ print.conflict_report <- function(x, ...) {
   }
 
   x <- x[order(names(x))]
-  fun <- map_chr(names(x), function(x) cli::format_inline("{.fn {x}}"))
-  pkgs <- map_chr(x, function(x) cli::format_inline("{.pkg {x}}"))
+  fun <- map_chr(names(x), function(x) sprintf("{.fn %s}", x))
+  pkgs <- map_chr(x, function(x) sprintf("{.pkg %s}", x))
   bullets <- paste0(fun, ": ", pkgs)
   names(bullets) <- rep("*", length(bullets))
 
