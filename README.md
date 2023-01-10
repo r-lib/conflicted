@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/r-lib/conflicted/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/conflicted/actions)
+[![R-CMD-check](https://github.com/r-lib/conflicted/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/conflicted/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/r-lib/conflicted/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/conflicted?branch=main)
 <!-- badges: end -->
@@ -39,7 +39,8 @@ library(conflicted)
 library(dplyr)
 
 filter(mtcars, cyl == 8)
-#> Error: [conflicted] `filter` found in 2 packages.
+#> Error:
+#> ! [conflicted] `filter` found in 2 packages.
 #> Either pick the one you want with `::` 
 #> * dplyr::filter
 #> * stats::filter
