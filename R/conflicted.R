@@ -12,3 +12,7 @@
 #' @keywords internal
 #' @import rlang
 "_PACKAGE"
+
+
+the <- new_environment()
+the$pause_registration <- FALSE

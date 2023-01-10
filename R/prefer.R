@@ -10,6 +10,9 @@
 #' `conflicted_prefer_matching()` to prefer functions that match a regular
 #' expression.
 #'
+#' If you are defining many preferences, use [conflicts_declare()] to
+#' improve performance.
+#'
 #' @section Best practices:
 #' I recommend placing calls to `conflict_prefer()` at the top of your
 #' script, immediately underneath the relevant `library()` call.

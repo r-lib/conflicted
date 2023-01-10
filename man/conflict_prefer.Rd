@@ -34,6 +34,9 @@ all comers).
 Use \code{conficted_prefer_all()} to prefer all functions in a package, or
 \code{conflicted_prefer_matching()} to prefer functions that match a regular
 expression.
+
+If you are defining many preferences, use \code{\link[=conflicts_declare]{conflicts_declare()}} to
+improve performance.
 }
 \section{Best practices}{
 
