@@ -1,8 +1,8 @@
-pandoc: 2.14.2
-pkgdown: 2.0.6
+pandoc: 2.19.2
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-10-06T22:05Z
+last_built: 2023-01-10T14:33Z
 urls:
   reference: https://conflicted.r-lib.org/reference
   article: https://conflicted.r-lib.org/articles
