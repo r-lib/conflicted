@@ -75,7 +75,7 @@ prefer_bullets <- function(pkgs, name) {
       name,
       pkg
     )
-})
+  })
   names(prefer) <- rep("*", length(prefer))
   prefer
 }
