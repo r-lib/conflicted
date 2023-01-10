@@ -39,6 +39,15 @@
 #' conflict_prefer_all("tidylog", "dtplyr")
 #' }
 conflict_prefer <- function(name, winner, losers = NULL, quiet = FALSE) {
+  conflict_preference_register(name, winner, losers = losers, quiet = quiet)
+
+  if (pkg_attached(winner))
+    conflicts_register()
+
+  invisible()
+}
+
+conflict_preference_register <- function(name, winner, losers = NULL, quiet = FALSE) {
   stopifnot(is.character(name), length(name) == 1)
   stopifnot(is.character(winner), length(winner) == 1)
   stopifnot(is.null(losers) || is.character(losers))
@@ -67,10 +76,6 @@ conflict_prefer <- function(name, winner, losers = NULL, quiet = FALSE) {
 
   env_bind(prefs, !!name := c(winner, losers))
 
-  if (pkg_attached(winner))
-    conflicts_register()
-
-  invisible()
 }
 
 #' @export
