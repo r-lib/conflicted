@@ -51,7 +51,7 @@ dplyr::filter(mtcars, am & cyl == 8)
 Or declare a session-wide preference:
 
 ```{r}
-conflict_prefer("filter", "dplyr")
+conflicts_prefer(dplyr::filter())
 filter(mtcars, am & cyl == 8)
 ```
 
@@ -59,7 +59,7 @@ I recommend declaring preferences directly underneath the corresponding library 
 
 ```{r, eval = FALSE}
 library(dplyr)
-conflict_prefer("filter", "dplyr")
+conflicts_prefer(dplyr::filter)
 ```
 
 You can ask conflicted to report any conflicts in the current session:

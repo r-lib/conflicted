@@ -61,8 +61,12 @@ disambiguate_prefix <- function(name, pkgs) {
 # Helpers -----------------------------------------------------------------
 
 prefer_bullets <- function(pkgs, name) {
+  if (make.names(name) != name) {
+    name <- backtick(name)
+  }
+
   prefer <- map_chr(pkgs, function(pkg) {
-  cli::format_inline("{.run [conflict_prefer(\"{name}\", \"{pkg}\")](conflicted::conflict_prefer(\"{name}\", \"{pkg}\"))}")
+    cli::format_inline("{.run [conflicts_prefer({pkg}::{name})](conflicted::conflict_prefer({pkg}::{name}))}")
 })
   names(prefer) <- rep("*", length(prefer))
   prefer
