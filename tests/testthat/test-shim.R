@@ -5,27 +5,28 @@ test_that("shimmed arguments match unshimmed", {
 })
 
 test_that("shims load package with conflicts silently", {
-  red <- function() {}
+  col_red <- function() {}
   shims_bind()
 
-  expect_message(library(crayon), NA)
-  detach("package:crayon")
+  expect_message(library(cli), NA)
+  detach("package:cli")
 
-  expect_message(require(crayon, quietly = TRUE), NA)
-  detach("package:crayon")
+  expect_message(require(cli, quietly = TRUE), NA)
+  detach("package:cli")
 })
 
 test_that("detaching package removes shims", {
-  skip_if_not("chr" %in% pkg_ls("crayon") && "chr" %in% pkg_ls("rlang"))
+  conflict <- "ns_env"
+  skip_if_not(conflict %in% pkg_ls("pkgload") && conflict %in% pkg_ls("rlang"))
   shims_bind()
 
-  library(crayon)
+  library(pkgload)
   library(rlang)
-  expect_true(exists("chr", ".conflicts", inherits = FALSE))
+  expect_true(exists(conflict, ".conflicts", inherits = FALSE))
 
-  detach("package:crayon")
+  detach("package:pkgload")
   detach("package:rlang")
-  expect_false(exists("chr", ".conflicts", inherits = FALSE))
+  expect_false(exists(conflict, ".conflicts", inherits = FALSE))
 })
 
 test_that("shimmed help returns same as unshimmed", {

@@ -1,13 +1,3 @@
-style_name <- function(...) {
-  x <- paste0(...)
-
-  if (!is_installed("crayon")) {
-    x
-  } else {
-    crayon::blue(x)
-  }
-}
-
 invert <- function(x) {
   if (length(x) == 0) return()
   stacked <- utils::stack(x)
@@ -40,11 +30,27 @@ map2 <- function(.x, .y, .f, ...) {
   mapply(.f, .x, .y, MoreArgs = list(...), SIMPLIFY = FALSE)
 }
 
+map_chr <- function(.x, .f, ...) {
+  vapply(.x, .f, ..., FUN.VALUE = character(1))
+}
+
 unique_obj <- function(name, pkgs) {
   objs <- lapply(pkgs, getExportedValue, name)
   names(objs) <- pkgs
 
   pkgs[!duplicated(objs)]
+}
+
+style_object <- function(pkg, name, winner = FALSE) {
+  paste0(
+    if (winner) cli::style_bold(cli::col_blue(pkg)) else cli::col_blue(pkg),
+    "::",
+    backtick(name)
+  )
+}
+
+label_conflicted <- function() {
+  cli::col_grey("[conflicted]")
 }
 
 backtick <- function(x) {

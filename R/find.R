@@ -61,26 +61,20 @@ new_conflict_report <- function(conflicts, n = length(conflicts)) {
 
 #' @export
 print.conflict_report <- function(x, ...) {
-  pkg_names <- function(pkgs) {
-    if (length(pkgs) == 1) {
-      paste0("[", style_name(pkgs), "]")
-    } else {
-      paste0(style_name(pkgs), collapse = ", ")
-    }
-  }
-
   n <- attr(x, "n")
-  cat_line(n, " conflict", if (n != 1) "s", if (n > 0) ":")
+  cli::cli_text("{n} conflict{?s}")
 
   if (length(x) == 0) {
     return(invisible(x))
   }
 
   x <- x[order(names(x))]
-  fun <- paste0("`", names(x), "`")
-  pkgs <-  vapply(x, pkg_names, character(1))
+  fun <- map_chr(names(x), function(x) sprintf("{.fn %s}", x))
+  pkgs <- map_chr(x, function(x) cli::format_inline("{.pkg {x}}"))
+  bullets <- paste0(fun, ": ", pkgs)
+  names(bullets) <- rep("*", length(bullets))
 
-  cat_line("* ", format(fun),  ": ", pkgs)
+  cli::cli_bullets(bullets)
   if (n > length(x)) {
     cat_line("...")
   }

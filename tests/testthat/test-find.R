@@ -1,3 +1,10 @@
+test_that("conflict_scout prints usefully", {
+  expect_snapshot({
+    conflict_scout("dplyr")
+    conflict_scout(c("rlang", "pkgload"))
+  })
+})
+
 test_that("primitive functions are never supersets", {
   pkgload::load_all(test_path("primitive"), quiet = TRUE)
   on.exit(pkgload::unload("primitive"))

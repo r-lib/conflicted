@@ -26,20 +26,34 @@ test_that("length n vector beats listed others", {
 })
 
 
-# en masse ----------------------------------------------------------------
+# messaging ----------------------------------------------------------------
+
+test_that("useful messages for specific preferences", {
+  withr::defer(prefs_reset())
+
+  expect_snapshot({
+    conflict_prefer("mean", "canoodle", c("noodle", "doodle"))
+    conflict_prefer("mean", "canoodle", "boodle")
+    conflict_prefer("+", "canoodle")
+  })
+})
 
 test_that("can register preference for multiple functions", {
   pkgload::load_all(test_path("funmatch"), quiet = TRUE)
-  on.exit({
+  withr::defer({
     pkgload::unload("funmatch")
     prefs_reset()
   })
 
-  conflict_prefer_all("funmatch", quiet = TRUE)
+  expect_snapshot({
+    conflict_prefer_all("funmatch")
+  })
   expect_setequal(prefs_ls(), c("mean", "pi"))
   prefs_reset()
 
-  conflict_prefer_matching("m", "funmatch", quiet = TRUE)
+  expect_snapshot({
+    conflict_prefer_matching("m", "funmatch")
+  })
   expect_setequal(prefs_ls(), "mean")
   prefs_reset()
 })
