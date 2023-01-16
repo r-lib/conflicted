@@ -75,6 +75,8 @@ conflict_preference_register <- function(name, winner, losers = NULL, quiet = FA
   }
 
   env_bind(prefs, !!name := c(winner, losers))
+
+  invisible()
 }
 
 

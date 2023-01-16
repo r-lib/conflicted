@@ -36,3 +36,30 @@
       * `` conflicts_prefer(b::`%in%`) ``
       * `` conflicts_prefer(c::`%in%`) ``
 
+# display namespace if not attached
+
+    Code
+      cnds$prefix
+    Output
+      <error/rlang_error>
+      Error:
+      ! [conflicted] x found in 3 packages.
+      Either pick the one you want with `::`:
+      * a::x
+      * b::x
+      * c::x
+      Or declare a preference with `conflicted::conflict_prefer()`:
+      * `conflicted::conflicts_prefer(a::x)`
+      * `conflicted::conflicts_prefer(b::x)`
+      * `conflicted::conflicts_prefer(c::x)`
+    Code
+      cnds$infix
+    Output
+      <error/rlang_error>
+      Error:
+      ! [conflicted] %in% found in 3 packages.
+      Declare a preference with `conflicted::conflict_prefer()`:
+      * `` conflicted::conflicts_prefer(a::`%in%`) ``
+      * `` conflicted::conflicts_prefer(b::`%in%`) ``
+      * `` conflicted::conflicts_prefer(c::`%in%`) ``
+

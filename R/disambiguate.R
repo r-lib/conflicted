@@ -26,7 +26,7 @@ disambiguate_infix <- function(name, pkgs) {
 
     cli::cli_abort(c(
       "{label_conflicted()} {.strong {name}} found in {length(pkgs)} packages.",
-      "Declare a preference with {.fn conflict_prefer}:",
+      "Declare a preference with {.fn {add_ns('conflict_prefer')}}:",
       prefer
     ))
   }
@@ -52,10 +52,14 @@ disambiguate_prefix <- function(name, pkgs) {
       "{label_conflicted()} {.strong {name}} found in {length(pkgs)} packages.",
       "Either pick the one you want with {.code ::}:",
       namespace,
-      "Or declare a preference with {.fn conflict_prefer}:",
+      "Or declare a preference with {.fn {add_ns('conflict_prefer')}}:",
       prefer
     ))
   }
+}
+
+add_ns <- function(fun = "") {
+  paste0(if (!pkg_attached("conflicted")) "conflicted::", fun)
 }
 
 # Helpers -----------------------------------------------------------------
@@ -65,9 +69,18 @@ prefer_bullets <- function(pkgs, name) {
     name <- backtick(name)
   }
 
+  ns <- add_ns()
   prefer <- map_chr(pkgs, function(pkg) {
-    cli::format_inline("{.run [conflicts_prefer({pkg}::{name})](conflicted::conflicts_prefer({pkg}::{name}))}")
-})
+    sprintf(
+      "{.run [%sconflicts_prefer(%s::%s)](conflicted::conflicts_prefer(%s::%s))}",
+      ns,
+      pkg,
+      name,
+      pkg,
+      name
+    )
+  })
+
   names(prefer) <- rep("*", length(prefer))
   prefer
 }

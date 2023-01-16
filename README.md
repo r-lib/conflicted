@@ -32,7 +32,7 @@ devtools::install_github("r-lib/conflicted")
 
 ## Usage
 
-To use conflicted, all you need to do is load it:
+To use conflicted, all you need to do is attach it:
 
 ``` r
 library(conflicted)
