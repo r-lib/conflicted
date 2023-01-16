@@ -1,7 +1,15 @@
 #' Declare many preferences at once
 #'
-#' This is a wrapper around [conflict_prefer()] that makes it easier to
-#' declare many preferences at once with a convenient syntax.
+#' @description
+#' `conflicts_prefer()` allows you to declare "winners" of conflicts,
+#' declaring one or many winners at once.
+#'
+#' See [conflict_prefer()] for more more precise control.
+#'
+#' @section Best practices:
+#' I recommend placing a single call to `conflicts_prefer()` at the top of
+#' your script, immediately after loading all needed packages with calls to
+#' `library()`.
 #'
 #' @export
 #' @param ... Functions to prefer in form `pkg::fun` or `pkg::fun()`.

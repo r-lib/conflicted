@@ -4,15 +4,12 @@
 #' `conflict_prefer()` allows you to declare "winners" of conflicts.
 #' You can either declare a specific pairing (i.e. `dplyr::filter()` beats
 #' `base::filter()`), or an overall winner (i.e. `dplyr::filter()` beats
-#' all comers).
+#' all comers). As conflicted 1.2.0, in most case you should use
+#' [conflicts_prefer()] instead as it's both faster and easier to use.
 #'
 #' Use `conficted_prefer_all()` to prefer all functions in a package, or
 #' `conflicted_prefer_matching()` to prefer functions that match a regular
 #' expression.
-#'
-#' @section Best practices:
-#' I recommend placing calls to `conflict_prefer()` at the top of your
-#' script, immediately underneath the relevant `library()` call.
 #'
 #' @param name Name of function.
 #' @param winner Name of package that should win the conflict.

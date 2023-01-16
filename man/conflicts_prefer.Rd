@@ -12,9 +12,18 @@ conflicts_prefer(..., .quiet = FALSE)
 \item{.quiet}{If \code{TRUE}, all output will be suppressed}
 }
 \description{
-This is a wrapper around \code{\link[=conflict_prefer]{conflict_prefer()}} that makes it easier to
-declare many preferences at once with a convenient syntax.
+\code{conflicts_prefer()} allows you to declare "winners" of conflicts,
+declaring one or many winners at once.
+
+See \code{\link[=conflict_prefer]{conflict_prefer()}} for more more precise control.
 }
+\section{Best practices}{
+
+I recommend placing a single call to \code{conflicts_prefer()} at the top of
+your script, immediately after loading all needed packages with calls to
+\code{library()}.
+}
+
 \examples{
 conflicts_prefer(
   dplyr::filter(),
