@@ -66,7 +66,7 @@ prefer_bullets <- function(pkgs, name) {
   }
 
   prefer <- map_chr(pkgs, function(pkg) {
-    cli::format_inline("{.run [conflicts_prefer({pkg}::{name})](conflicted::conflict_prefer({pkg}::{name}))}")
+    cli::format_inline("{.run [conflicts_prefer({pkg}::{name})](conflicted::conflicts_prefer({pkg}::{name}))}")
 })
   names(prefer) <- rep("*", length(prefer))
   prefer
