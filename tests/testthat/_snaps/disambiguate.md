@@ -10,9 +10,9 @@
       * b::x
       * c::x
       Or declare a preference with `conflict_prefer()`:
-      * `conflict_prefer("x", "a")`
-      * `conflict_prefer("x", "b")`
-      * `conflict_prefer("x", "c")`
+      * `conflicts_prefer(a::x)`
+      * `conflicts_prefer(b::x)`
+      * `conflicts_prefer(c::x)`
     Code
       disambiguate_prefix("if", c("a", "b", "c"))()
     Condition
@@ -23,18 +23,18 @@
       * b::`if`
       * c::`if`
       Or declare a preference with `conflict_prefer()`:
-      * `conflict_prefer("if", "a")`
-      * `conflict_prefer("if", "b")`
-      * `conflict_prefer("if", "c")`
+      * `` conflicts_prefer(a::`if`) ``
+      * `` conflicts_prefer(b::`if`) ``
+      * `` conflicts_prefer(c::`if`) ``
     Code
       disambiguate_infix("%in%", c("a", "b", "c"))()
     Condition
       Error:
       ! [conflicted] %in% found in 3 packages.
       Declare a preference with `conflict_prefer()`:
-      * `conflict_prefer("%in%", "a")`
-      * `conflict_prefer("%in%", "b")`
-      * `conflict_prefer("%in%", "c")`
+      * `` conflicts_prefer(a::`%in%`) ``
+      * `` conflicts_prefer(b::`%in%`) ``
+      * `` conflicts_prefer(c::`%in%`) ``
 
 # display namespace if not attached
 
@@ -49,9 +49,9 @@
       * b::x
       * c::x
       Or declare a preference with `conflicted::conflict_prefer()`:
-      * `conflicted::conflict_prefer("x", "a")`
-      * `conflicted::conflict_prefer("x", "b")`
-      * `conflicted::conflict_prefer("x", "c")`
+      * `conflicted::conflicts_prefer(a::x)`
+      * `conflicted::conflicts_prefer(b::x)`
+      * `conflicted::conflicts_prefer(c::x)`
     Code
       cnds$infix
     Output
@@ -59,7 +59,7 @@
       Error:
       ! [conflicted] %in% found in 3 packages.
       Declare a preference with `conflicted::conflict_prefer()`:
-      * `conflicted::conflict_prefer("%in%", "a")`
-      * `conflicted::conflict_prefer("%in%", "b")`
-      * `conflicted::conflict_prefer("%in%", "c")`
+      * `` conflicted::conflicts_prefer(a::`%in%`) ``
+      * `` conflicted::conflicts_prefer(b::`%in%`) ``
+      * `` conflicted::conflicts_prefer(c::`%in%`) ``
 

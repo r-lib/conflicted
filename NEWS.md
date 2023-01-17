@@ -1,5 +1,8 @@
 # conflicted (development version)
 
+* New `conflicts_prefer()` to easily declare multiple preferences at once:
+  `conflicts_prefer(dplyr::filter, lubridate::week, ...)` (#82).
+
 * Conflict dismabiguation message now provides clickable preferences (#74).
 
 # conflicted 1.1.0

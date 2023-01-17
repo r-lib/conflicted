@@ -65,17 +65,22 @@ add_ns <- function(fun = "") {
 # Helpers -----------------------------------------------------------------
 
 prefer_bullets <- function(pkgs, name) {
+  if (make.names(name) != name) {
+    name <- backtick(name)
+  }
+
   ns <- add_ns()
   prefer <- map_chr(pkgs, function(pkg) {
     sprintf(
-      "{.run [%sconflict_prefer(\"%s\", \"%s\")](conflicted::conflict_prefer(\"%s\", \"%s\"))}",
+      "{.run [%sconflicts_prefer(%s::%s)](conflicted::conflicts_prefer(%s::%s))}",
       ns,
-      name,
       pkg,
       name,
-      pkg
+      pkg,
+      name
     )
   })
+
   names(prefer) <- rep("*", length(prefer))
   prefer
 }
