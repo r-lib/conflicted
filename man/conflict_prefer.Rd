@@ -29,7 +29,7 @@ package.}
 \code{conflict_prefer()} allows you to declare "winners" of conflicts.
 You can either declare a specific pairing (i.e. \code{dplyr::filter()} beats
 \code{base::filter()}), or an overall winner (i.e. \code{dplyr::filter()} beats
-all comers). As conflicted 1.2.0, in most case you should use
+all comers). As of conflicted 1.2.0, in most case you should use
 \code{\link[=conflicts_prefer]{conflicts_prefer()}} instead as it's both faster and easier to use.
 
 Use \code{conficted_prefer_all()} to prefer all functions in a package, or

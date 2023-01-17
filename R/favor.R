@@ -4,7 +4,7 @@
 #' `conflicts_prefer()` allows you to declare "winners" of conflicts,
 #' declaring one or many winners at once.
 #'
-#' See [conflict_prefer()] for more more precise control.
+#' See [conflict_prefer()] for more precise control.
 #'
 #' @section Best practices:
 #' I recommend placing a single call to `conflicts_prefer()` at the top of
@@ -19,6 +19,12 @@
 #'   dplyr::filter(),
 #'   dplyr::lag(),
 #' )
+#'
+#' # or
+#' conflicts_prefer(
+#'   dplyr::filter,
+#'   dplyr::lag,
+#' )
 conflicts_prefer <- function(..., .quiet = FALSE) {
   calls <- exprs(...)
   # accept pkg::fun() or pkg::fun
@@ -27,7 +33,7 @@ conflicts_prefer <- function(..., .quiet = FALSE) {
   is_ok <- vapply(calls, is_ns_call, logical(1))
   if (any(!is_ok)) {
     cli::cli_abort(
-      "All arguments must be in form {.code pkg::fun} or {.fn pkg::fun}"
+      "All arguments must be in form {.code pkg::fun} or {.fn pkg::fun}."
     )
   }
 

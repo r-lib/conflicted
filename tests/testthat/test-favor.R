@@ -8,3 +8,11 @@ test_that("trailing () is optional", {
     )
   })
 })
+
+test_that("errors if invalid form", {
+  expect_snapshot(error = TRUE, {
+    conflicts_prefer(1)
+    conflicts_prefer(foo())
+    conflicts_prefer(dplyr::filter(a = 1))
+  })
+})

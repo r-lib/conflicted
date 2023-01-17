@@ -9,7 +9,7 @@
       * a::x
       * b::x
       * c::x
-      Or declare a preference with `conflict_prefer()`:
+      Or declare a preference with `conflicts_prefer()`:
       * `conflicts_prefer(a::x)`
       * `conflicts_prefer(b::x)`
       * `conflicts_prefer(c::x)`
@@ -22,7 +22,7 @@
       * a::`if`
       * b::`if`
       * c::`if`
-      Or declare a preference with `conflict_prefer()`:
+      Or declare a preference with `conflicts_prefer()`:
       * `` conflicts_prefer(a::`if`) ``
       * `` conflicts_prefer(b::`if`) ``
       * `` conflicts_prefer(c::`if`) ``
@@ -31,7 +31,7 @@
     Condition
       Error:
       ! [conflicted] %in% found in 3 packages.
-      Declare a preference with `conflict_prefer()`:
+      Declare a preference with `conflicts_prefer()`:
       * `` conflicts_prefer(a::`%in%`) ``
       * `` conflicts_prefer(b::`%in%`) ``
       * `` conflicts_prefer(c::`%in%`) ``
@@ -48,7 +48,7 @@
       * a::x
       * b::x
       * c::x
-      Or declare a preference with `conflicted::conflict_prefer()`:
+      Or declare a preference with `conflicted::conflicts_prefer()`:
       * `conflicted::conflicts_prefer(a::x)`
       * `conflicted::conflicts_prefer(b::x)`
       * `conflicted::conflicts_prefer(c::x)`
@@ -58,7 +58,7 @@
       <error/rlang_error>
       Error:
       ! [conflicted] %in% found in 3 packages.
-      Declare a preference with `conflicted::conflict_prefer()`:
+      Declare a preference with `conflicted::conflicts_prefer()`:
       * `` conflicted::conflicts_prefer(a::`%in%`) ``
       * `` conflicted::conflicts_prefer(b::`%in%`) ``
       * `` conflicted::conflicts_prefer(c::`%in%`) ``

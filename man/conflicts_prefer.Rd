@@ -15,7 +15,7 @@ conflicts_prefer(..., .quiet = FALSE)
 \code{conflicts_prefer()} allows you to declare "winners" of conflicts,
 declaring one or many winners at once.
 
-See \code{\link[=conflict_prefer]{conflict_prefer()}} for more more precise control.
+See \code{\link[=conflict_prefer]{conflict_prefer()}} for more precise control.
 }
 \section{Best practices}{
 
@@ -28,5 +28,11 @@ your script, immediately after loading all needed packages with calls to
 conflicts_prefer(
   dplyr::filter(),
   dplyr::lag(),
+)
+
+# or
+conflicts_prefer(
+  dplyr::filter,
+  dplyr::lag,
 )
 }

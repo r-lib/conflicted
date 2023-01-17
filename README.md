@@ -32,7 +32,7 @@ devtools::install_github("r-lib/conflicted")
 
 ## Usage
 
-To use conflicted, all you need to do is attach it:
+To use conflicted, all you need to do is load it:
 
 ``` r
 library(conflicted)
@@ -44,7 +44,7 @@ filter(mtcars, cyl == 8)
 #> Either pick the one you want with `::`:
 #> • dplyr::filter
 #> • stats::filter
-#> Or declare a preference with `conflict_prefer()`:
+#> Or declare a preference with `conflicts_prefer()`:
 #> • `conflicts_prefer(dplyr::filter)`
 #> • `conflicts_prefer(stats::filter)`
 ```
