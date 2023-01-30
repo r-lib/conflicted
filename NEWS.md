@@ -1,5 +1,8 @@
 # conflicted (development version)
 
+* conflicted now understands `include.only` and `exclude` arguments that 
+  you might have specified in `library()` (#84).
+
 * New `conflicts_prefer()` to easily declare multiple preferences at once:
   `conflicts_prefer(dplyr::filter, lubridate::week, ...)` (#82).
 

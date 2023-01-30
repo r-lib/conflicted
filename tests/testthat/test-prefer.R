@@ -39,7 +39,7 @@ test_that("useful messages for specific preferences", {
 })
 
 test_that("can register preference for multiple functions", {
-  pkgload::load_all(test_path("funmatch"), quiet = TRUE)
+  pkgload::load_all(test_path("funmatch"), quiet = TRUE, export_all = FALSE)
   withr::defer({
     pkgload::unload("funmatch")
     prefs_reset()
