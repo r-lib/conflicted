@@ -32,7 +32,7 @@ You can either declare a specific pairing (i.e. \code{dplyr::filter()} beats
 all comers). As of conflicted 1.2.0, in most case you should use
 \code{\link[=conflicts_prefer]{conflicts_prefer()}} instead as it's both faster and easier to use.
 
-Use \code{conficted_prefer_all()} to prefer all functions in a package, or
+Use \code{conflicted_prefer_all()} to prefer all functions in a package, or
 \code{conflicted_prefer_matching()} to prefer functions that match a regular
 expression.
 }
