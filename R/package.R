@@ -15,7 +15,7 @@ pkg_attached <- function(x) {
 # `exclude` and `include.only` arguments to library(). Otherwise fall back
 # to a NAMESPACE based approach
 pkg_ls <- function(pkg) {
-  if (is_attached(pkg_env_name(pkg))) {
+  if (pkg_attached(pkg)) {
     ls(pkg_env_name(pkg))
   } else {
     ns <- getNamespace(pkg)
