@@ -1,3 +1,3 @@
-mean <- 10
+median <- 10
 
 pi <- function() 3

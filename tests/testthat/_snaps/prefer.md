@@ -19,13 +19,20 @@
     Code
       conflict_prefer_all("funmatch")
     Message
-      [conflicted] Will prefer funmatch::mean over any other package.
+      [conflicted] Will prefer funmatch::median over any other package.
       [conflicted] Will prefer funmatch::pi over any other package.
+
+---
+
+    Code
+      conflict_prefer_all("funmatch", "base")
+    Message
+      [conflicted] Will prefer funmatch::pi over base::pi.
 
 ---
 
     Code
       conflict_prefer_matching("m", "funmatch")
     Message
-      [conflicted] Will prefer funmatch::mean over any other package.
+      [conflicted] Will prefer funmatch::median over any other package.
 

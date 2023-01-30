@@ -1,6 +1,8 @@
 # conflicted (development version)
 
 * `conflict_prefer_all()` and `conflict_prefer_matching()` are now much faster.
+  And when `losers` is supplied, they only register the minimal necessary
+  number of conflicts.
 
 * New `conflicts_prefer()` to easily declare multiple preferences at once:
   `conflicts_prefer(dplyr::filter, lubridate::week, ...)` (#82).

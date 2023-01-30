@@ -79,6 +79,8 @@ conflict_preference_register <- function(name, winner, losers = NULL, quiet = FA
 #' @rdname conflict_prefer
 conflict_prefer_matching <- function(pattern, winner, losers = NULL, quiet = FALSE) {
   names <- grep(pattern, sort(pkg_ls(winner)), value = TRUE)
+  names <- losers_intersect(names, losers)
+
   for (name in names) {
     conflict_preference_register(name, winner, losers = losers, quiet = quiet)
   }
@@ -90,10 +92,21 @@ conflict_prefer_matching <- function(pattern, winner, losers = NULL, quiet = FAL
 #' @rdname conflict_prefer
 conflict_prefer_all <- function(winner, losers = NULL, quiet = FALSE) {
   names <- sort(pkg_ls(winner))
+  names <- losers_intersect(names, losers)
+
   for (name in names) {
     conflict_preference_register(name, winner, losers = losers, quiet = quiet)
   }
   conflicts_register_if_needed(winner)
+}
+
+losers_intersect <- function(names, losers) {
+  if (is.null(losers)) {
+    names
+  } else {
+    loser_names <- unlist(lapply(losers, pkg_ls))
+    names <- intersect(names, loser_names)
+  }
 }
 
 prefs_resolve <- function(fun, conflicts) {
