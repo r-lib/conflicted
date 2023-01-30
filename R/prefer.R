@@ -7,7 +7,7 @@
 #' all comers). As of conflicted 1.2.0, in most case you should use
 #' [conflicts_prefer()] instead as it's both faster and easier to use.
 #'
-#' Use `conficted_prefer_all()` to prefer all functions in a package, or
+#' Use `conflicted_prefer_all()` to prefer all functions in a package, or
 #' `conflicted_prefer_matching()` to prefer functions that match a regular
 #' expression.
 #'
@@ -37,11 +37,7 @@
 #' }
 conflict_prefer <- function(name, winner, losers = NULL, quiet = FALSE) {
   conflict_preference_register(name, winner, losers = losers, quiet = quiet)
-
-  if (pkg_attached(winner))
-    conflicts_register()
-
-  invisible()
+  conflicts_register_if_needed(winner)
 }
 
 conflict_preference_register <- function(name, winner, losers = NULL, quiet = FALSE) {
@@ -83,17 +79,33 @@ conflict_preference_register <- function(name, winner, losers = NULL, quiet = FA
 #' @rdname conflict_prefer
 conflict_prefer_matching <- function(pattern, winner, losers = NULL, quiet = FALSE) {
   names <- grep(pattern, sort(pkg_ls(winner)), value = TRUE)
+  names <- losers_intersect(names, losers)
+
   for (name in names) {
-    conflict_prefer(name, winner, losers = losers, quiet = quiet)
+    conflict_preference_register(name, winner, losers = losers, quiet = quiet)
   }
+
+  conflicts_register_if_needed(winner)
 }
 
 #' @export
 #' @rdname conflict_prefer
 conflict_prefer_all <- function(winner, losers = NULL, quiet = FALSE) {
   names <- sort(pkg_ls(winner))
+  names <- losers_intersect(names, losers)
+
   for (name in names) {
-    conflict_prefer(name, winner, losers = losers, quiet = quiet)
+    conflict_preference_register(name, winner, losers = losers, quiet = quiet)
+  }
+  conflicts_register_if_needed(winner)
+}
+
+losers_intersect <- function(names, losers) {
+  if (is.null(losers)) {
+    names
+  } else {
+    loser_names <- unlist(lapply(losers, pkg_ls))
+    names <- intersect(names, loser_names)
   }
 }
 

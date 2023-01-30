@@ -31,7 +31,7 @@ test_that("functions aren't conflicts with non-functions", {
   on.exit(pkgload::unload("funmatch"))
 
   expect_equal(function_lookup("pi", c("base", "funmatch")), character())
-  expect_equal(function_lookup("mean", c("base", "funmatch")), character())
+  expect_equal(function_lookup("median", c("stats", "funmatch")), character())
 })
 
 test_that("can find conflicts with data", {
