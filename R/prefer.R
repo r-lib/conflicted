@@ -37,11 +37,7 @@
 #' }
 conflict_prefer <- function(name, winner, losers = NULL, quiet = FALSE) {
   conflict_preference_register(name, winner, losers = losers, quiet = quiet)
-
-  if (pkg_attached(winner))
-    conflicts_register()
-
-  invisible()
+  conflicts_register_if_needed(winner)
 }
 
 conflict_preference_register <- function(name, winner, losers = NULL, quiet = FALSE) {
@@ -84,8 +80,10 @@ conflict_preference_register <- function(name, winner, losers = NULL, quiet = FA
 conflict_prefer_matching <- function(pattern, winner, losers = NULL, quiet = FALSE) {
   names <- grep(pattern, sort(pkg_ls(winner)), value = TRUE)
   for (name in names) {
-    conflict_prefer(name, winner, losers = losers, quiet = quiet)
+    conflict_preference_register(name, winner, losers = losers, quiet = quiet)
   }
+
+  conflicts_register_if_needed(winner)
 }
 
 #' @export
@@ -93,8 +91,9 @@ conflict_prefer_matching <- function(pattern, winner, losers = NULL, quiet = FAL
 conflict_prefer_all <- function(winner, losers = NULL, quiet = FALSE) {
   names <- sort(pkg_ls(winner))
   for (name in names) {
-    conflict_prefer(name, winner, losers = losers, quiet = quiet)
+    conflict_preference_register(name, winner, losers = losers, quiet = quiet)
   }
+  conflicts_register_if_needed(winner)
 }
 
 prefs_resolve <- function(fun, conflicts) {
