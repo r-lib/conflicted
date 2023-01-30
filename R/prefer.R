@@ -7,7 +7,7 @@
 #' all comers). As of conflicted 1.2.0, in most case you should use
 #' [conflicts_prefer()] instead as it's both faster and easier to use.
 #'
-#' Use `conficted_prefer_all()` to prefer all functions in a package, or
+#' Use `conflicted_prefer_all()` to prefer all functions in a package, or
 #' `conflicted_prefer_matching()` to prefer functions that match a regular
 #' expression.
 #'
