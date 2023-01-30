@@ -1,5 +1,7 @@
 test_that("pkg_ls() respects exclude", {
-  library(callr,)
+  skip_if_not(getRversion() >= "3.6")
+
+  library(callr)
   expect_true("r" %in% pkg_ls("callr"))
   pkgload::unload("callr")
 
