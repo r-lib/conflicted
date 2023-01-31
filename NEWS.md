@@ -1,4 +1,4 @@
-# conflicted (development version)
+# conflicted 1.2.0
 
 * New `conflicts_prefer()` to easily declare multiple preferences at once:
   `conflicts_prefer(dplyr::filter, lubridate::week, ...)` (#82).
