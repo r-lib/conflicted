@@ -1,5 +1,8 @@
 # conflicted (development version)
 
+* conflicted now understands `include.only` and `exclude` arguments that 
+  you might have specified in `library()` (#84).
+
 * `conflict_prefer_all()` and `conflict_prefer_matching()` are now much faster.
   And when `losers` is supplied, they only register the minimal necessary
   number of conflicts.

@@ -11,13 +11,20 @@ pkg_attached <- function(x) {
   paste0("package:", x) %in% search()
 }
 
+# Use attached package if possible, because that is affected by the
+# `exclude` and `include.only` arguments to library(). Otherwise fall back
+# to a NAMESPACE based approach
 pkg_ls <- function(pkg) {
-  ns <- getNamespace(pkg)
-  exports <- getNamespaceExports(ns)
+  if (pkg_attached(pkg)) {
+    ls(pkg_env_name(pkg))
+  } else {
+    ns <- getNamespace(pkg)
+    exports <- getNamespaceExports(ns)
 
-  names <- intersect(exports, env_names(ns))
-  int <- grepl("^.__", names)
-  c(names[!int], pkg_data(pkg))
+    names <- intersect(exports, env_names(ns))
+    int <- grepl("^.__", names)
+    c(names[!int], pkg_data(pkg))
+  }
 }
 
 pkg_data <- function(x) {
