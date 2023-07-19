@@ -20,6 +20,7 @@ test_that("superset", {
   # by definition/design, there are no real conflicts in base functions
   expect_equal(superset_principle("cbind", c("base", "methods")), character())
 
+  skip_if_not_installed("Matrix")
   # Automatically created S4 generics obey the superset principle
   expect_equal(superset_principle("print", c("base", "Matrix")), character())
   # Even if the arguments have been customised
