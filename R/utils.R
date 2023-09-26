@@ -38,7 +38,20 @@ unique_obj <- function(name, pkgs) {
   objs <- lapply(pkgs, getExportedValue, name)
   names(objs) <- pkgs
 
-  pkgs[!duplicated(objs)]
+  env_names <- map_chr(objs, function(obj) {
+    tryCatch(
+      getNamespaceName(environment(obj)),
+      error = function(e) ""
+    )
+  })
+
+  canonical_names <- unique(env_names[env_names != ""])
+  canonical_pos <- set_names(match(canonical_names, env_names), canonical_names)
+
+  canonical_objs <- c(objs[canonical_pos], objs)
+  canonical_pkgs <- c(canonical_names, pkgs)
+
+  canonical_pkgs[!duplicated(canonical_objs)]
 }
 
 style_object <- function(pkg, name, winner = FALSE) {
