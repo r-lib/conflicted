@@ -12,9 +12,8 @@ the default, will report conflicts for all loaded packages}
 }
 \value{
 A named list of character vectors. The names are functions and
-the values are the packages where they appear. If there is only a single
-package listed, it means that an automated disambiguation has selected
-that function.
+the values are the packages where they appear. Disambiguated functions
+are removed from that list.
 
 A user friendly print method displays the result as bulleted list.
 }

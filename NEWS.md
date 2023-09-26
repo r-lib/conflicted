@@ -1,5 +1,8 @@
 # conflicted (development version)
 
+* `conflict_scout()` no longer returns functions whose conflicts have been
+  resolved manually or automatically (#95).
+
 # conflicted 1.2.0
 
 * New `conflicts_prefer()` to easily declare multiple preferences at once:
