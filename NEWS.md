@@ -1,5 +1,8 @@
 # conflicted (development version)
 
+* `conflict_scout()` refers to the package where the function was defined,
+  for reexported functions (#93).
+
 * `conflict_scout()` no longer returns functions whose conflicts have been
   resolved manually or automatically (#95).
 

@@ -22,6 +22,11 @@ A user friendly print method displays the result as bulleted list.
 call it directly yourself if you want to see all conflicts before hitting
 them in practice.
 }
+\details{
+For a reexported function, this function will report the package where the
+function has been defined. This means that the results may contain packages
+that are not explicitly attached.
+}
 \examples{
 conflict_scout()
 }

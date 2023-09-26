@@ -3,6 +3,10 @@
 #' `conflict_scout()` is the workhorse behind the conflicted package. You can
 #' call it directly yourself if you want to see all conflicts before hitting
 #' them in practice.
+#'
+#' For a reexported function, this function will report the package where the
+#' function has been defined. This means that the results may contain packages
+#' that are not explicitly attached.
 #
 #' @param pkgs Set of packages for which to report conflicts. If `NULL`,
 #'   the default, will report conflicts for all loaded packages
