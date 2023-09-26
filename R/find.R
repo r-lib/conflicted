@@ -7,9 +7,8 @@
 #' @param pkgs Set of packages for which to report conflicts. If `NULL`,
 #'   the default, will report conflicts for all loaded packages
 #' @return A named list of character vectors. The names are functions and
-#'   the values are the packages where they appear. If there is only a single
-#'   package listed, it means that an automated disambiguation has selected
-#'   that function.
+#'   the values are the packages where they appear. Disambiguated functions
+#'   are removed from that list.
 #'
 #'   A user friendly print method displays the result as bulleted list.
 #' @export
@@ -45,7 +44,8 @@ conflict_scout <- function(pkgs = NULL) {
     conflicts[[fun]] <- prefs_resolve(fun, conflicts[[fun]])
   }
 
-  conflicts <- compact(conflicts)
+  # remove all non-conflicts from the list
+  conflicts <- conflicts[lengths(conflicts) > 1]
 
   new_conflict_report(conflicts)
 }
