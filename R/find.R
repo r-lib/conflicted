@@ -45,7 +45,7 @@ conflict_scout <- function(pkgs = NULL) {
     conflicts[[fun]] <- prefs_resolve(fun, conflicts[[fun]])
   }
 
-  conflicts <- compact(conflicts)
+  conflicts <- conflicts[lengths(conflicts) > 1]
 
   new_conflict_report(conflicts)
 }

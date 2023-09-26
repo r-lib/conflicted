@@ -11,3 +11,19 @@
       * `ns_env()`: rlang and pkgload
       * `pkg_env()`: rlang and pkgload
 
+# preferences are obeyed
+
+    Code
+      conflict_scout(c("rlang", "prefs"))
+    Message
+      1 conflict
+      * `set_names()`: rlang and prefs
+    Code
+      conflicts_prefer(rlang::set_names())
+    Message
+      [conflicted] Will prefer rlang::set_names over any other package.
+    Code
+      conflict_scout(c("rlang", "prefs"))
+    Message
+      0 conflicts
+

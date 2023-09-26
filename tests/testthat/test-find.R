@@ -42,6 +42,19 @@ test_that("can find conflicts with data", {
   expect_named(conflict_scout(c("datasets", "data")), "mtcars")
 })
 
+test_that("preferences are obeyed", {
+  pkgload::load_all(test_path("prefs"), quiet = TRUE)
+  withr::defer(pkgload::unload("prefs"))
+
+  on.exit(prefs_reset(), add = TRUE)
+
+  expect_snapshot({
+    conflict_scout(c("rlang", "prefs"))
+    conflicts_prefer(rlang::set_names())
+    conflict_scout(c("rlang", "prefs"))
+  })
+})
+
 # moved functions ----------------------------------------------------
 
 test_that(".Deprecated call contains function name", {
