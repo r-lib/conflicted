@@ -27,3 +27,11 @@
     Message
       0 conflicts
 
+# using canonical reference
+
+    Code
+      conflict_scout(c("testthat", "dplyr", "pipe"))
+    Message
+      1 conflict
+      * `%>%()`: magrittr and pipe
+
