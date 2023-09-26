@@ -17,6 +17,7 @@
 #' conflict_scout()
 conflict_scout <- function(pkgs = NULL) {
   pkgs <- pkgs %||% pkgs_attached()
+  pkgs <- topo_sort(pkgs)
   objs <- lapply(pkgs, pkg_ls)
   names(objs) <- pkgs
 
