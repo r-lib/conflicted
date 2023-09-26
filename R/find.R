@@ -20,11 +20,11 @@ conflict_scout <- function(pkgs = NULL) {
   names(objs) <- pkgs
 
   index <- invert(objs)
-  potential <- Filter(function(x) length(x) > 1, index)
+  potential <- index[lengths(index) > 1]
 
   # Only consider it a conflict if the objects are actually different
   unique <- Map(unique_obj, names(potential), potential)
-  conflicts <- Filter(function(x) length(x) > 1, unique)
+  conflicts <- unique[lengths(unique) > 1]
 
   # superset principle: ignore single conflict with base packages
   # unless attr(f, "conflicted_superset") is FALSE
