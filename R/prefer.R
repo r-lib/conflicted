@@ -91,7 +91,13 @@ conflict_prefer_matching <- function(pattern, winner, losers = NULL, quiet = FAL
 #' @export
 #' @rdname conflict_prefer
 conflict_prefer_all <- function(winner, losers = NULL, quiet = FALSE) {
-  names <- sort(pkg_ls(winner))
+  winner_names <- sort(pkg_ls(winner))
+  if (is.null(losers)) {
+    names <- winner_names
+  } else {
+    conflicts <- conflict_scout(c(winner, losers))
+    names <- intersect(winner_names, names(conflicts))
+  }
   names <- losers_intersect(names, losers)
 
   for (name in names) {
