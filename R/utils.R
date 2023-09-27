@@ -40,20 +40,26 @@ unique_obj <- function(name, pkgs) {
 
   # Finding the namespace where a function is really defined
   env_names <- map_chr(objs, function(obj) {
-    tryCatch(
+    canonical_obj <- tryCatch(
       {
         canonical_pkg <- getNamespaceName(environment(obj))
         # Double-check that this is actually the correct object,
         # e.g., devtools does interesting things here
         canonical_obj <- getExportedValue(canonical_pkg, name)
-        if (identical(canonical_obj, obj)) {
-          canonical_pkg
-        } else {
-          ""
-        }
+        set_names(list(canonical_obj), canonical_pkg)
       },
-      error = function(e) ""
+      error = function(e) NULL
     )
+
+    if (is.null(canonical_obj)) {
+      return("")
+    }
+
+    if (identical(unname(canonical_obj)[[1]], obj)) {
+      names(canonical_obj)
+    } else {
+      ""
+    }
   })
 
   canonical_names <- unique(env_names[env_names != ""])
