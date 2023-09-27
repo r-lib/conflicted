@@ -5,8 +5,8 @@
 #' them in practice.
 #'
 #' For a reexported function, this function will report the package where the
-#' function has been defined. This means that the results may contain packages
-#' that are not explicitly attached.
+#' function is defined. If this package is not attached, it will report
+#' the first such package on the search path or in the `pkgs` argument.
 #
 #' @param pkgs Set of packages for which to report conflicts. If `NULL`,
 #'   the default, will report conflicts for all loaded packages

@@ -24,8 +24,8 @@ them in practice.
 }
 \details{
 For a reexported function, this function will report the package where the
-function has been defined. This means that the results may contain packages
-that are not explicitly attached.
+function is defined. If this package is not attached, it will report
+the first such package on the search path or in the \code{pkgs} argument.
 }
 \examples{
 conflict_scout()
