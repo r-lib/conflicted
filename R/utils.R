@@ -38,6 +38,15 @@ unique_obj <- function(name, pkgs) {
   objs <- lapply(pkgs, getExportedValue, name)
   names(objs) <- pkgs
 
+  canonical <- canonical_objs(objs, name)
+
+  canonical_objs <- c(canonical, objs)
+  canonical_pkgs <- c(names(canonical), pkgs)
+
+  canonical_pkgs[!duplicated(canonical_objs)]
+}
+
+canonical_objs <- function(objs, name) {
   # Finding the namespace where a function is really defined
   env_names <- map_chr(objs, function(obj) {
     canonical_obj <- tryCatch(
@@ -65,10 +74,7 @@ unique_obj <- function(name, pkgs) {
   canonical_names <- unique(env_names[env_names != ""])
   canonical_pos <- set_names(match(canonical_names, env_names), canonical_names)
 
-  canonical_objs <- c(objs[canonical_pos], objs)
-  canonical_pkgs <- c(canonical_names, pkgs)
-
-  canonical_pkgs[!duplicated(canonical_objs)]
+  set_names(objs[canonical_pos], canonical_names)
 }
 
 style_object <- function(pkg, name, winner = FALSE) {
