@@ -34,6 +34,15 @@ map_chr <- function(.x, .f, ...) {
   vapply(.x, .f, ..., FUN.VALUE = character(1))
 }
 
+imap_chr <- function(.x, .f, ...) {
+  out <- character(length(.x))
+  for (i in seq_along(.x)) {
+    out[[i]] <- .f(.x[[i]], names(.x)[[i]], ...)
+  }
+
+  set_names(out, names(.x))
+}
+
 unique_obj <- function(name, pkgs) {
   objs <- lapply(pkgs, getExportedValue, name)
   names(objs) <- pkgs
@@ -47,8 +56,10 @@ unique_obj <- function(name, pkgs) {
 }
 
 canonical_objs <- function(objs, name) {
+  seen <- list()
+
   # Finding the namespace where a function is really defined
-  env_names <- map_chr(objs, function(obj) {
+  env_names <- imap_chr(objs, function(obj, pkg) {
     canonical_obj <- tryCatch(
       {
         canonical_pkg <- getNamespaceName(environment(obj))
@@ -60,15 +71,32 @@ canonical_objs <- function(objs, name) {
       error = function(e) NULL
     )
 
+
+    # Error getting name or exported value?
     if (is.null(canonical_obj)) {
       return("")
     }
 
-    if (identical(unname(canonical_obj)[[1]], obj)) {
-      names(canonical_obj)
-    } else {
-      ""
+    # Roundtrip failed?
+    if (!identical(unname(canonical_obj)[[1]], obj)) {
+      return("")
     }
+
+    # Happy path: canonical package is attached?
+    canonical <- names(canonical_obj)
+    if (canonical %in% names(objs)) {
+      return(canonical)
+    }
+
+    # More work needed: we pick the first package
+    if (canonical %in% names(seen)) {
+      # Second pass, we had found a package with that function before
+      return(seen[[canonical]])
+    }
+
+    # We are first, recording
+    seen[[canonical]] <<- pkg
+    pkg
   })
 
   canonical_names <- unique(env_names[env_names != ""])

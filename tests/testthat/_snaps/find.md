@@ -33,5 +33,5 @@
       conflict_scout(c("testthat", "dplyr", "pipe"))
     Message
       1 conflict
-      * `%>%()`: magrittr and pipe
+      * `%>%()`: testthat and pipe
 
