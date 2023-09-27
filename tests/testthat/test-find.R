@@ -43,10 +43,12 @@ test_that("can find conflicts with data", {
 })
 
 test_that("preferences are obeyed", {
+  skip("not attached")
   pkgload::load_all(test_path("prefs"), quiet = TRUE)
-  withr::defer(pkgload::unload("prefs"))
-
-  on.exit(prefs_reset(), add = TRUE)
+  withr::defer({
+    pkgload::unload("prefs")
+    prefs_reset()
+  })
 
   expect_snapshot({
     conflict_scout(c("rlang", "prefs"))

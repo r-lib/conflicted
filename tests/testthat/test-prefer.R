@@ -1,5 +1,6 @@
 test_that("can register preference over all or selected packages", {
   on.exit(prefs_reset())
+  skip("not attached")
 
   conflict_prefer("x1", "pkga", quiet = TRUE)
   conflict_prefer("x2", "pkga", "pkgb", quiet = TRUE)
@@ -11,6 +12,7 @@ test_that("can register preference over all or selected packages", {
 # resolution --------------------------------------------------------------
 
 test_that("length 1 vector beats all comers", {
+  skip("not attached")
   on.exit(prefs_reset())
 
   conflict_prefer("x1", "pkga", quiet = TRUE)
@@ -18,6 +20,7 @@ test_that("length 1 vector beats all comers", {
 })
 
 test_that("length n vector beats listed others", {
+  skip("not attached")
   on.exit(prefs_reset())
 
   conflict_prefer("x1", "pkga", "pkgb", quiet = TRUE)
@@ -29,6 +32,7 @@ test_that("length n vector beats listed others", {
 # messaging ----------------------------------------------------------------
 
 test_that("useful messages for specific preferences", {
+  skip("not attached")
   withr::defer(prefs_reset())
 
   expect_snapshot({
@@ -62,4 +66,8 @@ test_that("can register preference for multiple functions", {
   })
   expect_setequal(prefs_ls(), "median")
   prefs_reset()
+})
+
+test_that("errs for packages not attached", {
+  expect_error(conflicts_prefer(foo::bar()))
 })

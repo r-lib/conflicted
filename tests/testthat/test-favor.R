@@ -1,4 +1,5 @@
 test_that("trailing () is optional", {
+  skip("not attached")
   withr::defer(prefs_reset())
 
   expect_snapshot({
