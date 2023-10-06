@@ -55,6 +55,15 @@ test_that("preferences are obeyed", {
   })
 })
 
+test_that("using canonical reference", {
+  pkgload::load_all(test_path("pipe"), quiet = TRUE)
+  withr::defer(pkgload::unload("pipe"))
+
+  expect_snapshot({
+    conflict_scout(c("testthat", "dplyr", "pipe"))
+  })
+})
+
 # moved functions ----------------------------------------------------
 
 test_that(".Deprecated call contains function name", {

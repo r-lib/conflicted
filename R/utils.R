@@ -34,11 +34,75 @@ map_chr <- function(.x, .f, ...) {
   vapply(.x, .f, ..., FUN.VALUE = character(1))
 }
 
+imap_chr <- function(.x, .f, ...) {
+  out <- character(length(.x))
+  for (i in seq_along(.x)) {
+    out[[i]] <- .f(.x[[i]], names(.x)[[i]], ...)
+  }
+
+  set_names(out, names(.x))
+}
+
 unique_obj <- function(name, pkgs) {
   objs <- lapply(pkgs, getExportedValue, name)
   names(objs) <- pkgs
 
-  pkgs[!duplicated(objs)]
+  canonical <- canonical_objs(objs, name)
+
+  canonical_objs <- c(canonical, objs)
+  canonical_pkgs <- c(names(canonical), pkgs)
+
+  canonical_pkgs[!duplicated(canonical_objs)]
+}
+
+canonical_objs <- function(objs, name) {
+  seen <- list()
+
+  # Finding the namespace where a function is really defined
+  env_names <- imap_chr(objs, function(obj, pkg) {
+    canonical_obj <- tryCatch(
+      {
+        canonical_pkg <- getNamespaceName(environment(obj))
+        # Double-check that this is actually the correct object,
+        # e.g., devtools does interesting things here
+        canonical_obj <- getExportedValue(canonical_pkg, name)
+        set_names(list(canonical_obj), canonical_pkg)
+      },
+      error = function(e) NULL
+    )
+
+
+    # Error getting name or exported value?
+    if (is.null(canonical_obj)) {
+      return("")
+    }
+
+    # Roundtrip failed?
+    if (!identical(unname(canonical_obj)[[1]], obj)) {
+      return("")
+    }
+
+    # Happy path: canonical package is attached?
+    canonical <- names(canonical_obj)
+    if (canonical %in% names(objs)) {
+      return(canonical)
+    }
+
+    # More work needed: we pick the first package
+    if (canonical %in% names(seen)) {
+      # Second pass, we had found a package with that function before
+      return(seen[[canonical]])
+    }
+
+    # We are first, recording
+    seen[[canonical]] <<- pkg
+    pkg
+  })
+
+  canonical_names <- unique(env_names[env_names != ""])
+  canonical_pos <- set_names(match(canonical_names, env_names), canonical_names)
+
+  set_names(objs[canonical_pos], canonical_names)
 }
 
 style_object <- function(pkg, name, winner = FALSE) {
