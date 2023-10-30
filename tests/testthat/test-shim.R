@@ -62,15 +62,14 @@ test_that("package_name mimics library", {
 })
 
 test_that("package_name throws errors with invalid names" ,{
-  x <- c("x", "y")
-  expect_error(package_name(quo(x), TRUE), "character vector")
+  package_name_ <- function(x) {
+    package_name(quo(x), character.only = TRUE)
+  }
 
-  x <- 1:10
-  expect_error(package_name(quo(x), TRUE), "character vector")
-
-  x <- NA_character_
-  expect_error(package_name(quo(x), TRUE), "NA")
-
-  x <- ""
-  expect_error(package_name(quo(x), TRUE), "''")
+  expect_snapshot(error = TRUE, {
+    package_name_(c("x", "y"))
+    package_name_(1:10)
+    package_name_(NA_character_)
+    package_name_("")
+  })
 })

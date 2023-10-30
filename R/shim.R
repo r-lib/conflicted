@@ -178,10 +178,10 @@ package_name <- function(package, character.only = FALSE) {
   }
 
   if (!is.character(package) || length(package) != 1L) {
-    abort("`package` must be character vector of length 1.")
+    cli::cli_abort("{.arg package} must be character vector of length 1.")
   }
   if (is.na(package) || (package == "")) {
-    abort("`package` must not be NA or ''.")
+    cli::cli_abort("{.arg package} must not be NA or ''.")
   }
 
   package
