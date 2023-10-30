@@ -14,7 +14,7 @@ them in practice."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
     
     <a class="navbar-brand me-2" href="../index.html">conflicted</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,17 +72,12 @@ the default, will report conflicts for all loaded packages</p></dd>
     
 
 <p>A named list of character vectors. The names are functions and
-the values are the packages where they appear. Disambiguated functions
-are removed from that list.</p>
+the values are the packages where they appear. If there is only a single
+package listed, it means that an automated disambiguation has selected
+that function.</p>
 
 
 <p>A user friendly print method displays the result as bulleted list.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>For a reexported function, this function will report the package where the
-function is defined. If this package is not attached, it will report
-the first such package on the search path or in the <code>pkgs</code> argument.</p>
     </div>
 
     <div class="section level2">
@@ -98,7 +93,7 @@ the first such package on the search path or in the <code>pkgs</code> argument.<
    </div>
   <footer><div class="container">
   <div class="pkgdown-footer-left">
-  <p></p><p>Developed by <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
+  <p></p><p>Developed by <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" style="margin-bottom: 3px;"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
