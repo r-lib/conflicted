@@ -27,8 +27,8 @@ Thanks to [\@krlmlr](https://github.com/krlmlr) for this neat idea! This code wa
 ## Installation
 
 ```{r, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("r-lib/conflicted")
+# install.packages("pak")
+pak::pak("r-lib/conflicted")
 ```
 
 ## Usage
