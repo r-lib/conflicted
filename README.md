@@ -26,8 +26,8 @@ package.
 ## Installation
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("r-lib/conflicted")
+# install.packages("pak")
+pak::pak("r-lib/conflicted")
 ```
 
 ## Usage
@@ -81,8 +81,7 @@ You can ask conflicted to report any conflicts in the current session:
 
 ``` r
 conflict_scout()
-#> 2 conflicts
-#> • `filter()`: dplyr
+#> 1 conflict
 #> • `lag()`: dplyr and stats
 ```
 
