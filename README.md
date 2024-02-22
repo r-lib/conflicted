@@ -103,18 +103,20 @@ update the conflicted environment with any new conflicts.
 
 ## Alternative approaches
 
-It is worth comparing conflicted to
-[modules](https://github.com/klmr/modules) and
-[import](https://github.com/rticulate/import). Both packages provide
+It is worth comparing conflicted to [box](https://github.com/klmr/box)
+and [import](https://github.com/rticulate/import). Both packages provide
 strict alternatives to `library()`, giving much finer control over what
 functions are added to the search path.
 
 ``` r
-# modules expects you to namespace all package functions
-dplyr <- modules::import_package('dplyr')
+# box expects you to either namespace all package functions or to load them explicitly
+box::use(dplyr)
 dplyr$filter(mtcars, cyl == 8)
+# or:
+box::use(dplyr[select, arrange, dplyr_filter = filter])
+dplyr_filter(mtcars, cyl == 8)
 
-# import expects you to explicit load functions
+# import expects you to explicitly load functions
 import::from(dplyr, select, arrange, dplyr_filter = filter)
 dplyr_filter(mtcars, cyl == 8)
 ```
