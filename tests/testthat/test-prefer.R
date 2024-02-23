@@ -48,18 +48,18 @@ test_that("can register preference for multiple functions", {
   expect_snapshot({
     conflict_prefer_all("funmatch")
   })
-  expect_setequal(prefs_ls(), c("median", "pi"))
+  expect_setequal(prefs_ls(), c("mean", "median", "pi"))
   prefs_reset()
 
   expect_snapshot({
     conflict_prefer_all("funmatch", "base")
   })
-  expect_setequal(prefs_ls(), "pi")
+  expect_setequal(prefs_ls(), "mean")
   prefs_reset()
 
   expect_snapshot({
     conflict_prefer_matching("m", "funmatch")
   })
-  expect_setequal(prefs_ls(), "median")
+  expect_setequal(prefs_ls(), c("median", "mean"))
   prefs_reset()
 })
