@@ -11,13 +11,13 @@ R's default conflict management system gives the most recently loaded package pr
 \section{Resolving conflicts}{
 
 
-To permanently resolve a conflict within a session, use assignment:
+To permanently resolve a conflict within a session, use conflict_prefer():
 
 \preformatted{
 library(conflicted)
 library(dplyr)
 
-filter <- dplyr::filter
+conflict_prefer("filter", "dplyr")
 }
 }
 
