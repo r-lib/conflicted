@@ -127,8 +127,8 @@ is_superset <- function(fun, pkg, base) {
     return(FALSE)
 
   pkg_obj <- getExportedValue(pkg, fun)
-  # If it's a standardGeneric, assume the author know's what they're doing
-  if (methods::is(pkg_obj, "standardGeneric")) {
+  # If it's a genericFunction, assume the author know's what they're doing
+  if (methods::is(pkg_obj, "genericFunction")) {
     return(TRUE)
   }
 
