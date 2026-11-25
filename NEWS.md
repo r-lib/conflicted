@@ -1,5 +1,8 @@
 # conflicted (development version)
 
+* Preferences declared in `.Rprofile` now take effect after R attaches its
+  default packages (#91).
+
 * `conflict_scout()` refers to the package where the function was defined,
   for reexported functions (#93).
 
