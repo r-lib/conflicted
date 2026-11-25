@@ -10,5 +10,6 @@
 # detach() it messes up the computation of `pos` inside of `detach()` and it
 # detaches the wrong environment
 .onUnload <- function(...) {
+  conflicts_remove_startup_hooks()
   conflicts_reset()
 }

@@ -19,7 +19,11 @@
 #' @examples
 #' conflict_scout()
 conflict_scout <- function(pkgs = NULL) {
-  pkgs <- pkgs %||% pkgs_attached()
+  conflicts <- conflicts_find(pkgs %||% pkgs_attached())
+  new_conflict_report(conflicts[lengths(conflicts) > 1L])
+}
+
+conflicts_find <- function(pkgs) {
   objs <- lapply(pkgs, pkg_ls)
   names(objs) <- pkgs
 
@@ -42,16 +46,13 @@ conflict_scout <- function(pkgs = NULL) {
 
   # apply declared user preferences
   for (fun in ls(prefs)) {
-    if (!has_name(conflicts, fun))
+    if (!has_name(conflicts, fun) || !prefs[[fun]][[1L]] %in% index[[fun]])
       next
 
     conflicts[[fun]] <- prefs_resolve(fun, conflicts[[fun]])
   }
 
-  # remove all non-conflicts from the list
-  conflicts <- conflicts[lengths(conflicts) > 1]
-
-  new_conflict_report(conflicts)
+  conflicts[lengths(conflicts) > 0L]
 }
 
 new_conflict_report <- function(conflicts, n = length(conflicts)) {
