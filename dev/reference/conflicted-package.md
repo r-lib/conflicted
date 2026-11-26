@@ -9,13 +9,14 @@ to use.
 
 ## Resolving conflicts
 
-To permanently resolve a conflict within a session, use assignment:
+To permanently resolve a conflict within a session, use
+[`conflict_prefer()`](https://conflicted.r-lib.org/dev/reference/conflict_prefer.md):
 
 
     library(conflicted)
     library(dplyr)
 
-    filter <- dplyr::filter
+    conflict_prefer("filter", "dplyr")
 
 ## See also
 
