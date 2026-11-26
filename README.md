@@ -7,7 +7,7 @@
 
 [![R-CMD-check](https://github.com/r-lib/conflicted/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/conflicted/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/r-lib/conflicted/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/conflicted?branch=main)
+coverage](https://codecov.io/gh/r-lib/conflicted/graph/badge.svg)](https://app.codecov.io/gh/r-lib/conflicted)
 <!-- badges: end -->
 
 The goal of conflicted is to provide an alternative conflict resolution

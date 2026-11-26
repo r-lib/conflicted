@@ -14,3 +14,4 @@
 ^\.github$
 ^pkgdown$
 ^CRAN-SUBMISSION$
+^AGENTS\.md$
