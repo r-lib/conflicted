@@ -1,6 +1,6 @@
 #' @section Resolving conflicts:
 #'
-#' To permanently resolve a conflict within a session, use conflict_prefer():
+#' To permanently resolve a conflict within a session, use [conflict_prefer()]:
 #'
 #' \preformatted{
 #' library(conflicted)

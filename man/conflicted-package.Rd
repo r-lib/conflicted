@@ -11,7 +11,7 @@ R's default conflict management system gives the most recently loaded package pr
 \section{Resolving conflicts}{
 
 
-To permanently resolve a conflict within a session, use conflict_prefer():
+To permanently resolve a conflict within a session, use \code{\link[=conflict_prefer]{conflict_prefer()}}:
 
 \preformatted{
 library(conflicted)
