@@ -31,7 +31,6 @@ shim_library_3_1 <- function(package,
 
     conflicts_reset()
     on.exit(conflicts_register())
-    on_detach(package, function() conflicts_remove(package))
 
     library(
       package,
@@ -78,7 +77,6 @@ if (getRversion() >= "3.6.0") {
 
       conflicts_reset()
       on.exit(conflicts_register())
-      on_detach(package, function() conflicts_remove(package))
 
       library(
         package,
@@ -123,7 +121,6 @@ shim_require_3_1 <- function(package,
 
   conflicts_reset()
   on.exit(conflicts_register())
-  on_detach(package, function() conflicts_remove(package))
 
   require(
     package,
@@ -150,7 +147,6 @@ if (getRversion() >= "3.6.0") {
 
     conflicts_reset()
     on.exit(conflicts_register())
-    on_detach(package, function() conflicts_remove(package))
 
     require(
       package,
