@@ -29,6 +29,51 @@ test_that("detaching package removes shims", {
   expect_false(exists(conflict, ".conflicts", inherits = FALSE))
 })
 
+test_that("detaching package attached before conflicted updates conflicts", {
+  skip_if_not_installed("dplyr")
+
+  is_devel <- pkgload::is_dev_package("conflicted")
+  pkg_path <- if (is_devel) pkgload::pkg_path()
+
+  res <- callr::r(
+    function(is_devel, pkg_path) {
+      library(dplyr, warn.conflicts = FALSE)
+      if (is_devel) {
+        pkgload::load_all(pkg_path, quiet = TRUE)
+      } else {
+        library(conflicted)
+      }
+
+      before <- exists("filter", ".conflicts", inherits = FALSE)
+      detach("package:dplyr")
+      after_first <- exists("filter", ".conflicts", inherits = FALSE)
+
+      library(dplyr)
+      reattached <- exists("filter", ".conflicts", inherits = FALSE)
+      detach("package:dplyr")
+      after_second <- exists("filter", ".conflicts", inherits = FALSE)
+
+      c(
+        before = before,
+        after_first = after_first,
+        reattached = reattached,
+        after_second = after_second
+      )
+    },
+    list(is_devel = is_devel, pkg_path = pkg_path)
+  )
+
+  expect_equal(
+    res,
+    c(
+      before = TRUE,
+      after_first = FALSE,
+      reattached = TRUE,
+      after_second = FALSE
+    )
+  )
+})
+
 test_that("shimmed help returns same as unshimmed", {
   shims_bind()
 

@@ -7,7 +7,32 @@ conflicts_register <- function(pkgs = pkgs_attached()) {
   # Shim library() and require() so we can rebuild
   shims_bind(env)
 
+  conflicts_register_detach(pkgs)
+
   env
+}
+
+detach_hooks <- env()
+
+conflicts_register_detach <- function(pkgs) {
+  pkgs <- setdiff(pkgs, "base")
+  for (pkg in pkgs) {
+    if (!pkg_attached(pkg) || env_has(detach_hooks, pkg)) {
+      next
+    }
+    conflict_detach_register(pkg)
+  }
+}
+
+conflict_detach_register <- function(pkg) {
+  force(pkg)
+  env_bind(detach_hooks, !!pkg := TRUE)
+  on_detach(pkg, function() {
+    env_unbind(detach_hooks, pkg)
+    if (conflicts_attached()) {
+      conflicts_remove(pkg)
+    }
+  })
 }
 
 conflicts_register_if_needed <- function(package) {
